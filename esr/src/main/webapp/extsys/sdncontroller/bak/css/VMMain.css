@@ -134,7 +134,7 @@ ul, li {
 }
 
 .detail-btn {
-    background: url(../image/openo.png) no-repeat -343px -283px;
+    background: url(../image/onap.png) no-repeat -343px -283px;
     width: 16px;
     height: 16px;
     border: none;
@@ -254,17 +254,17 @@ table.userform tbody tr td {
     padding-bottom: 3px !important;
 }
 
-.openoBrowseButton_element {
+.onapBrowseButton_element {
     display: table;
 }
 
-.openo {
+.onap {
     font-family: "Microsoft Yahei", SimSun, Arial, Tahoma;
     font-size: 12px;
     color: #000;
 }
 
-.openoBrowseButton_input {
+.onapBrowseButton_input {
     width: 198px;
     position: relative;
     border: 1px solid #c3c3c3 !important;
@@ -277,11 +277,11 @@ table.userform tbody tr td {
 
 .buttonClassDefault, .buttonClassDefault:active {
     cursor: pointer;
-    background-image: url(../images/openo.png);
+    background-image: url(../images/onap.png);
     background-position: -154px -7px !important;
 }
 
-.openoBrowseButton_button {
+.onapBrowseButton_button {
     width: 27px;
     border: 0;
     float: right;
@@ -294,7 +294,7 @@ table.userform tbody tr td {
     border-left: none;
 }
 
-.openo .openo-input, .openo.openo-input {
+.onap .onap-input, .onap.onap-input {
     outline: 0;
     border: 1px solid #c3c3c3;
     box-shadow: 1px 1px #f6f6f6 inset;
@@ -302,7 +302,7 @@ table.userform tbody tr td {
     height: 26px;
 }
 
-.openoInput_openoDefaultText {
+.onapInput_onapDefaultText {
     padding: 0 0 0 6px;
     border-radius: 4px;
     color: #000;
@@ -313,7 +313,7 @@ table.userform tbody tr td {
     background: #fff;
 }
 
-div.openo-select {
+div.onap-select {
     border: 1px solid #c3c3c3;
     border-radius: 4px;
     background: url(../images/arrow-down-enable.png) right no-repeat #fff;
@@ -322,7 +322,7 @@ div.openo-select {
     display: block;
 }
 
-div.openo-select > input.openo-select-input {
+div.onap-select > input.onap-select-input {
     border: none;
     outline: 0;
     line-height: 21px;
@@ -331,13 +331,13 @@ div.openo-select > input.openo-select-input {
     border-right: solid 1px #c3c3c3;
 }
 
-.openo .openo-ellipsis, .openo.openo-ellipsis {
+.onap .onap-ellipsis, .onap.onap-ellipsis {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
-a.openoButton_buttonClass, a.openoButton_buttonDisableClass, div.openoButton_buttonClass, div.openoButton_buttonDisableClass {
+a.onapButton_buttonClass, a.onapButton_buttonDisableClass, div.onapButton_buttonClass, div.onapButton_buttonDisableClass {
     height: 26px;
     float: left;
     cursor: pointer;
@@ -354,12 +354,12 @@ a.openoButton_buttonClass, a.openoButton_buttonDisableClass, div.openoButton_but
     border-radius: 6px;
 }
 
-.openoButton_buttonInnerClass {
+.onapButton_buttonInnerClass {
     padding: 0 19px;
     border-radius: 6px;
 }
 
-.openoButton_buttonCenterText {
+.onapButton_buttonCenterText {
     color: #000;
     line-height: 24px;
     white-space: nowrap;
@@ -373,19 +373,19 @@ a.openoButton_buttonClass, a.openoButton_buttonDisableClass, div.openoButton_but
     padding: 10px 10px 0px 0px;
 }
 
-.openoButton_buttonGroupClass {
+.onapButton_buttonGroupClass {
     display: inline;
 }
 
-.openoButton_buttonGroupClass div.openoButton_buttonClass_parent:first-child {
+.onapButton_buttonGroupClass div.onapButton_buttonClass_parent:first-child {
     margin-left: 0;
 }
 
-.openoButton_buttonLeftImg {
+.onapButton_buttonLeftImg {
     margin-right: 5px;
 }
 
-.openoButton_buttonLeftImg, .openoButton_buttonRightImg {
+.onapButton_buttonLeftImg, .onapButton_buttonRightImg {
     display: inline-block;
     vertical-align: top;
     width: 16px;
@@ -393,11 +393,11 @@ a.openoButton_buttonClass, a.openoButton_buttonDisableClass, div.openoButton_but
     margin-top: 4px;
 }
 
-.openo-table-pagination-wrapper {
+.onap-table-pagination-wrapper {
     height: 37px;
 }
 
-.openo-pagination {
+.onap-pagination {
     display: block;
     float: left;
     overflow: hidden;
@@ -405,11 +405,11 @@ a.openoButton_buttonClass, a.openoButton_buttonDisableClass, div.openoButton_but
     margin-top: 8px;
 }
 
-.openoPagination_openoPaginationLengthOptions:not(msie8) {
+.onapPagination_onapPaginationLengthOptions:not(msie8) {
     line-height: 24px;
 }
 
-.openoPagination_openoPaginationLengthOptions {
+.onapPagination_onapPaginationLengthOptions {
     white-space: normal;
     height: 24px;
     float: left;
@@ -418,7 +418,7 @@ a.openoButton_buttonClass, a.openoButton_buttonDisableClass, div.openoButton_but
     margin: 0 5px;
 }
 
-.openo-pagination-select {
+.onap-pagination-select {
     height: 26px;
     line-height: 22px;
     text-align: center;
@@ -428,11 +428,11 @@ a.openoButton_buttonClass, a.openoButton_buttonDisableClass, div.openoButton_but
     padding: 1px;
 }
 
-.openoPagination_openoPaginationLengthOptions span {
+.onapPagination_onapPaginationLengthOptions span {
     background-color: #fff !important;
 }
 
-.openo-pagination-theme a, .openo-pagination-theme span {
+.onap-pagination-theme a, .onap-pagination-theme span {
     float: left;
     color: #666;
     font: 12px Lucida Grande, Verdana, Arial, Helvetica, sans-serif;
@@ -446,7 +446,7 @@ a.openoButton_buttonClass, a.openoButton_buttonDisableClass, div.openoButton_but
     background: #fff;
 }
 
-.openo-pagination-selectspan {
+.onap-pagination-selectspan {
     background: url(../images/ideo_default_select.png) left no-repeat !important;
     float: right !important;
     width: 26px;
@@ -454,7 +454,7 @@ a.openoButton_buttonClass, a.openoButton_buttonDisableClass, div.openoButton_but
     cursor: pointer;
 }
 
-.openo-pagination-theme label {
+.onap-pagination-theme label {
     padding-top: 6px;
     vertical-align: middle;
     margin-right: 20px;
@@ -465,7 +465,7 @@ a.openoButton_buttonClass, a.openoButton_buttonDisableClass, div.openoButton_but
     font: 12px Lucida Grande, Verdana, Arial, Helvetica, sans-serif;
 }
 
-.openo-pagination li, .openo-pagination ul {
+.onap-pagination li, .onap-pagination ul {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -476,23 +476,23 @@ dd, dl, dt, li {
     color: #000;
 }
 
-.openo-pagination-theme a, .openo-pagination-theme span.current {
+.onap-pagination-theme a, .onap-pagination-theme span.current {
     margin: 0 5px 0 0;
 }
 
-.openo .openo-disabled, .openo.openo-disabled {
+.onap .onap-disabled, .onap.onap-disabled {
     border-color: #c3c3c3 !important;
     color: #666 !important;
     opacity: .3;
     filter: alpha(opacity=30);
 }
 
-.openo-pagination-theme .prev {
+.onap-pagination-theme .prev {
     background: 0 0;
     float: left;
 }
 
-.openo-pagination-theme .current {
+.onap-pagination-theme .current {
     text-decoration: none !important;
     float: left;
     padding-left: 6px;
@@ -503,7 +503,7 @@ dd, dl, dt, li {
     background: #4ad2ff;
 }
 
-.openo-pagination-theme a, .openo-pagination-theme span {
+.onap-pagination-theme a, .onap-pagination-theme span {
     float: left;
     color: #666;
     font: 12px Lucida Grande, Verdana, Arial, Helvetica, sans-serif;
@@ -517,19 +517,19 @@ dd, dl, dt, li {
     background: #fff;
 }
 
-.openo-pagination-theme .prev.openo-disabled:before {
+.onap-pagination-theme .prev.onap-disabled:before {
     background: url(../images/page_left_disabled.png) 50% 45% no-repeat;
 }
 
-.openo-pagination-theme .prev.openo-disabled:before {
+.onap-pagination-theme .prev.onap-disabled:before {
     background: url(../images/page_left_disabled.png) 50% 45% no-repeat;
 }
 
-.openo-pagination-theme .prev:before {
+.onap-pagination-theme .prev:before {
     background: url(../images/page_l.png) 50% 45% no-repeat;
 }
 
-.openo-pagination-theme .next:after, .openo-pagination-theme .prev:before {
+.onap-pagination-theme .next:after, .onap-pagination-theme .prev:before {
     display: inline-block;
     content: "";
     vertical-align: middle;
@@ -537,11 +537,11 @@ dd, dl, dt, li {
     height: 24px;
 }
 
-.openo-pagination-theme .prev:before {
+.onap-pagination-theme .prev:before {
     background: url(../images/page_l.png) 50% 45% no-repeat;
 }
 
-.openo-pagination-theme .next:after, .openo-pagination-theme .prev:before {
+.onap-pagination-theme .next:after, .onap-pagination-theme .prev:before {
     display: inline-block;
     content: "";
     vertical-align: middle;
@@ -556,14 +556,14 @@ pagination ul {
     float: left;
 }
 
-.openo-pagination li, .openo-pagination ul {
+.onap-pagination li, .onap-pagination ul {
     list-style: none;
     padding: 0;
     margin: 0;
     float: left;
 }
 
-.openoPagination_gototext {
+.onapPagination_gototext {
     background: #FFF;
     outline: 0;
     width: 29px;
@@ -578,12 +578,12 @@ pagination ul {
     min-width: 50px;
 }
 
-.openoPagination_gotoimage {
+.onapPagination_gotoimage {
     width: 29px;
     height: 26px;
     line-height: 26px;
     background-color: #FFF;
-    background-image: url(/portal/themes/default/components/openo/images/openo.png);
+    background-image: url(/portal/themes/default/components/onap/images/onap.png);
     padding-left: 21px;
     float: left;
     margin-left: 5px;
@@ -594,7 +594,7 @@ pagination ul {
     background-position: -184px -181px !important;
 }
 
-.openo-pagination-theme .ellipse {
+.onap-pagination-theme .ellipse {
     float: left;
     margin-left: -8px;
     margin-right: -4px;
@@ -606,19 +606,19 @@ pagination ul {
     cursor: default;
 }
 
-.openo.openo-disabled {
+.onap.onap-disabled {
     border-color: #c3c3c3 !important;
     color: #666 !important;
     opacity: .3;
     filter: alpha(opacity=30);
 }
 
-.openo-pagination-theme .prev {
+.onap-pagination-theme .prev {
     background: 0 0;
     float: left;
 }
 
-.openo-pagination-theme .current {
+.onap-pagination-theme .current {
     text-decoration: none !important;
     float: left;
     padding-left: 6px;
@@ -630,11 +630,11 @@ pagination ul {
     border: 1px solid #e0e0e0;
 }
 
-.openo-pagination-theme .next:after {
+.onap-pagination-theme .next:after {
     background: url(../images/page_r.png) 50% 45% no-repeat;
 }
 
-.openoButton_buttonGroupClass div.openoButton_buttonClass_parent, .openoButton_buttonRightImg {
+.onapButton_buttonGroupClass div.onapButton_buttonClass_parent, .onapButton_buttonRightImg {
     margin-left: 5px;
 }
 
@@ -647,11 +647,11 @@ html, body {
     padding: 0px 20px 0px 20px;
 }
 
-div.openoButton_buttonClass:hover {
+div.onapButton_buttonClass:hover {
     border: 1px solid #4ac9ff;
 }
 
-div.openoButton_button_default:hover .openoButton_buttonCenterText {
+div.onapButton_button_default:hover .onapButton_buttonCenterText {
     color: #009ae7;
 }
 
@@ -661,11 +661,11 @@ div.openoButton_button_default:hover .openoButton_buttonCenterText {
     margin-top: 17px;
 }
 
-.openo.openo-hide {
+.onap.onap-hide {
     display: none;
 }
 
-div.openo-select-popup-container {
+div.onap-select-popup-container {
     position: absolute;
     border: 1px solid #4ac9ff;
     border-top: none;
@@ -676,47 +676,47 @@ div.openo-select-popup-container {
     z-index: 880;
 }
 
-div.openo-select-popup-container > div.openo-select-item {
+div.onap-select-popup-container > div.onap-select-item {
     display: block;
 }
 
-.openo .openo-ellipsis, .openo.openo-ellipsis {
+.onap .onap-ellipsis, .onap.onap-ellipsis {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
-div.openo-select-popup-container > div.openo-select-item > label {
+div.onap-select-popup-container > div.onap-select-item > label {
     padding-top: 3px;
     padding-bottom: 3px;
     line-height: 20px;
 }
 
-.openo .openo-ellipsis, .openo.openo-ellipsis {
+.onap .onap-ellipsis, .onap.onap-ellipsis {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
-.openo-select-item label {
+.onap-select-item label {
     margin-left: 4px;
     margin-right: 4px;
     white-space: nowrap;
 }
 
-div.openo-select-popup-container > div.openo-select-item.openo-item-selected, div.openo-select-popup-container > div.openo-select-item:hover {
+div.onap-select-popup-container > div.onap-select-item.onap-item-selected, div.onap-select-popup-container > div.onap-select-item:hover {
     background-color: #f1f1f1;
     color: #008fd6;
 }
 
-div.openo-select.openo-focus {
+div.onap-select.onap-focus {
     border: 1px solid #4ac9ff;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     border-bottom-color: #ddd;
 }
 
-.openo-pagination-theme a:hover {
+.onap-pagination-theme a:hover {
     border-color: #4ac9ff;
     cursor: pointer;
 }
@@ -736,7 +736,7 @@ table tbody tr.even:hover td, table tbody tr.odd:hover td {
     background-color: #e6fbe0;
 }
 
-table tr.openoTable_row_selected td {
+table tr.onapTable_row_selected td {
     background: #e8f8fe !important;
     border-bottom: 1px solid #e8e8e8 !important;
 }

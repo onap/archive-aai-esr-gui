@@ -358,20 +358,20 @@ function loadTemplate() {
 
 /*var modelTemplate = "";
 function loadTemplate() {
-    *//*$.get('/openoui/framework/template.html', function (template) {
+    *//*$.get('/onapui/framework/template.html', function (template) {
         modelTemplate += template;
     });*//*
-    $.get('/openoui/framework/templateContainer.html', function (template) {
+    $.get('/onapui/framework/templateContainer.html', function (template) {
         modelTemplate += template;
     });
-    $.get('/openoui/framework/templateWidget.html', function (template) {
+    $.get('/onapui/framework/templateWidget.html', function (template) {
         //console.log("Template is : "+template);
         modelTemplate += template;
     });
-    $.get('/openoui/framework/templateNotification.html', function (template) {
+    $.get('/onapui/framework/templateNotification.html', function (template) {
         modelTemplate += template;
     });
-    $.get('/openoui/framework/templateFunctional.html', function (template) {
+    $.get('/onapui/framework/templateFunctional.html', function (template) {
         modelTemplate += template;
     });
 }*/
@@ -379,20 +379,20 @@ function loadTemplate() {
 var modelTemplate = "";
 function loadTemplate() {
 
-    /*$.get('/openoui/resmgr/templates/template.html', function (template) {
+    /*$.get('/onapui/resmgr/templates/template.html', function (template) {
         modelTemplate += template;
      });*/
-    $.get('/openoui/extsys/sdncontroller/templates/templateContainer.html', function (template) {
+    $.get('/onapui/extsys/sdncontroller/templates/templateContainer.html', function (template) {
         modelTemplate += template;
     });
-    $.get('/openoui/extsys/sdncontroller/templates/templateWidget.html', function (template) {
+    $.get('/onapui/extsys/sdncontroller/templates/templateWidget.html', function (template) {
         //console.log("Template is : "+template);
         modelTemplate += template;
     });
-    $.get('/openoui/extsys/sdncontroller/templates/templateNotification.html', function (template) {
+    $.get('/onapui/extsys/sdncontroller/templates/templateNotification.html', function (template) {
         modelTemplate += template;
     });
-    $.get('/openoui/extsys/sdncontroller/templates/templateFunctional.html', function (template) {
+    $.get('/onapui/extsys/sdncontroller/templates/templateFunctional.html', function (template) {
         modelTemplate += template;
     });
 }

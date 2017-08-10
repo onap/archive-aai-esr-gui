@@ -30,7 +30,7 @@ $('.siteDeleteImg').click(
     });
 
 function deleteController(objectId) {
-    var requestUrl = "/openoapi/extsys/v1/sdncontrollers/" + objectId;
+    var requestUrl = "/onapapi/aai/esr/v1/sdncontrollers/" + objectId;
     $.ajax({
         type: "DELETE",
         url: requestUrl,
@@ -49,7 +49,7 @@ function deleteController(objectId) {
 }
 
 function loadControllerData() {
-    var requestUrl = "/openoapi/extsys/v1/sdncontrollers";
+    var requestUrl = "/onapapi/aai/esr/v1/sdncontrollers";
     $.ajax({
         type: "GET",
         url: requestUrl,
@@ -93,8 +93,8 @@ $(function () {
 
     $('.table tbody tr').click(
         function () {
-            $(this).addClass('openoTable_row_selected').siblings()
-                .removeClass('openoTable_row_selected');
+            $(this).addClass('onapTable_row_selected').siblings()
+                .removeClass('onapTable_row_selected');
         });
     $('.table tr:odd').addClass('active');
     $('#false').click(function () {
@@ -108,8 +108,8 @@ $(function () {
     $('#filterTpLogicalType').click(
         function () {
             $('#filterTpLogicalType_select_popupcontainer').toggleClass(
-                'openo-hide');
-            $('#filterTpLogicalType').toggleClass('openo-focus');
+                'onap-hide');
+            $('#filterTpLogicalType').toggleClass('onap-focus');
             var oLeft = $('#open_base_tpL_td6').offset().left;
             var oTop = $('#open_base_tpL_td6').offset().top;
             var oHeight = $('#open_base_tpL_td6').height();
@@ -118,13 +118,13 @@ $(function () {
                 'top': oTop + oHeight + 10
             });
         });
-    $('div.openo-select-popup-container>div.openo-select-item>label').click(
+    $('div.onap-select-popup-container>div.onap-select-item>label').click(
         function () {
             var Lvalue = $(this).html();
             $('#filterTpLogicalType_select_input').attr('value', Lvalue);
             $('#filterTpLogicalType_select_popupcontainer').addClass(
-                'openo-hide');
-            $('#filterTpLogicalType').removeClass('openo-focus');
+                'onap-hide');
+            $('#filterTpLogicalType').removeClass('onap-focus');
         });
     $.fn.serializeObject = function () {
         var o = {};
@@ -144,7 +144,7 @@ $(function () {
 
     $('#createController').click(function () {
         var formData = JSON.stringify($("#controllerForm").serializeObject());
-        var requestUrl = "/openoapi/extsys/v1/sdncontrollers";
+        var requestUrl = "/onapapi/aai/esr/v1/sdncontrollers";
         $.ajax({
             type: "POST",
             url: requestUrl,

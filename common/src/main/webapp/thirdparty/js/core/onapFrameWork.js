@@ -330,7 +330,7 @@ var s=!function(w,d){
     return purl;
 });
 //把框架所有的ajax请求集中到一起，发一条请求，获取所有的配置信息。
-openoFrameWork_conf = {
+onapFrameWork_conf = {
 	userName:store("loginUserName"),
 	changePassItem:FrameConst.change_pass?FrameConst.change_pass:true,
 	helpMenuItem:false,
@@ -342,7 +342,7 @@ openoFrameWork_conf = {
 	dbType:"other",
 	acceptLanguage:"en-US"
 };
-$("#currentUser").html(openoFrameWork_conf.userName);
+$("#currentUser").html(onapFrameWork_conf.userName);
 
 $.ajax({
 	url : FrameConst.REST_FRAMECOMMIFO,
@@ -352,31 +352,31 @@ $.ajax({
 	success: function(data){
 		var tempConf = data;
 		if(	tempConf.helpMenuItem && tempConf.helpMenuItem != "" ){
-			openoFrameWork_conf.helpMenuItem = tempConf.helpMenuItem;
+			onapFrameWork_conf.helpMenuItem = tempConf.helpMenuItem;
 		}
 		if(	tempConf.aboutMenuItem && tempConf.aboutMenuItem != "" ){
-			openoFrameWork_conf.aboutMenuItem = tempConf.aboutMenuItem;
+			onapFrameWork_conf.aboutMenuItem = tempConf.aboutMenuItem;
 		}		
 		if(	tempConf.flightMenuItem && tempConf.flightMenuItem != "" ){
-			openoFrameWork_conf.flightMenuItem = tempConf.flightMenuItem;
+			onapFrameWork_conf.flightMenuItem = tempConf.flightMenuItem;
 		}
 		if(	tempConf.fullscreenMenuItem && tempConf.fullscreenMenuItem != "" ){
-			openoFrameWork_conf.fullscreenMenuItem = tempConf.fullscreenMenuItem;
+			onapFrameWork_conf.fullscreenMenuItem = tempConf.fullscreenMenuItem;
 		}
 		if(	tempConf.logoutMenuItem && tempConf.logoutMenuItem != "" ){
-			openoFrameWork_conf.logoutMenuItem = tempConf.logoutMenuItem;
+			onapFrameWork_conf.logoutMenuItem = tempConf.logoutMenuItem;
 		}
 		if(	tempConf.defaultThemeColor && tempConf.defaultThemeColor != "" ){
-			openoFrameWork_conf.defaultThemeColor = tempConf.defaultThemeColor;
+			onapFrameWork_conf.defaultThemeColor = tempConf.defaultThemeColor;
 		}
 		if(	tempConf.dbType && tempConf.dbType != "" ){
-			openoFrameWork_conf.dbType = tempConf.dbType;
+			onapFrameWork_conf.dbType = tempConf.dbType;
 		}	 
 		if(	tempConf.acceptLanguage && tempConf.acceptLanguage != "" ){
-			openoFrameWork_conf.acceptLanguage = tempConf.acceptLanguage;
+			onapFrameWork_conf.acceptLanguage = tempConf.acceptLanguage;
 		}
 		if(	tempConf.changePassItem && tempConf.changePassItem != "" ){
-			openoFrameWork_conf.changePassItem = tempConf.changePassItem;
+			onapFrameWork_conf.changePassItem = tempConf.changePassItem;
 		}
 		
 		setFrameWorkByConf();
@@ -405,12 +405,12 @@ function setThemeColor( configColor ){
 
 function setFrameWorkByConf() {
 	//设置用户相关的框架下拉菜单是否可用
-	var helpMenuItem = openoFrameWork_conf.helpMenuItem;
-	var aboutMenuItem = openoFrameWork_conf.aboutMenuItem;
-	var flightMenuItem = openoFrameWork_conf.flightMenuItem;
-	var fullscreenMenuItem = openoFrameWork_conf.fullscreenMenuItem;
-	var logoutMenuItem = openoFrameWork_conf.logoutMenuItem;
-	var changePassMenuItem = openoFrameWork_conf.changePassMenuItem;
+	var helpMenuItem = onapFrameWork_conf.helpMenuItem;
+	var aboutMenuItem = onapFrameWork_conf.aboutMenuItem;
+	var flightMenuItem = onapFrameWork_conf.flightMenuItem;
+	var fullscreenMenuItem = onapFrameWork_conf.fullscreenMenuItem;
+	var logoutMenuItem = onapFrameWork_conf.logoutMenuItem;
+	var changePassMenuItem = onapFrameWork_conf.changePassMenuItem;
 	if (!helpMenuItem || helpMenuItem === "false") {
 		$('#uep_ict_help_url').parent('li').remove();
 	}
@@ -440,7 +440,7 @@ function setFrameWorkByConf() {
 	}
 
 	//设置二次开发者选择的框架皮肤
-	var defaultColor = openoFrameWork_conf.defaultThemeColor;
+	var defaultColor = onapFrameWork_conf.defaultThemeColor;
 	var panel = $('.zte-theme-panel');
 	$('ul > li', panel).removeClass("current"); 
 	if (store && !store('style_color')) { // cookie没有才设置默认主题
@@ -482,14 +482,14 @@ var fMenuSiderDivId = 'page-f-sidebar-menu';
 var fMenuMegaDivId = 'f_hormenu';
 var megaSiderDivId = 'page-megachild-sidebar-menu';
 var megaDivId = 'main_hormenu';
-var openoFrameWork_menu_horizontal = "horizontal";
-var openoFrameWork_menu_vertical = "vertical";
-var openoFrameWork_menu_fmenu = "fmenu";
-var openoFrameWork_showNav = "true";
-var openoFrameWork_smallView = 960;//原来为992，但是在投影仪上不准（投影仪设置为1024，但是实际尺寸比1024小），边栏菜单也会被移除，这个设置一个稍小的值。
+var onapFrameWork_menu_horizontal = "horizontal";
+var onapFrameWork_menu_vertical = "vertical";
+var onapFrameWork_menu_fmenu = "fmenu";
+var onapFrameWork_showNav = "true";
+var onapFrameWork_smallView = 960;//原来为992，但是在投影仪上不准（投影仪设置为1024，但是实际尺寸比1024小），边栏菜单也会被移除，这个设置一个稍小的值。
 
 /*下面是主框架的核心*/
-var openoFrameWork = function () {
+var onapFrameWork = function () {
 	var defaultLanage=getLanguage();
     var isRTL = false;//文档顺序
 	var isTouch=function(){
@@ -615,7 +615,7 @@ var openoFrameWork = function () {
     var dealSidebarState = function () {
         // 窗体宽度小尺寸（平板和iphone模式下）时移出左边栏
         var viewport = _getViewPort();
-        if (viewport.width < openoFrameWork_smallView) {
+        if (viewport.width < onapFrameWork_smallView) {
             $('body').removeClass("page-sidebar-closed");
         }else{
 			if (getCookie('sidebar_closed') === '1') {
@@ -623,7 +623,7 @@ var openoFrameWork = function () {
 			}
 		}
     }
-    //  openoFrameWork.addResponsiveHandler()回调函数.
+    //  onapFrameWork.addResponsiveHandler()回调函数.
     var runResponsiveHandlers = function () {
         //重新初始化其他订阅的元素elements
         for (var i = 0; i < responsiveHandlers.length; i++) {
@@ -843,7 +843,7 @@ var openoFrameWork = function () {
 		// 屏幕小尺寸时会隐藏边栏，这时菜单由小屏幕右上图标控制，当屏幕变化到大尺寸屏幕时，
 		// 需要按原菜单出现方式恢复菜单显示。
 		var screenwidth = $(window).width();
-		if(screenwidth >= openoFrameWork_smallView){
+		if(screenwidth >= onapFrameWork_smallView){
 			changeSiderBar();
 			if($(".page-sidebar-menu li").css('display') != "none"){
 				if ($('body').hasClass("page-sidebar-closed") && $(".sidebar-toggler").hasClass("close-by-viewportChange")) {	
@@ -897,7 +897,7 @@ var openoFrameWork = function () {
                     }
                     resize = setInterval(dealIframeHeight, 400,$(this)); 
                 }*/
-    			openoFrameWork.stopPageLoading();
+    			onapFrameWork.stopPageLoading();
     		});     		             
         }                                  
     }
@@ -914,9 +914,9 @@ var openoFrameWork = function () {
 		$('#header_notification_bar').html("<div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</div>");
 	}
 	var dealShownav=function(){
-        var showNav=openoFrameWork.getLocationURLParameter('showNav');
+        var showNav=onapFrameWork.getLocationURLParameter('showNav');
 		if( showNav=="false"){
-            openoFrameWork_showNav = showNav;
+            onapFrameWork_showNav = showNav;
 			hidemenu();
 			hideAlarmLight();
 		}
@@ -937,7 +937,7 @@ var openoFrameWork = function () {
 			dealFMenuRelated(source , megaSiderDivId);
             targetContainer = rtn[0];
             targetsource = rtn[1];
-		}else if(navPosOption === openoFrameWork_menu_fmenu){
+		}else if(navPosOption === onapFrameWork_menu_fmenu){
             dealFMenuRelated(source , fMenuSiderDivId);
         }
 		if (targetContainer) {
@@ -1008,7 +1008,7 @@ var openoFrameWork = function () {
 
         }else{//F菜单的竖向菜单点击
             //处理一种特殊情况，告警灯打开新页面，所有的菜单都不出现，因此，虽然这个source在竖菜单，但竖菜单这个时候实际上是没有显示的
-            if( openoFrameWork_showNav == "true") {
+            if( onapFrameWork_showNav == "true") {
                 $('#' + siderDivId + '>li').hide();     
 				var lis = $(source).parents('li');	
 				var id = lis.eq(lis.length-1).children( 'a' ).attr('hparentid');				
@@ -1126,14 +1126,14 @@ var openoFrameWork = function () {
             var url = aObject.attr("href");
             if(!url||url.length<2)
               return;
-			url=openoFrameWork.handlBaseURL(url);
+			url=onapFrameWork.handlBaseURL(url);
 		    //-----------2015年9月21日新增V5中大O需要的按照实例（根据选择的系统实例变化url的ip和端口地址）进行动态切换菜单的功能
 		    var category= aObject.attr("category");//处理菜单中定义的Category属性
 			if(category&&category.length>0){//处理Category属性
 				var newIpPort=_menuCategorys.items(category);
 				if(newIpPort&&newIpPort.ipPort&&newIpPort.ipPort.trim()!=""){//如果找到了
-					var newIpPortstr=openoFrameWork.getDomainURL(newIpPort.ipPort);//去掉ip和port后多余的部分
-					var urlipport=openoFrameWork.getDomainURL(url);
+					var newIpPortstr=onapFrameWork.getDomainURL(newIpPort.ipPort);//去掉ip和port后多余的部分
+					var urlipport=onapFrameWork.getDomainURL(url);
 					console.log("old url:"+url);
 					url=newIpPortstr+url.replace(urlipport,"");
 					console.log("newIpPort:"+newIpPortstr+"      newURL:"+url);					
@@ -1171,7 +1171,7 @@ var openoFrameWork = function () {
 				pymParent.iframe.setAttribute('msallowfullscreen','');
 				pymParent.iframe.setAttribute('webkitallowfullscreen',''); 
 				//pymParent.iframe.setAttribute('scrolling',autoScroll);
-				pymParent.iframe.setAttribute('onload', 'openoFrameWork.SyncCSS(this,0,"'+_cssfile+'");openoFrameWork.stopPageLoading();');
+				pymParent.iframe.setAttribute('onload', 'onapFrameWork.SyncCSS(this,0,"'+_cssfile+'");onapFrameWork.stopPageLoading();');
 				cachedIframesObject.replace(id,pymParent);//缓存iframe对象实体
 				pymParent.onMessage('height', function(he){
 					  console.log("The frame "+id+" receive message height is "+he);
@@ -1230,7 +1230,7 @@ var openoFrameWork = function () {
 						return false;//返回false 后续不再做其他动作了
 					}
 					finally{
-						openoFrameWork.stopPageLoading();
+						onapFrameWork.stopPageLoading();
 					}
 				}else{//否则url不同,或者url相同但没有shiftjs
 					if(nagivJS.length>0&&nagivJS.toLowerCase()!="null"){//如果是代码导航过来的去掉url参数中的默认action动作
@@ -1241,7 +1241,7 @@ var openoFrameWork = function () {
 						pagemyIframe.attr("src","");//url和src不同说明更换了页面，需要清空重新加载
 					}else //if (src.trim()==url.trim()) //没有shiftjs并且url相同，说明不需要再次加载了,已经加载过了
 					{
-						openoFrameWork.stopPageLoading();
+						onapFrameWork.stopPageLoading();
 					}	
 					pagemyIframe.attr("src",url);
 					
@@ -1254,7 +1254,7 @@ var openoFrameWork = function () {
 						});						
 					}
 					if(_cssfile.length>0&&_cssfile.toLowerCase()!="null"){//如果配置了cssSrc，每次切换都重新执行一边这个css文件，防止有遗漏
-						parm={syncCSSJS:'openoFrameWork.SyncCSS(this,10,"'+_cssfile+'");openoFrameWork.stopPageLoading();'};
+						parm={syncCSSJS:'onapFrameWork.SyncCSS(this,10,"'+_cssfile+'");onapFrameWork.stopPageLoading();'};
 						pagemyIframe.one('load',parm,function(e){ 
 							var syncCSSJS=e&&e.data&&e.data.syncCSSJS?e.data.syncCSSJS:"";
 							if(syncCSSJS.length>0&&syncCSSJS.toLowerCase()!="null")
@@ -1289,7 +1289,7 @@ var openoFrameWork = function () {
 				
 			}  					
             showIframe(miframe);                  
-            openoFrameWork.fixContentHeight(); // 调整高度  
+            onapFrameWork.fixContentHeight(); // 调整高度  
 			return true;
    }
     // 处理边栏菜单
@@ -1425,7 +1425,7 @@ var openoFrameWork = function () {
 			if (url.length<2){
 				return;
 			}
-			url=openoFrameWork.handlBaseURL(url);
+			url=onapFrameWork.handlBaseURL(url);
 			if (gurl==url){				
 				if(e===true){
 					$('#pageableDiv').show();
@@ -1557,7 +1557,7 @@ var openoFrameWork = function () {
 	var dhByBreadcrumb = false;
     var dealBreadcrumb=function(clickedObject,notGenUID,e){//notGenUID为true就不重新生成id
 		var mbreadcrumb=$('.breadcrumbUl');
-		openoFrameWork.setPageTitle(clickedObject.find('span').text().trim());              
+		onapFrameWork.setPageTitle(clickedObject.find('span').text().trim());              
 		var clieckedObj= clickedObject.parent('li');
 		if(clieckedObj.length == 0){ //分页式更多菜单，a链接的父亲是div
 			clieckedObj= clickedObject.parent('div');
@@ -1578,7 +1578,7 @@ var openoFrameWork = function () {
 			while  (clieckedObj&&clieckedObj.length>0){
 			   if(clieckedObj.children('a')){
 					if(!notGenUID){
-						url=openoFrameWork.getUniqueID("aid");//+Math.floor(Math.random() * (new Date()).getTime());
+						url=onapFrameWork.getUniqueID("aid");//+Math.floor(Math.random() * (new Date()).getTime());
 						clieckedObj.children('a').attr("name",url);
 					}else{
 						url=clieckedObj.children('a').attr("name");
@@ -1586,7 +1586,7 @@ var openoFrameWork = function () {
 					tempObj=clieckedObj.clone();
 					tempObj.children('a').removeClass('iframe');
 					tempObj.children('a').removeClass('active');
-					tempObj.children('a').attr("href","javascript:openoFrameWork.goToURL('"+url+"');");
+					tempObj.children('a').attr("href","javascript:onapFrameWork.goToURL('"+url+"');");
 					var arrowdown = $(".fa-angle-down", tempObj.children('a'));
 					if (arrowdown) {
 						arrowdown.remove();
@@ -1599,9 +1599,9 @@ var openoFrameWork = function () {
 						var id = clieckedObj.children( 'a' ).attr('hparentid');									
 						//判断是F菜单还是横菜单
 						var megaMenu = null;
-						if(navPosOption ==  openoFrameWork_menu_horizontal){
+						if(navPosOption ==  onapFrameWork_menu_horizontal){
 							magaMenu = $('#'+megaDivId);
-						}else if(navPosOption ==  openoFrameWork_menu_fmenu){
+						}else if(navPosOption ==  onapFrameWork_menu_fmenu){
 							magaMenu = $('#'+fMenuMegaDivId);
 						}
 						clieckedObj =  $("a[id=" + id + "]" , magaMenu).parent('li');								
@@ -1652,7 +1652,7 @@ var openoFrameWork = function () {
 			if(tempObj.children('a')){
 				tempObj.children('a').removeClass('iframe');
 				url=tempObj.children('a').attr("href");
-				tempObj.children('a').attr("onclick","openoFrameWork.openbreadcrumbLink($(this),event);");
+				tempObj.children('a').attr("onclick","onapFrameWork.openbreadcrumbLink($(this),event);");
 				var tempdiv = tempObj.children('a').children('div');
 				if( tempdiv.length > 0 ){
 					var innerofDiv = tempdiv[0].innerHTML;
@@ -1724,7 +1724,7 @@ var openoFrameWork = function () {
         }
 
         var viewport = _getViewPort();
-        if (viewport.width >= openoFrameWork_smallView) {
+        if (viewport.width >= onapFrameWork_smallView) {
             var sidebarHeight = _calculateFixedSidebarViewportHeight();
             dealSidebarAndContentHeight();
         }
@@ -1813,7 +1813,7 @@ var openoFrameWork = function () {
     // 处理边栏菜单切换时的关闭和隐藏.
     var dealSidebarToggler = function () {
         var viewport = _getViewPort();
-        if (getCookie('sidebar_closed') === '1' && viewport.width >= openoFrameWork_smallView) {
+        if (getCookie('sidebar_closed') === '1' && viewport.width >= onapFrameWork_smallView) {
             $('body').addClass('page-sidebar-closed');
         }
         $('.page-sidebar, .sidebar-toggler').on('click', '.sidebar-toggler', function (e) {
@@ -1905,7 +1905,7 @@ var openoFrameWork = function () {
 		return setInterval(function() {
 			var userName;
 			if( userName == null ){
-				var userName = openoFrameWork_conf.userName;
+				var userName = onapFrameWork_conf.userName;
 			}
 			var heartUrl = FrameConst.REST_HEARTBEAT + "?username=" + encodeURIComponent(userName);
 			$.ajax(heartUrl, {
@@ -2028,7 +2028,7 @@ var openoFrameWork = function () {
         $('.header-option', panel).val("fixed");
         $('.footer-option', panel).val("default");
         if ( $('.sidebar-pos-option').attr("disabled") === false) {
-            $('.sidebar-pos-option', panel).val(openoFrameWork.isRTL() ? 'right' : 'left');
+            $('.sidebar-pos-option', panel).val(onapFrameWork.isRTL() ? 'right' : 'left');
         }		
         var _resetLayout = function () {
             dealResetLayout();
@@ -2037,7 +2037,7 @@ var openoFrameWork = function () {
 			dealSetLayout();
         }
         var setColor = function (color) {
-            var color_ = (openoFrameWork.isRTL() ? color + '-rtl' : color);
+            var color_ = (onapFrameWork.isRTL() ? color + '-rtl' : color);
             $('#style_color').attr("href", ICTFRAME_CONST_THEME_COLOR_CSS_PREFFIX + color_ + ".css");
             setCookie('style_color', color);
 			syncColorCSS();
@@ -2106,7 +2106,7 @@ var openoFrameWork = function () {
         var fsiderMenu = $("#" + fMenuSiderDivId);
 		var pcontent = $("[class='page-content']");
 		if (sidermenu && sidermenu.length > 0 && hormenu && hormenu.length  > 0 && fhorMenu && fhorMenu.length  > 0) {
-			if (navPosOption === openoFrameWork_menu_horizontal) {
+			if (navPosOption === onapFrameWork_menu_horizontal) {
 				sidermenu.css('display','none');// 侧边栏隐藏
                 fhorMenu.css('display','none');
                 fsiderMenu.css('display','none');
@@ -2118,7 +2118,7 @@ var openoFrameWork = function () {
 				$('.sidebar-option', panel).attr("disabled", true);
 				$('.sidebar-pos-option', panel).val("left");
 				$('.sidebar-pos-option', panel).attr("disabled", true);
-			} else if (navPosOption === openoFrameWork_menu_vertical ) {
+			} else if (navPosOption === onapFrameWork_menu_vertical ) {
 				$("body").removeClass("page-full-width");
 				sidermenu.css('display','block');//侧边栏显示
 				var body = $('body');
@@ -2133,7 +2133,7 @@ var openoFrameWork = function () {
 				horSiderMenu.css('display','none');
 				$('.sidebar-option', panel).attr("disabled", false);
 				$('.sidebar-pos-option', panel).attr("disabled", false);
-			} else if(navPosOption === openoFrameWork_menu_fmenu ){
+			} else if(navPosOption === onapFrameWork_menu_fmenu ){
                 sidermenu.css('display','none');// 侧边栏隐藏
                 hormenu.css("display", "none");//隐藏水平菜单栏
                 fsiderMenu.css('display','none');
@@ -2212,7 +2212,7 @@ var openoFrameWork = function () {
                 $("body").removeClass("page-footer-fixed");
         }
             //sidebar position
-        if (openoFrameWork.isRTL()) {
+        if (onapFrameWork.isRTL()) {
                 if (sidebarPosOption === 'left') {
                     $("body").addClass("page-sidebar-reversed");
                     $('#frontend-link').tooltip('destroy').tooltip({placement: 'right'});
@@ -2287,7 +2287,7 @@ var openoFrameWork = function () {
 			id = path.substring(0,spIndex);
 			action = path.substring(spIndex+1);
 		}
-		openoFrameWork.goToURLByIDAndNewAction(id,action);
+		onapFrameWork.goToURLByIDAndNewAction(id,action);
 	}
 	var syncColorCSS=function(){//注册皮肤切换事件处理函数，处理iframe中的皮肤切换
 		var pagemyIframe=null;
@@ -2295,7 +2295,7 @@ var openoFrameWork = function () {
             for (var i in cachedIframes.hash()) {                			      
 			    pagemyIframe=$('.page-content .page-content-body .'+i);
 			    if(pagemyIframe&&pagemyIframe.length>0){
-					openoFrameWork.SyncCSS(pagemyIframe[0],1,"");
+					onapFrameWork.SyncCSS(pagemyIframe[0],1,"");
 				}
             }
         }
@@ -2313,7 +2313,7 @@ var openoFrameWork = function () {
     }
 	//处理跨域请求代理，通过该代理进行iframe间传递参数，注意这里的代理页面proxy.html必须部署到要跨域的对端域的服务器web根目录下
 	var dealCrossProxy=function(ifrm,crossproxysrc,ifmHeadlins,flag){//crossproxysrc这个是proxy.html对应的url根路径
-		var url=$.url(openoFrameWork.getCurrentScript(document));
+		var url=$.url(onapFrameWork.getCurrentScript(document));
 		var proxyHtmlPath=url.attr("directory")+"proxy/proxy.html"//这中情况适用于使用了该界面集成框架的应用系统
 	    var _ifmProxy=$('<iframe id="ifm_Proxy" name="ifm_Proxy" oldproxyorigin="'+crossproxysrc+'" src="'+crossproxysrc+proxyHtmlPath+'" style="border: 0px; margin: 0px; padding: 0px; width: 100%; display:none;" ></iframe>');
 		var _ifm=$('#ifm_Proxy');
@@ -2422,7 +2422,7 @@ var openoFrameWork = function () {
 			$('title').html(title+" - "+gdocTitle); 
 		},
 		getLanguage:function(){//获取语言
-			return openoFrameWork_conf.acceptLanguage;
+			return onapFrameWork_conf.acceptLanguage;
 		},
         
 		getLocationHash:function(){
@@ -2461,13 +2461,13 @@ var openoFrameWork = function () {
 				if (!items || items.length < 1) {
 					items=$(".page-content a[id='"+id+"']");
 				}
-			}else if(navPosOption === openoFrameWork_menu_horizontal){//从水平菜单里面找
+			}else if(navPosOption === onapFrameWork_menu_horizontal){//从水平菜单里面找
                 items=$("#main_hormenu a[id='"+id+"']");
                 if(items.length == 0){
                     //横菜单没有找到，再在横菜单的子菜单找一次
                     items=$("#page-megachild-sidebar-menu a[id='"+id+"']");
                 }
-            }else if(navPosOption === openoFrameWork_menu_fmenu){
+            }else if(navPosOption === onapFrameWork_menu_fmenu){
                 items=$("#f_hormenu a[id='"+id+"']");
                 if(items.length == 0){
                     //横菜单没有找到，再在竖菜单找一次。
@@ -2534,11 +2534,11 @@ var openoFrameWork = function () {
         },
         //2015年10月26日新增动态切换菜单的功能，这里的菜单还需要再次更换菜单项访问的ip端口信息				
 		handlBaseURL:function(url){
-			var baseURLRoot=openoFrameWork.getBaseURLRoot();
+			var baseURLRoot=onapFrameWork.getBaseURLRoot();
 			if (baseURLRoot.length>0) {//2015年10月26日新增动态切换菜单的功能，这里的菜单还需要再次更换菜单项访问的ip端口信息
-					baseURLRoot=openoFrameWork.getDomainURL(baseURLRoot);//去掉ip和port后多余的部分
+					baseURLRoot=onapFrameWork.getDomainURL(baseURLRoot);//去掉ip和port后多余的部分
 					console.log("old a link href url:"+url);
-					url=baseURLRoot+url.replace(openoFrameWork.getDomainURL(url),"");
+					url=baseURLRoot+url.replace(onapFrameWork.getDomainURL(url),"");
 					console.log("baseURLRoot:"+baseURLRoot+"      newURL:"+url);			
 			};
 			return url;
@@ -2733,7 +2733,7 @@ var openoFrameWork = function () {
 					hkjs=document.createElement("script");	////hk.js 加载后拦截ajax请求进行转发				
 				}
 			}
-			var crossOrign=openoFrameWork.getDomainURL(ifrm.src);					
+			var crossOrign=onapFrameWork.getDomainURL(ifrm.src);					
 			if(	window.location.origin==crossOrign){	//第一层同域处理	
 				for (i=0;i<ifmHeadlins.length;i++){
 					var link=ifrm.contentDocument.getElementById(ifmHeadlins[i].link.id);
@@ -2761,7 +2761,7 @@ var openoFrameWork = function () {
 					}
 					for(j=0;j<childifrms.length;j++){
 						var parm={ifmHeadlins:ifmHeadlins2};
-						var childOrign=openoFrameWork.getDomainURL(childifrms[j].src);
+						var childOrign=onapFrameWork.getDomainURL(childifrms[j].src);
 						if(window.location.origin==childOrign){//同域
 							var ifrmload=function(e){ 
 								for (i=0;i<e.data.ifmHeadlins.length;i++){
@@ -2804,7 +2804,7 @@ var openoFrameWork = function () {
 		},	
 	    goToURL:function(url){
 			dhByBreadcrumb = true;//全局变量，声明此次事件是由点击面包屑发起的
-			var showNav=openoFrameWork.getLocationURLParameter('showNav');
+			var showNav=onapFrameWork.getLocationURLParameter('showNav');
 			if(showNav=="false"){//如果不显示菜单,就强制刷新本页
 				location.reload();
 			}else{
@@ -2813,7 +2813,7 @@ var openoFrameWork = function () {
 			}
          },
 		goToURLByName:function(name){
-	        var showNav=openoFrameWork.getLocationURLParameter('showNav');
+	        var showNav=onapFrameWork.getLocationURLParameter('showNav');
 			if(showNav=="false"){//如果不显示菜单,就强制刷新本页
 				location.reload();
 			}else{
@@ -2825,7 +2825,7 @@ var openoFrameWork = function () {
 			if(!id){
 				return;
 			}  
-			var showNav=openoFrameWork.getLocationURLParameter('showNav');
+			var showNav=onapFrameWork.getLocationURLParameter('showNav');
 			if(showNav=="false"){//如果不显示菜单,就强制刷新本页
 				location.reload();
 			}else{
@@ -2893,7 +2893,7 @@ var openoFrameWork = function () {
             waittime = setInterval(function () {
                     if(moreMenusisLoaded==true){
 						clearInterval(waittime);
-						openoFrameWork.goToURLByIDAndNewAction(id,newActionStr,null);
+						onapFrameWork.goToURLByIDAndNewAction(id,newActionStr,null);
 					}
                 }, 10); 
 		},
@@ -2961,12 +2961,12 @@ var openoFrameWork = function () {
 			if(menuitem&&menuitem.length>0){
 				var panel = $('.zte-theme-panel');
 				var navPosOption = $('.nav-pos-direction', panel).val();
-				if(navPosOption === openoFrameWork_menu_fmenu){
+				if(navPosOption === onapFrameWork_menu_fmenu){
 					var hparentid=menuitem.attr("hparentid");
 					var id=menuitem.attr("id");
 					var i=0,menuItemH=menuitem;
 					while (id!=hparentid&&i<20){
-						menuItemH=openoFrameWork.findMenuItemByMenuId(hparentid);
+						menuItemH=onapFrameWork.findMenuItemByMenuId(hparentid);
 						hparentid=menuItemH.attr("hparentid");
 						id=menuItemH.attr("id");
 						i++;
@@ -3001,7 +3001,7 @@ var openoFrameWork = function () {
 				
 				if(menuitem&&menuitem.length>0){
 					menuitem.one('click',parm,function(e){	//临时一次性的注册一次click事件处理函数，执行完毕会自动删除			
-						openoFrameWork.dealAtoIframe($(this),e);
+						onapFrameWork.dealAtoIframe($(this),e);
 						//$(window).one('hashchange', loadCurrentHash);
 						return false;
 					}); 
@@ -3026,13 +3026,13 @@ var openoFrameWork = function () {
 			var items = undefined;
 			if (navPosOption === "vertical"){ //从垂直菜单里面找
 				items=$("#page-sidebar-menu a[id='"+id+"']");
-			}else if(navPosOption === openoFrameWork_menu_horizontal){//从水平菜单里面找
+			}else if(navPosOption === onapFrameWork_menu_horizontal){//从水平菜单里面找
 				items=$("#main_hormenu a[id='"+id+"']");
 				if(items.length == 0){
                     //横菜单没有找到，再在横菜单的子菜单找一次
                     items=$("#page-megachild-sidebar-menu a[id='"+id+"']");
                 }
-			}else if(navPosOption === openoFrameWork_menu_fmenu){
+			}else if(navPosOption === onapFrameWork_menu_fmenu){
                 items=$("#f_hormenu a[id='"+id+"']");
                 if(items.length == 0){
                     //横菜单没有找到，再在竖菜单找一次。
@@ -3063,11 +3063,11 @@ var openoFrameWork = function () {
 			var panel = $('.zte-theme-panel');              
 			var navPosOption = $('.nav-pos-direction', panel).val();
 			var mainMenuId = null;
-			if (navPosOption === openoFrameWork_menu_vertical){
+			if (navPosOption === onapFrameWork_menu_vertical){
 				relationAry=sideBarMenu_to_moreMenu_frame;					
-			}else if(navPosOption === openoFrameWork_menu_horizontal){
+			}else if(navPosOption === onapFrameWork_menu_horizontal){
 				relationAry=horBarMenu_to_moreMenu_frame;
-			}else if(navPosOption === openoFrameWork_menu_fmenu){
+			}else if(navPosOption === onapFrameWork_menu_fmenu){
 				relationAry=horBarMenu_to_moreMenu_frame;
 			}				
 			if ( !relationAry || !id ){
@@ -3096,13 +3096,13 @@ var openoFrameWork = function () {
 			var navPosOption = $('.nav-pos-direction', panel).val();
             if (navPosOption === "vertical"){ //从垂直菜单里面找
                 items=$("#page-sidebar-menu a[id='"+id+"']");
-            }else if(navPosOption === openoFrameWork_menu_horizontal){//从水平菜单里面找
+            }else if(navPosOption === onapFrameWork_menu_horizontal){//从水平菜单里面找
                 items=$("#main_hormenu a[id='"+id+"']");
                 if(items.length == 0){
                     //横菜单没有找到，再在横菜单的子菜单找一次
                     items=$("#page-megachild-sidebar-menu a[id='"+id+"']");
                 }
-            }else if(navPosOption === openoFrameWork_menu_fmenu){
+            }else if(navPosOption === onapFrameWork_menu_fmenu){
                 items=$("#f_hormenu a[id='"+id+"']");
                 if(items.length == 0){
                     //横菜单没有找到，再在竖菜单找一次。
@@ -3180,7 +3180,7 @@ function runHtmlScripts(s) {
 	var currentRunningScriptSrcPath = {};
 	$(scripts).each(function() {
 		var src = this.src;
-		src = openoFrameWork.handlBaseURL(src);
+		src = onapFrameWork.handlBaseURL(src);
 		if (src) {
 			currentRunningScriptSrcPath[src.substring(src.lastIndexOf("/") + 1)] = src.substring(0, src.lastIndexOf("/") + 1);
 			$.getScript(src);
@@ -3196,7 +3196,7 @@ function stripHtmlScripts(htmlContent) {
 	var scripts = divContent.getElementsByTagName('script');
 
 	$(scripts).each(function() {
-		this.src = openoFrameWork.handlBaseURL(this.src);
+		this.src = onapFrameWork.handlBaseURL(this.src);
 		this.parentNode.removeChild(this);
 	});
 	return divContent.innerHTML;
@@ -3206,8 +3206,8 @@ function getsiderBarMenu(url){
     if (url.length<2){
         return;
     }
-	url=openoFrameWork.handlBaseURL(url);	   
-    openoFrameWork.startPageLoading();//菜单加载中请稍候....
+	url=onapFrameWork.handlBaseURL(url);	   
+    onapFrameWork.startPageLoading();//菜单加载中请稍候....
     var pagesidebar=$('#page-sidebar-menu');
     pagesidebar.empty();
     pagesidebar.append("<li class='sidebar-toggler-wrapper'><div class='sidebar-toggler hidden-xs hidden-sm'></div></li>");
@@ -3227,7 +3227,7 @@ function getsiderBarMenu(url){
             dealMysqlBackupMenu();
             //loadi18n_WebFramework_sideMenu();
 			setTimeout(function () {
-                openoFrameWork.stopPageLoading();
+                onapFrameWork.stopPageLoading();
 			    goToHomePage();
             }, 1000);
         },
@@ -3284,20 +3284,20 @@ function iniFMenu() {
 	var fsidemenu = $('#' + fMenuSiderDivId);
 
 	if (fsidemenu) {
-		openoFrameWork.startPageLoading();
+		onapFrameWork.startPageLoading();
 
 		var menuContent = initLeftMenu();
 		fsidemenu.empty();
 		fsidemenu.append("<li class='sidebar-toggler-wrapper'><div class='sidebar-toggler hidden-xs hidden-sm'></div></li>");
 		fsidemenu.append(menuContent);
-		loadi18n_WebFramework('web-framework-menu-i18n', 'i18n/', 'openo_frame_left_menu_i18n');
+		loadi18n_WebFramework('web-framework-menu-i18n', 'i18n/', 'onap_frame_left_menu_i18n');
 
-		openoFrameWork.stopPageLoading();
+		onapFrameWork.stopPageLoading();
 	}
 };
 
 function goToHomePage(){
-    locationhash = openoFrameWork.getLocationHash();
+    locationhash = onapFrameWork.getLocationHash();
 	if(!!locationhash&&locationhash.length>0){//有锚点，直接触发
 		var newIPPort=null;				
 		if (store&&store('menuCategoryID')) {
@@ -3307,9 +3307,9 @@ function goToHomePage(){
 			}				
         }
 		if(!!newIPPort){
-			openoFrameWork.goToURLByIDAndNewIPPort(locationhash,newIPPort,null);
+			onapFrameWork.goToURLByIDAndNewIPPort(locationhash,newIPPort,null);
 		}else{
-			openoFrameWork.goToURLByIDAndNewAction(locationhash,null,null);
+			onapFrameWork.goToURLByIDAndNewAction(locationhash,null,null);
 		}
 	}else{//否则还是模拟点击配置了start类的菜单
 	    var containerStr = "";
@@ -3334,7 +3334,7 @@ function goToHomePage(){
 
 		}
         //F菜单的恒菜单显示
-        else if (navPosOption === openoFrameWork_menu_fmenu) {
+        else if (navPosOption === onapFrameWork_menu_fmenu) {
             //containerStr=$('.hor-menu').length>0?'.header':containerStr;
             startmenu = $('.iframe.start' ,fhormenu);
 			if (startmenu && startmenu.length < 1) {
@@ -3412,7 +3412,7 @@ function getLcsRight(lcsoperations) {
 			"data" : jsonvalues
 		};
 		var url=FrameConst.REST_GETLICENSEINFO + "?tmpstamp=" + new Date().getTime();
-		url=openoFrameWork.handlBaseURL(url);
+		url=onapFrameWork.handlBaseURL(url);
 		$.ajax({
 			"dataType" : 'json',
 			"type" : "GET",
@@ -3552,7 +3552,7 @@ function groupButtonAuthentication() {
 		}
 	}
 	// 增加mysql判断，如果数据库为mysql，去掉基础数据备份功能菜单项
-	var dbType = openoFrameWork_conf.dbType;
+	var dbType = onapFrameWork_conf.dbType;
 	if (dbType == "mysql") {
         $("#uep-ict-backup-baseDataBack",$('.more-botton-zone > li.btn-group')).parent().remove();
 	}	
@@ -3629,7 +3629,7 @@ function getAllOperCodeRights(operations) {
 		};
 		var sendData = JSON.stringify(data);
 		var url=FrameConst.REST_CHECKRIGHT + "?data=" + sendData + "&tmpstamp=" + new Date().getTime();
-		url=openoFrameWork.handlBaseURL(url);
+		url=onapFrameWork.handlBaseURL(url);
 		$.ajax({
 			"dataType" : 'json',
 			"type" : "GET",
@@ -3665,7 +3665,7 @@ function hasRight(opCode, rightObj) {
 };
 // 处理mysql环境下备份菜单的合并问题
 function dealMysqlBackupMenu() {
-	var dbType = openoFrameWork_conf.dbType;
+	var dbType = onapFrameWork_conf.dbType;
     if (dbType !== undefined && dbType !== "mysql") {
         return;
     }

@@ -194,10 +194,10 @@ var app = angular.module("POCApp", ["ui.router", "ngTable"])
 
         /*$scope.geticonClass = function() {
             if($( "#panel1" ).hasClass( "in" )){
-                return "openo_accordion_ui-icon-expand";
+                return "onap_accordion_ui-icon-expand";
             }
             else{
-               return "openo_accordion_ui-icon-expand.current";
+               return "onap_accordion_ui-icon-expand.current";
             }
 
 

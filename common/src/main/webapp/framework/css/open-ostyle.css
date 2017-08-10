@@ -35,7 +35,7 @@ body {
     background-color: #f5f5f5;
 }
 
-.openo-accordion-resizable-handle {
+.onap-accordion-resizable-handle {
     z-index: 1 !important;
     cursor: e-resize;
     width: 7px;
@@ -47,7 +47,7 @@ body {
     display: block;
 }
 
-.openoAccordian_accordionmenu {
+.onapAccordian_accordionmenu {
     width: 100%;
     margin: 0;
     padding: 0;
@@ -55,7 +55,7 @@ body {
     line-height: 17px;
 }
 
-.openoAccordian_accordionmenu li {
+.onapAccordian_accordionmenu li {
     min-width: 75px;
     margin: 0;
     padding: 0;
@@ -64,7 +64,7 @@ body {
     clear: both;
 }
 
-.openo_accordion_ui-icon-collapse, .openo_accordion_ui-icon-expand {
+.onap_accordion_ui-icon-collapse, .onap_accordion_ui-icon-expand {
     display: block;
     float: left;
     margin-bottom: -1px;
@@ -74,16 +74,16 @@ body {
     padding-top: 26px;
 }
 
-.openo_accordion_ui-icon-expand {
+.onap_accordion_ui-icon-expand {
     background: url(../thirdparty/images/collapse_arrow.png) right 20px no-repeat;
     margin-top: 8px;
 }
 
-.openo_accordion_ui-icon-expand.current {
+.onap_accordion_ui-icon-expand.current {
     background: url(../thirdparty/images/expand_arrow.png) right 20px no-repeat;
 }
 
-.openoAccordian_showHideArrow_hide, .openoAccordian_showHideArrow_show {
+.onapAccordian_showHideArrow_hide, .onapAccordian_showHideArrow_show {
     display: block;
     position: absolute;
     right: 0;
@@ -94,8 +94,8 @@ body {
     background-color: #f5f5f5;
 }
 
-.openoAccordian_showHideArrow_hide {
-    background-image: url(../images/openo.png);
+.onapAccordian_showHideArrow_hide {
+    background-image: url(../images/onap.png);
     background-position: -7px 0 !important;
     border-collapse: separate;
     /*box-shadow: inset -1px 0 0 #e5e5e5;*/
@@ -108,14 +108,14 @@ a.header.opened, a.header.closed {
     color: #999999;
 }
 
-.openoAccordian_accordionmenu .closed, .openoAccordian_accordionmenu .opened {
+.onapAccordian_accordionmenu .closed, .onapAccordian_accordionmenu .opened {
     padding-right: 10px;
     background-position: 98% 50%;
     background-repeat: no-repeat;
 }
 
 
-.openoAccordian_accordionmenu li a {
+.onapAccordian_accordionmenu li a {
     padding: 11px 10px 12px;
     color: #333333;
     margin-top: -1px;
@@ -130,13 +130,13 @@ a.header.opened, a.header.closed {
     /*height: 19px;*/
 }
 
-.openoAccordian_accordionmenu ul {
+.onapAccordian_accordionmenu ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
 }
 
-.openoAccordian_accordionmenu a {
+.onapAccordian_accordionmenu a {
     display: block;
     text-decoration: none;
 }
@@ -157,7 +157,7 @@ a {
 .bar span {
     width: 13px;
     height: 34px;
-    background-image: url(../images/openo.png);
+    background-image: url(../images/onap.png);
     background-position: -39px 0 !important;
     display: block;
     /*margin-top: -430px;*/
@@ -167,11 +167,11 @@ li {
     cursor: pointer;
 }
 
-#puer_base_openo {
+#puer_base_onap {
     border: 1px solid #ddd;
 }
 
-.openo_accordion_selected {
+.onap_accordion_selected {
     margin-left: 0;
     margin-right: 0;
     background: #fafafa;
@@ -184,13 +184,13 @@ a:hover {
     color: #4ac9ff;
 }
 
-.openoAccordian_accordionmenu li.openo_accordion_selected a {
+.onapAccordian_accordionmenu li.onap_accordion_selected a {
     position: relative;
     left: -3px;
     color: #009ae7;
 }
 
-.openo-accordion-resizable-handle {
+.onap-accordion-resizable-handle {
     z-index: 1 !important;
     cursor: e-resize;
     width: 7px;
@@ -216,8 +216,8 @@ a:hover {
     height: 100%;
 }
 
-.openoAccordian_showHideArrow_show {
-    background-image: url(../images/openo.png);
+.onapAccordian_showHideArrow_show {
+    background-image: url(../images/onap.png);
     background-position: -39px 0 !important;
     box-shadow: inset 1px 0 0 #e5e5e5, inset -1px 0 0 #e5e5e5;
 }

@@ -29,7 +29,7 @@ app.factory("controllerDataService", function($http, DataService, $log){
                 //$log.info(response);
                 return response.data;
             });*/
-            return DataService.get(uri+'/openoapi/extsys/v1/sdncontrollers')
+            return DataService.get(uri+'/onapapi/aai/esr/v1/sdncontrollers')
                 .then(function(response){
                     $log.info("in get data service data is  :"+response);
                     console.log(response);
@@ -47,7 +47,7 @@ app.factory("controllerDataService", function($http, DataService, $log){
                 $log.info(response.data);
                 return response.data;
             });*/
-            return DataService.post(uri+'/openoapi/extsys/v1/sdncontrollers', controllerData)
+            return DataService.post(uri+'/onapapi/aai/esr/v1/sdncontrollers', controllerData)
                 .then(function(response){
                     console.log("Successfully added.. Data returned in DataService is");
                     console.log(response.data);
@@ -65,7 +65,7 @@ app.factory("controllerDataService", function($http, DataService, $log){
                 $log.info(response);
                 return response.data;
             });*/
-            return DataService.delete(uri+'/openoapi/extsys/v1/sdncontrollers/'+id)
+            return DataService.delete(uri+'/onapapi/aai/esr/v1/sdncontrollers/'+id)
                 .then(function(response){
                     $log.info("in delete data service data is  :"+response);
                     console.log(response);
@@ -84,7 +84,7 @@ app.factory("controllerDataService", function($http, DataService, $log){
                 return response.data;
             });*/
 
-            return DataService.put(uri+'/openoapi/extsys/v1/sdncontrollers', controllerData)
+            return DataService.put(uri+'/onapapi/aai/esr/v1/sdncontrollers', controllerData)
                 .then(function(response){
                     console.log("Successfully edited.. Data returned in DataService is");
                     console.log(response.data);

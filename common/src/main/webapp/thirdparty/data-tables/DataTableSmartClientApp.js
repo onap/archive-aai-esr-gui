@@ -495,7 +495,7 @@ var DatatableICT = function () {
                             "data": aoData,
                             "success": function(res, textStatus, jqXHR) {
                                 if (res.sMessage) {
-                                    openoFrameWork.alert({type: (res.sStatus == 'OK' ? 'success' : 'danger'), icon: (res.sStatus == 'OK' ? 'check' : 'warning'), message: res.sMessage, container: tableWrapper, place: 'prepend'});
+                                    onapFrameWork.alert({type: (res.sStatus == 'OK' ? 'success' : 'danger'), icon: (res.sStatus == 'OK' ? 'check' : 'warning'), message: res.sMessage, container: tableWrapper, place: 'prepend'});
                                 }
                                 if ($('.group-checkable', tableContainer).size() === 1) {
                                     $('.group-checkable', tableContainer).attr("checked", false);
@@ -532,7 +532,7 @@ var DatatableICT = function () {
                                 if (tableOptions.onError) {
                                     tableOptions.onError.call(the);
                                 }
-                                openoFrameWork.alert({type: 'danger', icon: 'warning', message: tableOptions.dataTable.oLanguage.sAjaxRequestGeneralError, container: tableWrapper, place: 'prepend'});
+                                onapFrameWork.alert({type: 'danger', icon: 'warning', message: tableOptions.dataTable.oLanguage.sAjaxRequestGeneralError, container: tableWrapper, place: 'prepend'});
                                 $('.dataTables_processing', tableWrapper).remove();
                             }
                         } );
@@ -554,7 +554,7 @@ var DatatableICT = function () {
                             tableInitialized = true; // set table initialized
                             table.show(); // display table
                         }
-                        openoFrameWork.initUniform($('input[type="checkbox"]', tableContainer));  // reinitialize uniform checkboxes on each table reload
+                        onapFrameWork.initUniform($('input[type="checkbox"]', tableContainer));  // reinitialize uniform checkboxes on each table reload
                         countSelectedRecords(); // reset selected records indicator
                         //所有td不换行
                         $('table#datatable_ajax').find('td').css('white-space', 'nowrap');

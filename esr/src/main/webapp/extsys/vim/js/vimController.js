@@ -37,10 +37,10 @@ var vm = avalon
         },
         isSave: true,
         action: {ADD: 'add', UPDATE: 'update'},
-        $queryVimInfoUrl: '/openoapi/extsys/v1/vims',
-        $addVimInfoUrl: '/openoapi/extsys/v1/vims/',
-        $updateVimInfoUrl: '/openoapi/extsys/v1/vims/',
-        $delVimInfoUrl: '/openoapi/extsys/v1/vims/{vim_id}',
+        $queryVimInfoUrl: '/onapapi/aai/esr/v1/vims',
+        $addVimInfoUrl: '/onapapi/aai/esr/v1/vims/',
+        $updateVimInfoUrl: '/onapapi/aai/esr/v1/vims/',
+        $delVimInfoUrl: '/onapapi/aai/esr/v1/vims/{vim_id}',
         $initTable: function () {
             $.ajax({
                 "type": 'get',

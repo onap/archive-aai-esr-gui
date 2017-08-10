@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 var initLeftMenu = function() {
-	var i18nName = "openo_frame_left_menu_i18n";
+	var i18nName = "onap_frame_left_menu_i18n";
 	var parentMenus;
 	var childMenus;
 

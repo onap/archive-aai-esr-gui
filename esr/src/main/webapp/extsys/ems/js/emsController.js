@@ -32,12 +32,12 @@ var vm = avalon
             failed: "inactive"
         },
         $restUrl: {
-            queryEmsInfoUrl: '/openoapi/extsys/v1/emss',
-            addEmsInfoUrl: '/openoapi/extsys/v1/emss',
-            updateEmsInfoUrl: '/openoapi/extsys/v1/emss/',
-            delEmsInfoUrl: '/openoapi/extsys/v1/emss/',
+            queryEmsInfoUrl: '/onapapi/aai/esr/v1/emss',
+            addEmsInfoUrl: '/onapapi/aai/esr/v1/emss',
+            updateEmsInfoUrl: '/onapapi/aai/esr/v1/emss/',
+            delEmsInfoUrl: '/onapapi/aai/esr/v1/emss/',
             queryMocUrl: '',
-            queryVimUrl: '/openoapi/extsys/v1/vims'
+            queryVimUrl: '/onapapi/aai/esr/v1/vims'
         },
         $htmlText: {
             saveSuccess: $.i18n.prop("nfv-ems-iui-message-save-success"),

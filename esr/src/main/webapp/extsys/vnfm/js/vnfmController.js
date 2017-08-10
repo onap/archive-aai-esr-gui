@@ -32,12 +32,12 @@ var vm = avalon
             failed: "inactive"
         },
         $restUrl: {
-            queryVnfmInfoUrl: '/openoapi/extsys/v1/vnfms',
-            addVnfmInfoUrl: '/openoapi/extsys/v1/vnfms',
-            updateVnfmInfoUrl: '/openoapi/extsys/v1/vnfms/',
-            delVnfmInfoUrl: '/openoapi/extsys/v1/vnfms/',
+            queryVnfmInfoUrl: '/onapapi/aai/esr/v1/vnfms',
+            addVnfmInfoUrl: '/onapapi/aai/esr/v1/vnfms',
+            updateVnfmInfoUrl: '/onapapi/aai/esr/v1/vnfms/',
+            delVnfmInfoUrl: '/onapapi/aai/esr/v1/vnfms/',
             queryMocUrl: '',
-            queryVimUrl: '/openoapi/extsys/v1/vims'
+            queryVimUrl: '/onapapi/aai/esr/v1/vims'
         },
         $htmlText: {
             saveSuccess: $.i18n.prop("nfv-vnfm-iui-message-save-success"),

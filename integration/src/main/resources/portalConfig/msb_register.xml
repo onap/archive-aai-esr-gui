@@ -18,7 +18,7 @@
     <msbHost>
         <hostIp>http://192.168.233.226</hostIp>
         <hostPort>80</hostPort>
-        <msbApiRootDomain>/openoapi/microservices/v1/services</msbApiRootDomain>
+        <msbApiRootDomain>/onapapi/microservices/v1/services</msbApiRootDomain>
     </msbHost>
     <registerList>
         <registerInfo>

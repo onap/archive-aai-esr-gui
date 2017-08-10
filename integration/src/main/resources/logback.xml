@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration debug="false" scan="true" scanPeriod="30 seconds">
-    <property name="projectName" value="openoui"/>
-   <property name="logDir" value="../webapps/openoui/openoui_log"/>
+    <property name="projectName" value="onapui"/>
+   <property name="logDir" value="../webapps/onapui/onapui_log"/>
     <property name="maxHistory" value="30"/>
     <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
 
