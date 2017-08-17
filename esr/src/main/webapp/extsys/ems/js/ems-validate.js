@@ -47,20 +47,20 @@ $(function () {
         },
         messages: {
             name: {
-                required: $.i18n.prop("nfv-vnfm-iui-validate-name")
+                required: $.i18n.prop("nfv-ems-iui-validate-name")
             },
             type: {
-                required: $.i18n.prop("nfv-vnfm-iui-validate-type")
+                required: $.i18n.prop("nfv-ems-iui-validate-type")
             },
             version: {
-                required: $.i18n.prop("nfv-vnfm-iui-validate-version")
+                required: $.i18n.prop("nfv-ems-iui-validate-version")
             },
             vendor: {
-                required: $.i18n.prop("nfv-vnfm-iui-validate-vendor")
+                required: $.i18n.prop("nfv-ems-iui-validate-vendor")
             },
             url: {
-                required: $.i18n.prop("nfv-vnfm-iui-validate-url-required"),
-                url: $.i18n.prop("nfv-vnfm-iui-validate-url")
+                required: $.i18n.prop("nfv-ems-iui-validate-url-required"),
+                url: $.i18n.prop("nfv-ems-iui-validate-url")
             }
         },
         errorPlacement: function (error, element) { // render error placement for each input type

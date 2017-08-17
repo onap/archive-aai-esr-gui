@@ -14,12 +14,45 @@
  * limitations under the License.
  */
 
-var vm = avalon
-    .define({
+var vm = avalon.define({
         $id: "emsController",
         emsInfo: [],
-        //mocSelectItems : [],
+        currentElement: {},
+        $emsList: [],
+        $newElement: {
+            "emsId": "",
+            "status": "active",
+            "emsName": "",
+            "version": "v1.0",
+            "vendor": "ZTE",
+            "description": "ems description",
+            "resource": {
+                "ftptype": "ftp",
+                "ip": "",
+                "port": "",
+                "user": "root",
+                "password": "",
+                "remotepath": "/opt/Gcp/data/",
+                "passive": true
+            },
+            "performance": {
+                "ftptype": "ftp",
+                "ip": "",
+                "port": "",
+                "user": "root",
+                "password": "",
+                "remotepath": "",
+                "passive": true
+            },
+            "alarm": {
+                "ip": "",
+                "port": 2000,
+                "user": "root",
+                "password": ""
+            }
+        },
         vimSelectItems: [],
+        saveType: "add",
         server_rtn: {
             info_block: false,
             warning_block: false,
@@ -27,15 +60,23 @@ var vm = avalon
             $RTN_SUCCESS: "RTN_SUCCESS",
             $RTN_FAILED: "RTN_FAILED"
         },
-        $Status: {
+        modalTitle: $.i18n.prop("nfv-ems-iui-text-register"),
+        urlTip: "",
+        currentStep: 1,
+        status: {
             success: "active",
             failed: "inactive"
         },
+        $format: {
+            "ipv4": /^((?:(?:25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d)))\.){3}(?:25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d))))$/,
+            "port": /^([0-9]|[1-9]\d|[1-9]\d{2}|[1-9]\d{3}|[1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5])$/,
+            "url": /^(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?$/
+        },
         $restUrl: {
-            queryEmsInfoUrl: '/onapapi/aai/esr/v1/emss',
-            addEmsInfoUrl: '/onapapi/aai/esr/v1/emss',
-            updateEmsInfoUrl: '/onapapi/aai/esr/v1/emss/',
-            delEmsInfoUrl: '/onapapi/aai/esr/v1/emss/',
+            queryEmsInfoUrl: "/esrui/extsys/ems/mock-data/ems.json",//'/onapapi/aai/esr/v1/ems',
+            addVnfmInfoUrl: '/onapapi/aai/esr/v1/ems',
+            updateVnfmInfoUrl: '/onapapi/aai/esr/v1/ems/',
+            delVnfmInfoUrl: '/onapapi/aai/esr/v1/ems/',
             queryMocUrl: '',
             queryVimUrl: '/onapapi/aai/esr/v1/vims'
         },
@@ -50,196 +91,239 @@ var vm = avalon
             $.ajax({
                 "type": 'GET',
                 "url": vm.$restUrl.queryEmsInfoUrl,
-                //"dataType": "json",
+                "dataType": "json",
                 "success": function (resp) {
-                    for (var i = 0; i < resp.length; i++) {
-                        resp[i].status = vm.$Status.success;
-                    }
                     vm.emsInfo = resp;
+                    vm.$emsList = $.extend(true, [], resp) ;
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     bootbox.alert($.i18n.prop("nfv-ems-iui-message-query-fail") + "：" + textStatus + ":" + errorThrown);
                     return;
                 },
                 complete: function () {
-                    emsUtil.tooltipEmsStatus();
+                    $("[data-toggle='tooltip']").tooltip();
                 }
             });
         },
-
-        $initVim: function () {
-            $.ajax({
-                type: 'get',
-                url: vm.$restUrl.queryVimUrl,
-                dataType: 'json',
-                success: function (resp) {
-                    if (resp) {
-                        vm.vimSelectItems = resp;
-                    }
-                    vm.vimSelectItems.push({"vimId": "", "name": ""});
-                }
-            });
-        },
-        addEms: {
-            title: $.i18n.prop("nfv-ems-iui-text-register"),
-            emsId: "",
-            name: "",
-            type: "",
-            //moc : "",
-            nameReadonly : false,
-            vimId: "",
-            //vimVisiable : false,
-            vendor: "",
-            version: "",
-            description: "",
-            certificateUrl: "",
-            url: "",
-            urlTip: $.i18n.prop("nfv-ems-iui-text-url-tip"),
-            userName: "",
-            password: "",
-            saveType: "add",
-            status: ""
-        },
-        $showEmsTable: function () {
-            vm.addEms.title = $.i18n.prop("nfv-ems-iui-text-register"),
-                vm.addEms.emsId = "";
-            vm.addEms.name = "";
-            vm.addEms.type = "";
-            vm.addEms.nameReadonly = false;
-            vm.addEms.vimId = "";
-            vm.addEms.vendor = "";
-            vm.addEms.version = "";
-            vm.addEms.description = "";
-            vm.addEms.certificateUrl = "";
-            vm.addEms.url = "";
-            vm.addEms.userName = "";
-            vm.addEms.password = "";
-            vm.addEms.saveType = "add";
-            vm.server_rtn.warning_block = false;
-            vm.server_rtn.info_block = false;
-            vm.$initVim();
-            $(".form-group").each(function () {
-                $(this).removeClass('has-success');
-                $(this).removeClass('has-error');
-                $(this).find(".help-block[id]").remove();
-            });
-            $("#addEmsDlg").modal("show");
-        },
-        // $getMocName : function(mocId) {
-        //       	var items = vm.mocSelectItems;
-        //           for(var i=0;i<items.length;i++) {
-        //    		if(items[i].id == mocId) {
-        //    			return items[i].name;
-        //    		}
-        //    	}
-        //    	return "";
-        // },
-        $saveEms: function () {
-            var form = $('#ems_form');
-            if (form.valid() == false) {
+        $nextStep: function () {
+            if(vm.currentStep == 1 && !vm.validate("resource")){
+                 return false;
+            } else if(vm.currentStep == 2 && !vm.validate("performance")){
                 return false;
             }
+            vm.currentStep ++;
+            vm.showStep();
+        },
+        $preStep: function () {
+            if(vm.currentStep == 2 && !vm.validate("resource")){
+                return false;
+            } else if(vm.currentStep == 3 && !vm.validate("alarm")){
+                return false;
+            }
+            vm.currentStep --;
+            vm.showStep();
+        },
+        showStep: function () {
+            var show = function (filter) {
+                $(".px-ui-steps ul li.step-active").removeClass("step-active");
+                $("#step-" + filter).addClass("step-active");
+                $(".step-content form").hide();
+                $("#form_" + filter).show();
+            };
+            switch (vm.currentStep){
+                case 1:
+                    show("resource");
+                    $("#btnSave, #btnPreStep").hide();
+                    $("#btnNextStep").show();
+                    break;
+                case 2:
+                    show("performance");
+                    $("#btnSave").hide();
+                    $("#btnNextStep, #btnPreStep").show();
+                    break;
+                case 3:
+                    show("alarm");
+                    $("#btnNextStep").hide();
+                    $("#btnSave, #btnPreStep").show();
+                    break;
+            }
+        },
+        $registerEMS: function () {
+            vm.currentElement = $.extend(true, {}, vm.$newElement);
+            vm.currentIndex = -1;
+            vm.saveType = "add";
+            vm.modalTitle = $.i18n.prop("nfv-ems-iui-text-register");
+            vm.$showTable();
+        },
+        $showTable: function () {
+            vm.currentStep = 1;
+            vm.showStep();
+            $(".form-group").removeClass('has-success').removeClass('has-error');
+            $("#addEmsDlg").modal("show");
+        },
+        dismiss: function () {
+            if(vm.currentIndex !== -1){
+                vm.currentElement.emsName = vm.$emsList[vm.currentIndex].emsName;
+            }
+            $("#addEmsDlg").modal("hide");
+        },
+        $saveEMS: function () {
+            var form = $('#vnfm_form');
+           //TODO valiate
             vm.server_rtn.info_block = true;
             vm.server_rtn.warning_block = false;
-            vm.addEms.status = vm.$Status.success;
 
-            var param = {
-                name: vm.addEms.name,
-                vimId: $("#vimId").val(),
-                vendor: vm.addEms.vendor,
-                version: vm.addEms.version,
-                type: vm.addEms.type,
-                description: vm.addEms.description,
-                certificateUrl: vm.addEms.certificateUrl,
-                url: vm.addEms.url,
-                userName: vm.addEms.userName,
-                password: vm.addEms.password
-            }
             //save VIM info
-            if (vm.addEms.saveType == "add") {     
-                $.ajax({
-                    type: "POST",
-                    url: vm.$restUrl.addEmsInfoUrl,
-                    data: JSON.stringify(param),
-                    dataType: "json",
-                    contentType: "application/json",
-                    success: function (data) {
-                        vm.server_rtn.info_block = false;
-                        vm.server_rtn.warning_block = false;
-                        if (data) {
-                            vm.emsInfo = [];
-                            vm.$initTable();
-
-                            $('#addEmsDlg').modal('hide');
-                            commonUtil.showMessage(vm.$htmlText.saveSuccess, "success");
-                        } else {
-                            vm.server_rtn.warning_block = true;
-                            vm.server_rtn.rtn_info = vm.$htmlText.saveFail;
-                            commonUtil.showMessage(vm.$htmlText.saveFail, "failed");
-                        }
-                    },
-                    error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        vm.server_rtn.warning_block = true;
-                        vm.server_rtn.rtn_info = textStatus + ":" + errorThrown;
-                        vm.server_rtn.info_block = false;
-                    }
-                });
+            var res = false;
+            if (vm.saveType == "add") {
+                res = vm.postEMS();
             } else {
-                $.ajax({
-                    type: "PUT",
-                    url: vm.$restUrl.updateEmsInfoUrl + vm.addEms.emsId,
-                    data: JSON.stringify(param),
-                    dataType: "json",
-                    contentType: "application/json",
-                    success: function (data) {
-                        vm.server_rtn.info_block = false;
-                        vm.server_rtn.warning_block = false;
-                        if (data) {
-                            for (var i = 0; i < vm.emsInfo.length; i++) {
-                                if (vm.emsInfo[i].emsId == vm.addEms.emsId) {
-                                    vm.emsInfo[i].name = vm.addEms.name;
-                                    vm.emsInfo[i].vimId = $("#vimId").val();
-                                    vm.emsInfo[i].vendor = vm.addEms.vendor;
-                                    vm.emsInfo[i].version = vm.addEms.version;
-                                    vm.emsInfo[i].certificateUrl = vm.addEms.certificateUrl;
-                                    vm.emsInfo[i].description = vm.addEms.description;
-                                    vm.emsInfo[i].url = vm.addEms.url;
-                                    vm.emsInfo[i].userName = vm.addEms.userName;
-                                    vm.emsInfo[i].password = vm.addEms.password;
-                                }
+                res = vm.putEMS();
+            }
+            if(res){
+                $("#addEmsDlg").modal("hide");
+            }
+        },
+        updateEMS: function (index) {
+            vm.saveType = "update";
+            vm.currentIndex = index;
+            vm.currentElement = vm.emsInfo[index];
+            vm.$showTable();
+        },
+        delEMS: function (id, index) {
+            bootbox.confirm($.i18n.prop("nfv-ems-iui-message-delete-confirm"), function (result) {
+                if (result) {
+                    vm.emsInfo.splice(index, 1);
+                    vm.$emsList.splice(index, 1);
+                    console.log(vm.emsInfo[index]);
+                   /* $.ajax({
+                        type: "DELETE",
+                        url: vm.$restUrl.delVnfmInfoUrl + id,
+                        dataType: "json",
+                        success: function (data, statusText, jqXHR) {
+                            if (jqXHR.status == "204") {
+
+                                commonUtil.showMessage($.i18n.prop("nfv-ems-iui-message-delete-success"), "success");
+                            } else {
+                                commonUtil.showMessage($.i18n.prop("nfv-ems-iui-message-delete-fail"), "warning");
                             }
-                            $('#addEmsDlg').modal('hide');
-                            commonUtil.showMessage(vm.$htmlText.updateSuccess, "success");
-                        } else {
-                            vm.server_rtn.warning_block = true;
-                            vm.server_rtn.rtn_info = vm.$htmlText.updateFail;
-                            commonUtil.showMessage(vm.$htmlText.updateFail, "failed");
+                        },
+                        error: function () {
+                            commonUtil.showMessage($.i18n.prop("nfv-ems-iui-message-delete-fail"), "warning");
                         }
-                    },
-                    error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        vm.server_rtn.warning_block = true;
-                        vm.server_rtn.rtn_info = textStatus + ":" + errorThrown;
-                        vm.server_rtn.info_block = false;
-                    }
-                });
-            }
-        },
-
-        vimRendered: function (action) {
-            var items = vm.vimSelectItems;
-            if (vm.addEms.saveType === "update") {
-                for (var i = 0; i < items.length; i++) {
-                    if (items[i].vimId == vm.addEms.vimId) {
-                        $("#vimId")[0].selectedIndex = i;
-                        break;
-                    }
+                    });*/
                 }
-            } else {
-                $("#vimId")[0].selectedIndex = items.length - 1;
-            }
+            });
         },
+        validate: function (formId) {
+            var res = true;
+            var emsSave = vm.getEMSSave();
+            var ip = emsSave[formId].ip;
+            var port = emsSave[formId].port;
+            if(!vm.$format.ipv4.test(ip)){
+                $("#form_" + formId + " input[name='ip']").next().html("The IP format is incorrect");
+                res = res && false;
+            } else {
+                $("#form_" + formId + " input[name='ip']").next().html("");
+            }
+            if(!vm.$format.port.test(port)){
+                $("#form_" + formId + " input[name='port']").next().html("The port format is incorrect");
+                res = res && false;
+            } else {
+                $("#form_" + formId + " input[name='port']").next().html("");
+            }
+            return res;
+        },
+        postEMS: function () {
+            var emsSave = vm.getEMSSave();
+            if(!vm.validate("alarm")){
+                return false;
+            }
+            emsSave.emsId = Math.floor(Math.random() * 100000) / 100000;
+            vm.emsInfo.push(emsSave);
+            vm.$emsList.push(emsSave);
+            console.log(emsSave);
+            return true;
+            /*$.ajax({
+                type: "POST",
+                url: vm.$restUrl.addVnfmInfoUrl,
+                data: JSON.stringify(vm.currentElement),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                    vm.server_rtn.info_block = false;
+                    vm.server_rtn.warning_block = false;
+                    if (data) {
+                        vm.vnfmInfo = [];
+                        vm.$initTable();
 
+                        $('#addEmsDlg').modal('hide');
+                        commonUtil.showMessage(vm.$htmlText.saveSuccess, "success");
+                    } else {
+                        vm.server_rtn.warning_block = true;
+                        vm.server_rtn.rtn_info = vm.$htmlText.saveFail;
+                        commonUtil.showMessage(vm.$htmlText.saveFail, "failed");
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    vm.server_rtn.warning_block = true;
+                    vm.server_rtn.rtn_info = textStatus + ":" + errorThrown;
+                    vm.server_rtn.info_block = false;
+                }
+            });*/
+        },
+        putEMS: function () {
+            console.log(vm.getEMSSave());
+            if(!vm.validate("alarm")){
+                return false;
+            }
+            return true;
+           /* $.ajax({
+                type: "PUT",
+                url: vm.$restUrl.updateVnfmInfoUrl + vm.currentElement.emsId,
+                data: JSON.stringify(vm.currentElement),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                    vm.server_rtn.info_block = false;
+                    vm.server_rtn.warning_block = false;
+                    if (data) {
+                        for (var i = 0; i < vm.vnfmInfo.length; i++) {
+                            if (vm.vnfmInfo[i].vnfmId == vm.addVnfm.vnfmId) {
+                                vm.vnfmInfo[i].name = vm.addVnfm.name;
+                                vm.vnfmInfo[i].vimId = $("#vimId").val();
+                                vm.vnfmInfo[i].vendor = vm.addVnfm.vendor;
+                                vm.vnfmInfo[i].version = vm.addVnfm.version;
+                                vm.vnfmInfo[i].certificateUrl = vm.addVnfm.certificateUrl;
+                                vm.vnfmInfo[i].description = vm.addVnfm.description;
+                                vm.vnfmInfo[i].url = vm.addVnfm.url;
+                                vm.vnfmInfo[i].userName = vm.addVnfm.userName;
+                                vm.vnfmInfo[i].password = vm.addVnfm.password;
+                            }
+                        }
+                        $('#addEmsDlg').modal('hide');
+                        commonUtil.showMessage(vm.$htmlText.updateSuccess, "success");
+                    } else {
+                        vm.server_rtn.warning_block = true;
+                        vm.server_rtn.rtn_info = vm.$htmlText.updateFail;
+                        commonUtil.showMessage(vm.$htmlText.updateFail, "failed");
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    vm.server_rtn.warning_block = true;
+                    vm.server_rtn.rtn_info = textStatus + ":" + errorThrown;
+                    vm.server_rtn.info_block = false;
+                }
+            });*/
+        },
+        getEMSSave: function () {
+            var emsSave = $.extend(true, {}, vm.currentElement.$model);
+            emsSave.alarm = vm.currentElement.alarm.$model;
+            emsSave.resource = vm.currentElement.resource.$model;
+            emsSave.performance = vm.currentElement.performance.$model;
+            return emsSave;
+        }
     });
+vm.currentElement = $.extend(true, {}, vm.$newElement);
 avalon.scan();
 vm.$initTable();
-//vm.$initMoc();

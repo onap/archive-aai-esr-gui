@@ -311,12 +311,10 @@ input[name="daterange"] {
 }
 
 td.details-control {
-    background: url('../images/details_open.png') no-repeat center center;
     cursor: pointer;
 }
 
 tr.shown td.details-control {
-    background: url('../images/details_close.png') no-repeat center center;
 }
 
 .details table td {
@@ -403,10 +401,10 @@ input.pagination-panel-input {
     animation-duration: .5s;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
+    -webkit-animation-delay: 0.1s;
 }
 
 .hpanel {
-    background-color: none;
     border: none;
     box-shadow: none;
     margin-bottom: 25px;
@@ -421,13 +419,15 @@ input.pagination-panel-input {
 }
 
 .h-200 {
-    min-height: 220px;
+    min-height: 120px;
 }
 
 .m-t-xl {
     margin-top: 40px;
 }
-
+.card-name{
+    text-align: center;
+}
 .m-t-xl div {
     margin-bottom: 15px;
 }
@@ -476,11 +476,78 @@ h3 {
     font-weight: 600;
     margin-bottom: 15px;
 }
-
 .hpanel_show {
     background-color: #f7f9fa;
 }
-
 .vnfm-padding {
     padding-left: 0;
+}
+.step-content{
+    margin-top: 20px;
+}
+.px-ui-steps{
+    height: 36px;
+}
+.px-ui-horizon-ul-horizon{
+    display: flex;
+    box-orient: horizontal;
+    margin: 0;
+    padding: 0;
+}
+.px-ui-steps-li{
+    list-style: none;
+    position: relative;
+    width: 386px;
+    height: 24px;
+    line-height: 24px;
+    float: left;
+    margin-right: 0;
+}
+.px-ui-menuitem-div-passive{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 120px;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+.step-active div:first-child span:last-child{
+    color: #4d5761;
+}
+.step-active div:last-child, .step-active div:first-child span:first-child{
+    background: #33bcff;
+}
+.px-ui-steps-number-passive{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+    float: left;
+    color: #fff;
+    text-align: center;
+    background: #ddd;
+}
+.px-ui-steps-title-passive{
+    white-space: nowrap;
+}
+.px-ui-steps-title-active{
+    color: #4d5761;
+}
+.px-ui-steps-title-passive{
+    color: #7c868d;
+}
+
+.px-ui-underline-passive{
+    width: 100%;
+    height: 2px;
+    margin-top: 35px;
+    position: absolute;
+    background: #ddd;
+}
+#btnPreStep, #btnSave{
+    display: none;
 }

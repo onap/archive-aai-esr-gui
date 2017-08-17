@@ -1,0 +1,66 @@
+[
+  {
+    "emsId": "123098765",
+    "status": "active",
+    "emsName": "EMS_TEST",
+    "version": "v1.0",
+    "vendor": "ZTE",
+    "description": "ems description",
+    "resource": {
+      "ftptype": "ftp",
+      "ip": "10.44.55.145",
+      "port": "2000",
+      "user": "root",
+      "password": "test",
+      "remotepath": "/opt/Gcp/data/",
+      "passive": true
+    },
+    "performance": {
+      "ftptype": "ftp",
+      "ip": "10.44.55.145",
+      "port": "2000",
+      "user": "root",
+      "password": "test",
+      "remotepath": "/opt/Gcp/data/",
+      "passive": true
+    },
+    "alarm": {
+      "ip": "10.44.55.145",
+      "port": 2000,
+      "user": "root",
+      "password": "test"
+    }
+  },
+  {
+    "emsId": "12309876566",
+    "status": "inactive",
+    "emsName": "EMS_TEST_FAILED",
+    "version": "v1.0",
+    "vendor": "ZTE",
+    "description": "ems description",
+    "resouce": {
+      "ftptype": "sftp",
+      "ip": "10.44.55.15",
+      "port": "2100",
+      "user": "root",
+      "password": "test",
+      "remotepath": "/opt/Gcp/data/",
+      "passive": true
+    },
+    "performance": {
+      "ftptype": "sftp",
+      "ip": "10.44.55.15",
+      "port": "2100",
+      "user": "root",
+      "password": "test",
+      "remotepath": "/opt/Gcp/data/",
+      "passive": true
+    },
+    "alarm": {
+      "ip": "10.44.55.15",
+      "port": 2100,
+      "user": "root",
+      "password": "test"
+    }
+  }
+]
