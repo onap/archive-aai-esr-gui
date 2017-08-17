@@ -1,0 +1,30 @@
+[
+  {
+    "sdnControllerId":"a6c42529-cd6b-4c01-b149-03eb54b20a03",
+    "name":"sdnc1",
+    "status": "active",
+    "url":"http://10.74.151.13:8181",
+    "userName":"admin",
+    "password":"admin",
+    "version":"v1.0",
+    "vendor":"ZTE",
+    "description":"",
+    "protocol":"netconf",
+    "productName":"",
+    "type":"WAN"
+  },
+  {
+    "sdnControllerId":"a6c42529-cd6b-4c01-b149-03eb54b20a04",
+    "name":"sdnc2",
+    "status": "inactive",
+    "url":"http://10.74.151.13:8181",
+    "userName":"admin",
+    "password":"admin",
+    "version":"v1.0",
+    "vendor":"ZTE",
+    "description":"",
+    "protocol":"netconf",
+    "productName":"",
+    "type":"WAN"
+  }
+]
