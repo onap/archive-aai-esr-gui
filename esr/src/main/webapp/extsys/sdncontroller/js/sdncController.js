@@ -107,7 +107,9 @@ var vm = avalon.define({
         },
         $saveSDNC: function () {
             var form = $('#vnfm_form');
-           //TODO valiate
+            if(!vm.validate()){
+                return;
+            }
             vm.server_rtn.info_block = true;
             vm.server_rtn.warning_block = false;
 
@@ -127,6 +129,18 @@ var vm = avalon.define({
             vm.currentIndex = index;
             vm.currentElement = vm.sdncList[index];
             vm.$showTable();
+        },
+        validate: function () {
+            var res = true;
+            var sdncSave = vm.getSDNCSave();
+           var url = sdncSave.url;
+            if(!vm.$format.url.test(url)){
+                $("#form_sdnc input[name='url']").next().html("The url format is incorrect");
+                res = res && false;
+            } else {
+                $("#form_sdnc input[name='url']").next().html("");
+            }
+            return res;
         },
         delSDNC: function (id, index) {
             bootbox.confirm($.i18n.prop("nfv-sdnc-iui-message-delete-confirm"), function (result) {
