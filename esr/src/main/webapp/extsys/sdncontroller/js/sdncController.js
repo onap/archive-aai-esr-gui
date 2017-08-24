@@ -127,7 +127,7 @@ var vm = avalon.define({
         updateSDNC: function (index) {
             vm.saveType = "update";
             vm.currentIndex = index;
-            vm.currentElement = vm.sdncList[index];
+            vm.fillElement(vm.sdncList[vm.currentIndex], vm.currentElement)
             vm.$showTable();
         },
         validate: function () {
@@ -204,6 +204,7 @@ var vm = avalon.define({
         },
         putSDNC: function () {
             console.log(vm.getSDNCSave());
+            vm.fillElement(vm.currentElement, vm.sdncList[vm.currentIndex]);
             return true;
            /* $.ajax({
                 type: "PUT",
@@ -242,6 +243,20 @@ var vm = avalon.define({
                     vm.server_rtn.info_block = false;
                 }
             });*/
+        },
+        fillElement: function (sourceElement, targetElement) {
+            targetElement["sdnControllerId"] = sourceElement["sdnControllerId"];
+            targetElement["name"] = sourceElement["name"];
+            targetElement["status"] = sourceElement["status"];
+            targetElement["url"] = sourceElement["url"];
+            targetElement["userName"] = sourceElement["userName"];
+            targetElement["password"] = sourceElement["password"];
+            targetElement["version"] = sourceElement["version"];
+            targetElement["vendor"] = sourceElement["vendor"];
+            targetElement["description"] = sourceElement["description"];
+            targetElement["protocol"] = sourceElement["protocol"];
+            targetElement["productName"] = sourceElement["productName"];
+            targetElement["type"] = sourceElement["type"];
         },
         getSDNCSave: function () {
             var emsSave = $.extend(true, {}, vm.currentElement.$model);
