@@ -17,18 +17,33 @@ var vm = avalon
     .define({
         $id: "vimController",
         vimInfo: [],
-        //vimStatusTime:$.i18n.prop('com_zte_ums_eco_roc_vim_getting_info'),
-        // ifSearch : 0,
-        // server_rtn:{
-        // 	info_block:false,
-        // 	warning_block:false,
-        // 	rtn_info:"",
-        // 	$RTN_SUCCESS:"RTN_SUCCESS",
-        // 	$RTN_FAILED:"RTN_FAILED",
-        //              wait : $.i18n.prop('com_zte_ums_eco_roc_vim_checking_status')
-        // },
         executeWait: {clazz: 'alert-info', visible: true, text: $.i18n.prop('com_zte_ums_eco_roc_vim_checking_status')},
         executeError: {clazz: 'alert-danger', visible: true, text: 'error'},
+        currentElement: {},
+        currentIndex: -1,
+        saveType: "add",
+        modalTitle: $.i18n.prop('com_zte_ums_eco_roc_vim_register'),
+        $blankElement: {
+            "cloud-owner": "ZTE",
+            "status": "active",
+            "cloud-region-id": "",
+            "cloud-type": "openstack",
+            "cloud-region-version": "v1.0",
+            "owner-defined-type": "",
+            "cloud-zone": "",
+            "complex-name": "",
+            "cloud-extra-info": "",
+            "auth-info-items": [
+                {
+                    "username": "",
+                    "password": "",
+                    "auth-url": "",
+                    "ssl-cacert": "",
+                    "ssl-insecure": "",
+                    "cloud-domain": ""
+                }
+            ]
+        },
         $Status: {
             success: "active",
             failed: "inactive",
@@ -37,7 +52,7 @@ var vm = avalon
         },
         isSave: true,
         action: {ADD: 'add', UPDATE: 'update'},
-        $queryVimInfoUrl: '/onapapi/aai/esr/v1/vims',
+        $queryVimInfoUrl: 'mock-data/vim.json',//'/onapapi/aai/esr/v1/vims',
         $addVimInfoUrl: '/onapapi/aai/esr/v1/vims/',
         $updateVimInfoUrl: '/onapapi/aai/esr/v1/vims/',
         $delVimInfoUrl: '/onapapi/aai/esr/v1/vims/{vim_id}',
@@ -45,7 +60,6 @@ var vm = avalon
             $.ajax({
                 "type": 'get',
                 "url": vm.$queryVimInfoUrl,
-                //"dataType": "json",
                 "success": function (resp, statusText, jqXHR) {
                     if (jqXHR.status == "200") {
                         vm.vimInfo = resp;
@@ -66,124 +80,52 @@ var vm = avalon
             });
 
         },
-        $vimType: {
-            condName: $.i18n.prop("com_zte_ums_eco_roc_vim_type"),
-            component_type: 'select',
-            selectItems: [
-                {
-                    cond_value: 'vmware',
-                    name: "vmware",
-                    value: true
-                },
-                {
-                    cond_value: 'openstack',
-                    name: "openstack",
-                    value: true
-                }
-            ]
-        },
-        addVim: {
-            titleName: $.i18n.prop("com_zte_ums_eco_roc_vim_register_info"),
-            vimId: "",
-            vimName: "",
-            domain: '',
-            domainVisable:true,
-            vimNameModify:false,
-            userName: "",
-            tenant: "",
-            password: "",
-            url: "",
-            saveType: "add",
-            description: "",
-            vimType: "openstack",
-            vendor: "",
-            version: ""
-        },
-        $showVimTable: function (el, action) {
+        $showVimTable: function (index, action) {
             vm.isSave = false;
+            vm.currentIndex = index;
+            vm.saveType = action;
             if (vm.action.ADD == action) {
-                vm.addVim.vimId = "";
-                vm.addVim.vimName = "";
-                vm.addVim.vimNameModify=false;
-                vm.addVim.userName = "";
-                vm.addVim.password = "";
-                vm.addVim.url = "";
-                vm.addVim.domain = "";
-                vm.addVim.domainVisable = true;
-                vm.addVim.description = "";
-                vm.addVim.tenant = "";
-                vm.addVim.vendor = "";
-                vm.addVim.saveType = "add";
-                vm.addVim.vimType = "openstack";
-                vm.addVim.titleName = $.i18n.prop("com_zte_ums_eco_roc_vim_register_info");
-
+                vm.modalTitle = $.i18n.prop('com_zte_ums_eco_roc_vim_register');
+                vm.fillElement(vm.$blankElement, vm.currentElement);
             } else {
-                vm.addVim.vimId = el.vimId;
-                vm.addVim.vimName = el.name;
-                vm.addVim.vimNameModify=true;
-                vm.addVim.url = el.url;
-                vm.addVim.description = el.description;
-                vm.addVim.userName = el.userName;
-                vm.addVim.password = el.password;
-                vm.addVim.tenant = el.tenant;
-                vm.addVim.domain = el.domain;
-                vm.addVim.domainVisable=vm.$getdomainVisable(el.type);
-                vm.addVim.saveType = "update";
-                vm.addVim.titleName = $.i18n.prop('com_zte_ums_eco_roc_vim_modify_info');
-                vm.addVim.vimType = el.type;
-                vm.addVim.vendor = el.vendor;
-                vm.addVim.version = el.version;
+                vm.modalTitle = $.i18n.prop('com_zte_ums_eco_roc_vim_modify_info');
+                vm.fillElement(vm.vimInfo[index], vm.currentElement);
             }
-            vm.executeError.visible = false;
-            vm.executeWait.visible = false;
-            $(".form-group").each(function () {
-                $(this).removeClass('has-success');
-                $(this).removeClass('has-error');
-                $(this).find(".help-block[id]").remove();
-            });
+            vm.$showModal();
+        },
+        $showModal: function () {
+            $(".form-group").removeClass('has-success').removeClass('has-error').find(".help-block[id]").remove();
             $("#addVimDlg").modal("show");
         },
-
-        $saveVimTable: function () {
+        $hideModal: function () {
+            $(".form-group").removeClass('has-success').removeClass('has-error').find(".help-block[id]").remove();
+            $("#addVimDlg").modal("hide");
+        },
+        $saveVimTable: function (index) {
             vm.isSave = true;
-            success.hide();
-            error.hide();
             if (form.valid() == false) {
                 vm.isSave = false;
                 return false;
             }
-            vm.executeWait.visible = true;
-            vm.executeError.visible = false;
-            if (vm.addVim.saveType == "add") { 
-                for( var i = 0; i < vm.vimInfo.length; i ++ ){
-                    if(vm.addVim.name == vm.vimInfo[i].name){
-                       resUtil.growl($.i18n.prop("com_zte_ums_eco_roc_vim_growl_msg_title") +  ' already exists',"info");
-                       $('#addVimDlg').modal('hide');
-                        return;
-                    }
-                }                 
-                vm.persistVim();
-            } else if (vm.addVim.saveType == "update") {
-                vm.updateVim();
+            var res = false;
+            if (vm.saveType == "add") {
+                res = vm.persistVim();
+            } else if (vm.saveType == "update") {
+                res = vm.updateVim();
+            }
+            if(res){
+                vm.$hideModal();
             }
         },
         //add vim
         persistVim: function () {
-            $.ajax({
+            var newElement = vm.getVIMSave();
+            vm.vimInfo.push(newElement);
+            return true;
+            /*$.ajax({
                 type: "Post",
                 url: vm.$addVimInfoUrl,
-                data: JSON.stringify({
-                    name: vm.addVim.vimName,
-                    url: vm.addVim.url,
-                    userName: vm.addVim.userName,
-                    password: vm.addVim.password,
-                    tenant: vm.addVim.tenant,
-                    domain: vm.addVim.domain,
-                    vendor: vm.addVim.vendor,
-                    version: vm.addVim.version,
-                    description: vm.addVim.description,
-                    type: vm.addVim.vimType,
-                }),
+                data: JSON.stringify(vm.currentElement.$model),
                 async: false,
                 dataType: "json",
                 contentType: 'application/json',
@@ -211,26 +153,17 @@ var vm = avalon
                     vm.executeWait.visible = false;
                     vm.isSave = false;
                 }
-            });
+            });*/
         },
         //update vim
         updateVim: function () {
-            $.ajax({
+            vm.fillElement(vm.getVIMSave(), vm.vimInfo[vm.currentIndex]);
+            return true;
+           /* $.ajax({
                 type: "Put",
                 url: vm.$updateVimInfoUrl + vm.addVim.vimId,
                 contentType: 'application/json',
-                data: JSON.stringify({
-                    name: vm.addVim.vimName,
-                    userName: vm.addVim.userName,
-                    password: vm.addVim.password,
-                    domain: vm.addVim.domain,
-                    version: vm.addVim.version,
-                    description: vm.addVim.description,
-                    url: vm.addVim.url,
-                    tenant: vm.addVim.tenant,
-                    type: vm.addVim.vimType,
-                    vendor: vm.addVim.vendor,
-                }),
+                data: JSON.stringify(vm.currentElement.$model),
                 dataType: "json",
                 async: false,
                 success: function (data, statusText, jqXHR) {
@@ -265,12 +198,14 @@ var vm = avalon
                     vm.executeError.text = textStatus + ":" + errorThrown;
                     vm.executeWait.visible = false;
                 }
-            });
+            });*/
         },
-        delVim: function (el) {
+        delVim: function (index) {
             bootbox.confirm($.i18n.prop('com_zte_ums_eco_roc_vim_confirm_delete_vim_record'), function (result) {
                 if (result) {
-                    $.ajax({
+                    var id = vm.vimInfo[index]["id"];
+                    vm.vimInfo.splice(index, 1);
+                   /* $.ajax({
                         type: "DELETE",
                         url: vm.$delVimInfoUrl.replace('{vim_id}', el.vimId),
                         success: function (data, statusText, jqXHR) {
@@ -290,27 +225,40 @@ var vm = avalon
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             resUtil.growl($.i18n.prop('com_zte_ums_eco_roc_vim_growl_msg_title') + errorThrown, "danger");
                         }
-                    });
+                    });*/
                 }
             });
         },
+        fillElement: function (sourceElement, targetElement) {
+            targetElement["cloud-owner"] = sourceElement["cloud-owner"];
+            targetElement["status"] = sourceElement["status"];
+            targetElement["cloud-region-id"] = sourceElement["cloud-region-id"];
+            targetElement["cloud-type"] = sourceElement["cloud-type"];
+            targetElement["cloud-region-version"] = sourceElement["cloud-region-version"];
+            targetElement["owner-defined-type"] = sourceElement["owner-defined-type"];
+            targetElement["cloud-zone"] = sourceElement["cloud-zone"];
+            targetElement["complex-name"] = sourceElement["complex-name"];
+            targetElement["cloud-extra-info"] = sourceElement["cloud-extra-info"];
+            if(!targetElement["auth-info-items"]){
+                targetElement["auth-info-items"] = [{}];
+            }
+            targetElement["auth-info-items"][0]["username"] = sourceElement["auth-info-items"][0]["username"];
+            targetElement["auth-info-items"][0]["password"] = sourceElement["auth-info-items"][0]["password"];
+            targetElement["auth-info-items"][0]["auth-url"] = sourceElement["auth-info-items"][0]["auth-url"];
+            targetElement["auth-info-items"][0]["ssl-cacert"] = sourceElement["auth-info-items"][0]["ssl-cacert"];
+            targetElement["auth-info-items"][0]["ssl-insecure"] = sourceElement["auth-info-items"][0]["ssl-insecure"];
+            targetElement["auth-info-items"][0]["cloud-domain"] = sourceElement["auth-info-items"][0]["cloud-domain"];
+        },
+        getVIMSave: function () {
+            var vimSave = $.extend(true, {}, vm.currentElement.$model);
+            vimSave["auth-info-items"] = $.extend(true, {}, vm.currentElement["auth-info-items"].$model);
+            return vimSave;
+        },
         gotoChartPage: function (oid, name, tenant) {
             window.location.href = "vimChart.html?" + oid + "&" + name + "&" + tenant;
-        },
-        $getdomainVisable:function(vimType){
-            if ("openstack"==vimType){
-                return true;           
-             }else{
-                return false;
-             }
-
-        },
-        vimTypeRendered:function(){
-            vm.addVim.domainVisable=vm.$getdomainVisable(vm.addVim.vimType);
         }
-
-
     });
+vm.currentElement = $.extend(true, {}, vm.$blankElement);
 avalon.scan();
 vm.$initTable();
 

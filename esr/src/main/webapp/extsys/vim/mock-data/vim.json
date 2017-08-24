@@ -1,0 +1,44 @@
+[
+  {
+    "cloud-owner": "ZTE",
+    "status": "active",
+    "cloud-region-id": "region-one",
+    "cloud-type": "openstack",
+    "cloud-region-version": "v1.0",
+    "owner-defined-type": "owner-defined-type",
+    "cloud-zone": "cloud zone",
+    "complex-name": "complex name",
+    "cloud-extra-info": "cloud-extra-info",
+    "auth-info-items": [
+      {
+        "username": "admin",
+        "password": "admin",
+        "auth-url": "http://10.74.151.13:5000/v2.0",
+        "ssl-cacert": "ssl-cacert",
+        "ssl-insecure": "ssl-insecure",
+        "cloud-domain": "cloud-domain"
+      }
+    ]
+  },
+  {
+    "cloud-owner": "ZTE",
+    "status": "inactive",
+    "cloud-region-id": "region-one",
+    "cloud-type": "openstack",
+    "cloud-region-version": "v1.0",
+    "owner-defined-type": "owner-defined-type",
+    "cloud-zone": "cloud zone",
+    "complex-name": "complex name",
+    "cloud-extra-info": "cloud-extra-info",
+    "auth-info-items": [
+      {
+        "username": "admin",
+        "password": "admin",
+        "auth-url": "http://10.74.151.13:5000/v2.0",
+        "ssl-cacert": "ssl-cacert",
+        "ssl-insecure": "ssl-insecure",
+        "cloud-domain": "cloud-domain"
+      }
+    ]
+  }
+]

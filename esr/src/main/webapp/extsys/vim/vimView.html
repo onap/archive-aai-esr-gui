@@ -24,152 +24,167 @@
     <link href="../../thirdparty/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../../thirdparty/uniform/css/uniform.default.css" rel="stylesheet"/>
     <link href="../../thirdparty/css/ngict-component.css" rel="stylesheet" type="text/css">
-    <link href="../../thirdparty/css/ZteIctIcons/style.css" rel="stylesheet" type="text/css">
     <link href="css/vim.css" rel="stylesheet" type="text/css"/>
     <link href="css/skill.css" rel="stylesheet" type="text/css"/>
     <link href="../../thirdparty/animate/animate.min.css" rel="stylesheet" type="text/css"/>
-
-
     <style>
         .ms-controller {
             visibility: hidden
         }
     </style>
-
 </head>
 <body>
 <div class="ms-controller container-fluid" ms-controller="vimController">
 
     <div id="addVimDlg" class="modal  fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
+         aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog">
             <div class="modal-content Changepasswd">
                 <div class="content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 id="myModalLabel" ms-text="addVim.titleName"></h4>
+                        <h4 id="myModalLabel">{{ modalTitle }}</h4>
                     </div>
                     <!-- modal body begin-->
                     <div class="modal-body">
-                        <div class="alert alert-info" ms-visible="executeWait.visible">{{executeWait.text}}</div>
-                        <div class="alert alert-danger " ms-visible="executeError.visible">{{executeError.text}}</div>
+                        <!--<div class="alert alert-info" ms-visible="executeWait.visible">{{executeWait.text}}</div>
+                        <div class="alert alert-danger " ms-visible="executeError.visible">{{executeError.text}}</div>-->
 
                         <form class="form-horizontal" id="vim_form" role="form">
-                            <input type="hidden" ms-duplex="addVim.vimId" name="vimId" class="form-control"/>
                             <div class="form-group">
                                 <label class="control-label col-sm-3">
-                                    <span id_i18n="com_zte_ums_eco_roc_vim_name"
-                                          name_i18n="com_zte_conductor_ui_i18n"></span>
+                                    <span>cloud-owner</span>
                                     <span class="required" aria-required="true">*</span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <input type="text" ms-duplex="addVim.vimName" name="vimName" class="form-control" ms-readonly="addVim.vimNameReadonly"/>
+                                    <input type="text" ms-duplex="currentElement['cloud-owner']" name="cloudOwner" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-3">
-                                    <span id_i18n="com_zte_ums_eco_roc_vim_type"
-                                          name_i18n="com_zte_conductor_ui_i18n"></span>
+                                    <span>cloud-region-id</span>
                                     <span class="required" aria-required="true">*</span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <select id="vimTypeSelect" ms-each="$vimType.selectItems"
-                                            ms-duplex="addVim.vimType" data-duplex-changed="vimTypeRendered">
-                                        <option ms-attr-value='el.cond_value'>{{el.name}}</option>
+                                    <input type="text" ms-duplex="currentElement['cloud-region-id']" name="cloudRegionId" class="form-control"/>
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3">
+                                    <span>cloud-type</span>
+                                    <span class="required" aria-required="true">*</span>
+                                </label>
+                                <div class="col-sm-7">
+                                    <select ms-duplex="currentElement['cloud-type']">
+                                        <option value='openstack'>openstack</option>
                                     </select>
                                     <span class="help-block"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-3">
-                                    <span id_i18n="com_zte_ums_eco_roc_vim_auth_url"
-                                          name_i18n="com_zte_conductor_ui_i18n"></span>
+                                    <span>cloud-region-version</span>
                                     <span class="required" aria-required="true">*</span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <input type="text" ms-duplex="addVim.url" placeholder="http://xx.xx.xx.xx:5000/v2.0"
-                                           name="url" class="form-control"/>
+                                    <input type="text" ms-duplex="currentElement['cloud-region-version']" name="cloudRegionVersion" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
 
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-3">
-                                    <span id_i18n="com_zte_ums_eco_roc_vim_username"
-                                          name_i18n="com_zte_conductor_ui_i18n"></span>
+                                    <span>owner-defined-type</span>
                                     <span class="required" aria-required="true">*</span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <input type="text" ms-duplex="addVim.userName" name="userName"
-                                           class="form-control"/>
-                                    <span class="help-block"></span>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-sm-3">
-                                    <span id_i18n="com_zte_ums_eco_roc_vim_password"
-                                          name_i18n="com_zte_conductor_ui_i18n"></span>
-                                    <span class="required" aria-required="true">*</span>
-                                </label>
-                                <div class="col-sm-7">
-                                    <input type="password" ms-duplex="addVim.password" name="password"
-                                           class="form-control"/>
+                                    <input type="text" ms-duplex="currentElement['owner-defined-type']" name="ownerDefinedType" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-3">
-                                    <span id_i18n="com_zte_ums_eco_roc_vim_tenant"
-                                          name_i18n="com_zte_conductor_ui_i18n"></span>
+                                    <span>cloud-zone</span>
                                     <span class="required" aria-required="true">*</span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <input type="text" ms-duplex="addVim.tenant" name="tenant" class="form-control"/>
+                                    <input type="text" ms-duplex="currentElement['cloud-zone']" name="cloudZone" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-3">
-                                    <span id_i18n="com_zte_ums_eco_roc_vim_version"
-                                          name_i18n="com_zte_conductor_ui_i18n"></span>
+                                    <span>complex-name</span>
                                     <span class="required" aria-required="true">*</span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <input type="text" ms-duplex="addVim.version" name="version" class="form-control"/>
+                                    <input type="text" ms-duplex="currentElement['complex-name']" name="complexName" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-3">
-                                    <span id_i18n="com_zte_ums_eco_roc_vim_vendor"
-                                          name_i18n="com_zte_conductor_ui_i18n"></span>
+                                    <span>cloud-extra-info</span>
                                     <span class="required" aria-required="true">*</span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <input type="text" ms-duplex="addVim.vendor" name="vendor" class="form-control"/>
+                                    <input type="text" ms-duplex="currentElement['cloud-extra-info']" name="cloudExtraInfo" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
                             </div>
-                            <div class="form-group" ms-visible="addVim.domainVisable">
+                            <div class="form-group">
                                 <label class="control-label col-sm-3">
-                                    <span id_i18n="com_zte_ums_eco_roc_vim_domain"
-                                          name_i18n="com_zte_conductor_ui_i18n"></span>
+                                    <span>username</span>
+                                    <span class="required" aria-required="true">*</span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <input type="text" ms-duplex="addVim.domain" name="domain" class="form-control"/>
+                                    <input type="text" ms-duplex="currentElement['auth-info-items'][0].username" name="username" class="form-control"/>
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3">
+                                    <span>password</span>
+                                </label>
+                                <div class="col-sm-7">
+                                    <input type="password" ms-duplex="currentElement['auth-info-items'][0].password" name="password" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
                             </div>                           
                             <div class="form-group">
                                 <label class="control-label col-sm-3">
-                                    <span id_i18n="com_zte_ums_eco_roc_vim_description"
-                                          name_i18n="com_zte_conductor_ui_i18n"></span>                                   
+                                    <span>auth-url</span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <textarea class="form-control" rows="3" ms-duplex="addVim.description"
-                                              name="description"></textarea>
+                                    <input type="text" ms-duplex="currentElement['auth-info-items'][0]['auth-url']" name="authUrl" class="form-control"/>
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3">
+                                    <span>ssl-cacert</span>
+                                </label>
+                                <div class="col-sm-7">
+                                    <input type="text" ms-duplex="currentElement['auth-info-items'][0]['ssl-cacert']" name="sslCacert" class="form-control"/>
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3">
+                                    <span>ssl-insecure</span>
+                                </label>
+                                <div class="col-sm-7">
+                                    <input type="text" ms-duplex="currentElement['auth-info-items'][0]['ssl-insecure']" name="sslInsecure" class="form-control"/>
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3">
+                                    <span>cloud-domain</span>
+                                </label>
+                                <div class="col-sm-7">
+                                    <input type="text" ms-duplex="currentElement['auth-info-items'][0]['cloud-domain']" name="cloudDomain" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
                             </div>
@@ -180,7 +195,7 @@
                         <button class="btn" data-dismiss="modal" aria-hidden="true"><span
                                 id_i18n="com_zte_ums_eco_roc_vim_cancel" name_i18n="com_zte_conductor_ui_i18n"></span>
                         </button>
-                        <button class="btn btn-primary" type="submit" ms-disabled="isSave" ms-click="$saveVimTable()">
+                        <button class="btn btn-primary" type="submit" ms-attr-disabled="isSave" ms-click="$saveVimTable()">
                             <span id_i18n="com_zte_ums_eco_roc_vim_save" name_i18n="com_zte_conductor_ui_i18n"></span>
                         </button>
                     </div>
@@ -192,7 +207,7 @@
 
     <div class="row-fluid col-sm-12" data-name="cond_zone">
         <div class="col-sm-4">
-            <button class="btn white radius_l" id="app-new-btn" ms-click="$showVimTable('', 'add')">
+            <button class="btn white radius_l" id="app-new-btn" ms-click="$showVimTable(-1, 'add')">
                 <i class="ict-new"></i> <span id_i18n="com_zte_ums_eco_roc_vim_register"
                                               name_i18n="com_zte_conductor_ui_i18n"></span>
             </button>
@@ -201,7 +216,7 @@
     </div>
 
     <div class="row-fluid col-sm-12 " ms-each-el="vimInfo">
-        <div class="col-sm-4 animated-panel zoomIn" style="-webkit-animation-delay: 0.1s;">
+        <div class="col-sm-3 animated-panel zoomIn" style="-webkit-animation-delay: 0.1s;">
             <div class="hpanel stats">
 
                 <div class="panel-body h-200" ms-hover="hpanel_show">
@@ -212,20 +227,22 @@
                         <i class="fa fa-cloud  fa-5x color_cloud"></i>
                     </div>
                     <div class="m-t-xl">
-                        <h3 ms-text="el.name"></h3>
+                        <h3 ms-text="el['cloud-owner'] + ':' + el['cloud-region-id']"></h3>
                         <div class="font">
-                            <span id_i18n="com_zte_ums_eco_roc_vim_display_type"
-                                  name_i18n="com_zte_conductor_ui_i18n"></span>
-                            <span ms-text="el.type"></span>
+                            <span id_i18n="com_zte_ums_eco_roc_vim_display_type"name_i18n="com_zte_conductor_ui_i18n"></span>
+                            <span ms-text="el['cloud-type']"></span>
                         </div>
-                        <div ms-text="el.url"></div>
+                        <div class="font">
+                            <span id_i18n="com_zte_ums_eco_roc_vim_display_version"name_i18n="com_zte_conductor_ui_i18n"></span>
+                            <span ms-text="el['cloud-region-version']"></span>
+                        </div>
                     </div>
                 </div>
                 <div class="panel-footer">
                     <div class="pull-right">
-                        <a class="btn btn-default btn-sm" ms-click="$showVimTable(el, 'update')"><i
+                        <a class="btn btn-default btn-sm" ms-click="$showVimTable($index, 'update')"><i
                                 class="fa fa-pencil-square-o fa-lg"></i></a>
-                        <a class="btn btn-default btn-sm" ms-click="delVim(el)"><i class="fa fa-trash-o fa-lg"> </i></a>
+                        <a class="btn btn-default btn-sm" ms-click="delVim($index)"><i class="fa fa-trash-o fa-lg"> </i></a>
                         <!--<a class="btn btn-default btn-sm" ms-click="gotoChartPage(el.oid,el.name,el.user)"><i class="fa fa-pie-chart fa-lg"> </i></a>-->
                     </div>
                 </div>
@@ -247,16 +264,12 @@
 <script type="text/javascript" src="../../thirdparty/jquery/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="../../thirdparty/js/tools.js"></script>
 <script type="text/javascript" src="../../thirdparty/jquery.i18n/jquery.i18n.properties-1.0.9.js"></script>
-<script type="text/javascript" src="../../thirdparty/js/json2.js"></script>
 <script type="text/javascript" src="../../thirdparty/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../thirdparty/jquery-validation/js/jquery.validate.js"></script>
 <script type="text/javascript" src="../../thirdparty/jquery-validation/js/additional-methods.min.js"></script>
 <script type="text/javascript" src="../../thirdparty/bootbox/bootbox.min.js"></script>
-<!--<script type="text/javascript" src="../component/thirdparty/cometd/cometd.js"></script>-->
-<!--<script type="text/javascript" src="../component/thirdparty/cometd/jquery/jquery.cometd.js"></script>-->
 <script type="text/javascript" src="i18n/loadi18nApp.js"></script>
 <script type="text/javascript" src="js/vim-validate.js"></script>
-<!--<script type="text/javascript" src="./js/client-cometd.js"></script>-->
 <script src="../../thirdparty/avalon/avalon.js"></script>
 <script type="text/javascript" src="js/vimUtil.js"></script>
 <script type="text/javascript" src="js/vimController.js"></script>
