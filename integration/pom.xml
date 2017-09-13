@@ -23,13 +23,18 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>aai-esr-gui-integration</artifactId>
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
     <name>esr-gui/integration</name>
 
     <properties>
-        <packagename>esrui</packagename>
+        <packagename>esr-gui</packagename>
         <version.logback>1.1.2</version.logback>
         <version.slf4j>1.7.6</version.slf4j>
+		<linux64id>linux64</linux64id>
+        <win64id>win64</win64id>
+        <linux64outputdir>target/assembly/${linux64id}</linux64outputdir>
+        <win64outputdir>target/assembly/${win64id}</win64outputdir>
+        <version.output>target/version</version.output>
     </properties>
 
     <dependencies>
@@ -88,69 +93,139 @@
         </dependency>
         <dependency>
             <groupId>org.onap.aai.esr-gui</groupId>
-            <artifactId>esr</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-            <type>war</type>
+            <artifactId>httpserver</artifactId>
+            <version>${project.version}</version>
+            <type>zip</type>
         </dependency>
     </dependencies>
 
     <build>
-        <finalName>esrui</finalName>
         <plugins>
             <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-resources-${linux64id}</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${linux64outputdir}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/assembly/</directory>
+                                    <filtering>false</filtering>
+                                    <includes>
+                                        <include>**/*</include>
+                                    </includes>
+                                    <excludes>
+                                        <exclude>**/*.bat</exclude>
+                                    </excludes>
+                                </resource>
+                            </resources>
+                            <overwrite>true</overwrite>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-resources-${win64id}</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${win64outputdir}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/assembly/</directory>
+                                    <filtering>false</filtering>
+                                    <includes>
+                                        <include>**/*</include>
+                                    </includes>
+                                    <excludes>
+                                        <exclude>**/*.sh</exclude>
+                                    </excludes>
+                                </resource>
+                            </resources>
+                            <overwrite>true</overwrite>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <packagingExcludes>WEB-INF/web.xml</packagingExcludes>
-                    <overlays>
-                        <overlay>
-                            <groupId>org.onap.aai.esr-gui</groupId>
-                            <artifactId>common</artifactId>
-                        </overlay>
-                        <overlay>
-                            <groupId>org.onap.aai.esr-gui</groupId>
-                            <artifactId>esr</artifactId>
-                        </overlay>
-                    </overlays>
-                </configuration>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>                    
+                    <execution>
+                        <id>unpack-httpserver-${linux64id}</id>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <phase>prepare-package</phase>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.onap.aai.esr-gui</groupId>
+                                    <artifactId>httpserver</artifactId>
+                                    <type>zip</type>
+                                </artifactItem>
+                            </artifactItems>
+                            <excludes>**/*.bat,*.cmd</excludes>
+                            <outputDirectory>${linux64outputdir}</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>true</overWriteSnapshots>
+                            <outputAbsoluteArtifactFilename>true</outputAbsoluteArtifactFilename>
+                        </configuration>
+                    </execution>                    
+                    <execution>
+                        <id>unpack-httpserver-${win64id}</id>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <phase>prepare-package</phase>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.onap.aai.esr-gui</groupId>
+                                    <artifactId>httpserver</artifactId>
+                                    <type>zip</type>
+                                </artifactItem>
+                            </artifactItems>
+                            <excludes>*.sh,*/*.sh,*/*/*.sh</excludes>
+                            <outputDirectory>${win64outputdir}</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>true</overWriteSnapshots>
+                            <outputAbsoluteArtifactFilename>true</outputAbsoluteArtifactFilename>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>zip</id>
+                        <id>distribution</id>
                         <phase>package</phase>
                         <goals>
                             <goal>run</goal>
                         </goals>
                         <configuration>
-                            <tasks name="${project.artifactId}">
-                                <zip destfile="target/${packagename}-${project.version}.zip" update="true">
-                                    <zipfileset dir="target/esrui" includes="**"/>
+                            <target name="distribution">
+                                <tar destfile="${version.output}/${packagename}-${project.version}-linux64.tar.gz" longfile="posix" compression="gzip">
+                                    <tarfileset dir="target/assembly/linux64" filemode="0644" dirmode="0755">
+                                        <exclude name="**/*.sh"/>
+                                    </tarfileset>
+                                    <tarfileset dir="target/assembly/linux64" filemode="0755" dirmode="0755">
+                                        <include name="**/*.sh"/>
+                                    </tarfileset>
+                                </tar>
+                                <attachartifact file="${version.output}/${packagename}-${project.version}-linux64.tar.gz" classifier="linux64" type="tar.gz"/>
+                                <zip destfile="${version.output}/${packagename}-${project.version}-win64.zip" update="true">
+                                    <zipfileset dir="target/assembly/win64" includes="**"/>
                                 </zip>
-                            </tasks>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>attach-artifacts</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>attach-artifact</goal>
-                        </goals>
-                        <configuration>
-                            <artifacts>
-                                <artifact>
-                                    <file>target/${packagename}-${project.version}.zip</file>
-                                    <type>zip</type>
-                                </artifact>
-                            </artifacts>
+                                <attachartifact file="${version.output}/${packagename}-${project.version}-win64.zip" classifier="win64" type="zip"/>
+                            </target>
                         </configuration>
                     </execution>
                 </executions>

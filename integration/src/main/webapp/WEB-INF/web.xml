@@ -15,7 +15,7 @@
     limitations under the License.
 -->
 <web-app>
-    <display-name>OPEN-O Web Application</display-name>
+    <display-name>ONAP Web Application</display-name>
     <welcome-file-list>
         <welcome-file>login/index.html</welcome-file>
     </welcome-file-list>
