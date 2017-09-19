@@ -15,7 +15,7 @@
 @REM
 
 @echo off
-title catalog
+title esr-gui
 
 set RUNHOME=%~dp0
 echo ##RUNHOME %RUNHOME%

@@ -18,10 +18,10 @@ DIRNAME=`dirname $0`
 RUNHOME=`cd $DIRNAME/; pwd`
 echo @RUNHOME@ $RUNHOME
 
-echo "### shutdown blueprint";
+echo "### shutdown esr-gui";
 cd $RUNHOME
 cd ./tomcat
 export CATALINA_HOME=$RUNHOME/tomcat
 export CATALINA_BASE=$RUNHOME/tomcat
 $RUNHOME/tomcat/bin/shutdown.sh &
-echo "### shutdown blueprint end";
+echo "### shutdown esr-gui end";

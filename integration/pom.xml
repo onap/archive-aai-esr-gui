@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    Copyright (C) 2017 CMCC, Inc. and others. All rights reserved.
+    Copyright 2017 ZTE Corporation.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
     You may obtain a copy of the License at
 
-            http://www.apache.org/licenses/LICENSE-2.0
+        http://www.apache.org/licenses/LICENSE-2.0
 
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,8 +22,8 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>aai-esr-gui-integration</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>integration</artifactId>
+    <packaging>war</packaging>
     <name>esr-gui/integration</name>
 
     <properties>
@@ -93,143 +93,32 @@
         </dependency>
         <dependency>
             <groupId>org.onap.aai.esr-gui</groupId>
-            <artifactId>httpserver</artifactId>
-            <version>${project.version}</version>
-            <type>zip</type>
-        </dependency>
+            <artifactId>portal</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <type>war</type>
+        </dependency>   
     </dependencies>
 
     <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy-resources-${linux64id}</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${linux64outputdir}</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>src/main/assembly/</directory>
-                                    <filtering>false</filtering>
-                                    <includes>
-                                        <include>**/*</include>
-                                    </includes>
-                                    <excludes>
-                                        <exclude>**/*.bat</exclude>
-                                    </excludes>
-                                </resource>
-                            </resources>
-                            <overwrite>true</overwrite>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>copy-resources-${win64id}</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${win64outputdir}</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>src/main/assembly/</directory>
-                                    <filtering>false</filtering>
-                                    <includes>
-                                        <include>**/*</include>
-                                    </includes>
-                                    <excludes>
-                                        <exclude>**/*.sh</exclude>
-                                    </excludes>
-                                </resource>
-                            </resources>
-                            <overwrite>true</overwrite>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
+		<finalName>esr-gui</finalName>
+        <plugins>		
+			<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>                    
-                    <execution>
-                        <id>unpack-httpserver-${linux64id}</id>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <phase>prepare-package</phase>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.onap.aai.esr-gui</groupId>
-                                    <artifactId>httpserver</artifactId>
-                                    <type>zip</type>
-                                </artifactItem>
-                            </artifactItems>
-                            <excludes>**/*.bat,*.cmd</excludes>
-                            <outputDirectory>${linux64outputdir}</outputDirectory>
-                            <overWriteReleases>false</overWriteReleases>
-                            <overWriteSnapshots>true</overWriteSnapshots>
-                            <outputAbsoluteArtifactFilename>true</outputAbsoluteArtifactFilename>
-                        </configuration>
-                    </execution>                    
-                    <execution>
-                        <id>unpack-httpserver-${win64id}</id>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <phase>prepare-package</phase>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.onap.aai.esr-gui</groupId>
-                                    <artifactId>httpserver</artifactId>
-                                    <type>zip</type>
-                                </artifactItem>
-                            </artifactItems>
-                            <excludes>*.sh,*/*.sh,*/*/*.sh</excludes>
-                            <outputDirectory>${win64outputdir}</outputDirectory>
-                            <overWriteReleases>false</overWriteReleases>
-                            <overWriteSnapshots>true</overWriteSnapshots>
-                            <outputAbsoluteArtifactFilename>true</outputAbsoluteArtifactFilename>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>distribution</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <target name="distribution">
-                                <tar destfile="${version.output}/${packagename}-${project.version}-linux64.tar.gz" longfile="posix" compression="gzip">
-                                    <tarfileset dir="target/assembly/linux64" filemode="0644" dirmode="0755">
-                                        <exclude name="**/*.sh"/>
-                                    </tarfileset>
-                                    <tarfileset dir="target/assembly/linux64" filemode="0755" dirmode="0755">
-                                        <include name="**/*.sh"/>
-                                    </tarfileset>
-                                </tar>
-                                <attachartifact file="${version.output}/${packagename}-${project.version}-linux64.tar.gz" classifier="linux64" type="tar.gz"/>
-                                <zip destfile="${version.output}/${packagename}-${project.version}-win64.zip" update="true">
-                                    <zipfileset dir="target/assembly/win64" includes="**"/>
-                                </zip>
-                                <attachartifact file="${version.output}/${packagename}-${project.version}-win64.zip" classifier="win64" type="zip"/>
-                            </target>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <packagingExcludes>WEB-INF/web.xml</packagingExcludes>
+                    <overlays>
+                        <overlay>
+                            <groupId>org.onap.aai.esr-gui</groupId>
+                            <artifactId>common</artifactId>
+                        </overlay>
+                        <overlay>
+                            <groupId>org.onap.aai.esr-gui</groupId>
+                            <artifactId>portal</artifactId>
+                        </overlay>
+                    </overlays>
+                </configuration>
+            </plugin>			
         </plugins>
     </build>
 </project>
