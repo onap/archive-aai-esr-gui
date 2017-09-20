@@ -548,3 +548,8 @@ h3 {
     position: absolute;
     background: #ddd;
 }
+.md-text-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

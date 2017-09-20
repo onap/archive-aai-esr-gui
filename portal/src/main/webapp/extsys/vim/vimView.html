@@ -52,84 +52,85 @@
                         <form class="form-horizontal" id="vim_form" role="form">
                             <div class="form-group">
                                 <label class="control-label col-sm-3">
-                                    <span>cloud-owner</span>
+                                    <span>cloudOwner</span>
                                     <span class="required" aria-required="true">*</span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <input type="text" ms-duplex="currentElement['cloud-owner']" name="cloudOwner" class="form-control"/>
+                                    <input type="text" ms-duplex="currentElement['cloudOwner']" name="cloudOwner" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-3">
-                                    <span>cloud-region-id</span>
+                                    <span>cloudRegionId</span>
                                     <span class="required" aria-required="true">*</span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <input type="text" ms-duplex="currentElement['cloud-region-id']" name="cloudRegionId" class="form-control"/>
+                                    <input type="text" ms-duplex="currentElement['cloudRegionId']" name="cloudRegionId" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-3">
-                                    <span>cloud-type</span>
+                                    <span>cloudType</span>
                                     <span class="required" aria-required="true">*</span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <select ms-duplex="currentElement['cloud-type']">
+                                    <select ms-duplex="currentElement['cloudType']">
                                         <option value='openstack'>openstack</option>
+                                        <option value='vmware'>vmware</option>
                                     </select>
                                     <span class="help-block"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-3">
-                                    <span>cloud-region-version</span>
+                                    <span>cloudRegionVersion</span>
                                     <span class="required" aria-required="true">*</span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <input type="text" ms-duplex="currentElement['cloud-region-version']" name="cloudRegionVersion" class="form-control"/>
+                                    <input type="text" ms-duplex="currentElement['cloudRegionVersion']" name="cloudRegionVersion" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
 
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-3">
-                                    <span>owner-defined-type</span>
+                                    <span>ownerDefinedType</span>
                                     <span class="required" aria-required="true">*</span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <input type="text" ms-duplex="currentElement['owner-defined-type']" name="ownerDefinedType" class="form-control"/>
+                                    <input type="text" ms-duplex="currentElement['ownerDefinedType']" name="ownerDefinedType" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-3">
-                                    <span>cloud-zone</span>
+                                    <span>cloudZone</span>
                                     <span class="required" aria-required="true">*</span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <input type="text" ms-duplex="currentElement['cloud-zone']" name="cloudZone" class="form-control"/>
+                                    <input type="text" ms-duplex="currentElement['cloudZone']" name="cloudZone" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-3">
-                                    <span>complex-name</span>
+                                    <span>complexName</span>
                                     <span class="required" aria-required="true">*</span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <input type="text" ms-duplex="currentElement['complex-name']" name="complexName" class="form-control"/>
+                                    <input type="text" ms-duplex="currentElement['complexName']" name="complexName" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-3">
-                                    <span>cloud-extra-info</span>
+                                    <span>cloudExtraInfo</span>
                                     <span class="required" aria-required="true">*</span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <input type="text" ms-duplex="currentElement['cloud-extra-info']" name="cloudExtraInfo" class="form-control"/>
+                                    <input type="text" ms-duplex="currentElement['cloudExtraInfo']" name="cloudExtraInfo" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
                             </div>
@@ -139,7 +140,7 @@
                                     <span class="required" aria-required="true">*</span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <input type="text" ms-duplex="currentElement['auth-info-items'][0].username" name="username" class="form-control"/>
+                                    <input type="text" ms-duplex="currentElement['vimAuthInfos'][0].userName" name="username" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
                             </div>
@@ -148,43 +149,45 @@
                                     <span>password</span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <input type="password" ms-duplex="currentElement['auth-info-items'][0].password" name="password" class="form-control"/>
+                                    <input type="password" ms-duplex="currentElement['vimAuthInfos'][0].password" name="password" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
                             </div>                           
                             <div class="form-group">
                                 <label class="control-label col-sm-3">
-                                    <span>auth-url</span>
+                                    <span>authUrl</span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <input type="text" ms-duplex="currentElement['auth-info-items'][0]['auth-url']" name="authUrl" class="form-control"/>
+                                    <input type="text" ms-duplex="currentElement['vimAuthInfos'][0]['authUrl']" name="authUrl" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-3">
-                                    <span>ssl-cacert</span>
+                                    <span>sslCacert</span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <input type="text" ms-duplex="currentElement['auth-info-items'][0]['ssl-cacert']" name="sslCacert" class="form-control"/>
+                                    <input type="text" ms-duplex="currentElement['vimAuthInfos'][0]['sslCacert']" name="sslCacert" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-3">
-                                    <span>ssl-insecure</span>
+                                    <span>sslInsecure</span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <input type="text" ms-duplex="currentElement['auth-info-items'][0]['ssl-insecure']" name="sslInsecure" class="form-control"/>
-                                    <span class="help-block"></span>
+                                    <select ms-duplex="currentElement['vimAuthInfos'][0]['sslInsecure']" name="sslInsecure" class="form-control">
+                                        <option value="false">false</option>
+                                        <option value="true">true</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-3">
-                                    <span>cloud-domain</span>
+                                    <span>cloudDomain</span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <input type="text" ms-duplex="currentElement['auth-info-items'][0]['cloud-domain']" name="cloudDomain" class="form-control"/>
+                                    <input type="text" ms-duplex="currentElement['vimAuthInfos'][0]['cloudDomain']" name="cloudDomain" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
                             </div>
@@ -227,14 +230,15 @@
                         <i class="fa fa-cloud  fa-5x color_cloud"></i>
                     </div>
                     <div class="m-t-xl">
-                        <h3 ms-text="el['cloud-owner'] + ':' + el['cloud-region-id']"></h3>
+                        <h3 class="md-text-overflow" ms-title="'cloudOwner:' + el['cloudOwner']" ms-text="'cloudOwner:' + el['cloudOwner']"></h3>
+                        <h3 class="md-text-overflow" ms-title="'cloudRegionId:' + el['cloudRegionId']" ms-text="'cloudRegionId:' + el['cloudRegionId']"></h3>
                         <div class="font">
                             <span id_i18n="com_zte_ums_eco_roc_vim_display_type"name_i18n="com_zte_conductor_ui_i18n"></span>
-                            <span ms-text="el['cloud-type']"></span>
+                            <span class="md-text-overflow" ms-title="el['cloudType']" ms-text="el['cloudType']"></span>
                         </div>
                         <div class="font">
                             <span id_i18n="com_zte_ums_eco_roc_vim_display_version"name_i18n="com_zte_conductor_ui_i18n"></span>
-                            <span ms-text="el['cloud-region-version']"></span>
+                            <span class="md-text-overflow" ms-title="el['cloudRegionVersion']" ms-text="el['cloudRegionVersion']"></span>
                         </div>
                     </div>
                 </div>
@@ -242,7 +246,7 @@
                     <div class="pull-right">
                         <a class="btn btn-default btn-sm" ms-click="$showVimTable($index, 'update')"><i
                                 class="fa fa-pencil-square-o fa-lg"></i></a>
-                        <a class="btn btn-default btn-sm" ms-click="delVim($index)"><i class="fa fa-trash-o fa-lg"> </i></a>
+                        <a class="btn btn-default btn-sm" disabled="disabled" ms-click="delVim($index)"><i class="fa fa-trash-o fa-lg"> </i></a>
                         <!--<a class="btn btn-default btn-sm" ms-click="gotoChartPage(el.oid,el.name,el.user)"><i class="fa fa-pie-chart fa-lg"> </i></a>-->
                     </div>
                 </div>
