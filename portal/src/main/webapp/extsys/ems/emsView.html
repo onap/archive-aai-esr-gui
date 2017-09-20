@@ -41,21 +41,21 @@
                     <div class="modal-body">
                         <div class="px-ui-steps">
                             <ul class="px-ui-horizon-ul-horizon" role="tablist">
-                                <li class="px-ui-steps-li step-active" id="step-resource">
+                                <li class="px-ui-steps-li step-active" id="step-resourceAddr">
                                     <div  class="px-ui-menuitem-div-passive">
                                         <span class="px-ui-steps-number-passive">1</span>
                                         <span class="px-ui-steps-title-passive">Resource</span>
                                     </div>
                                     <div class="px-ui-underline-passive"></div>
                                 </li>
-                                <li class="px-ui-steps-li" id="step-performance">
+                                <li class="px-ui-steps-li" id="step-performanceAddr">
                                     <div class="px-ui-menuitem-div-passive">
                                         <span class="px-ui-steps-number-passive">2</span>
                                         <span class="px-ui-steps-title-passive">Performance</span>
                                     </div>
                                     <div class="px-ui-underline-passive"></div>
                                 </li>
-                                <li class="px-ui-steps-li" id="step-alarm">
+                                <li class="px-ui-steps-li" id="step-alarmAddr">
                                     <div class="px-ui-menuitem-div-passive">
                                         <span class="px-ui-steps-number-passive">3</span>
                                         <span class="px-ui-steps-title-passive">Alarm</span>
@@ -65,14 +65,14 @@
                             </ul>
                         </div>
                         <div class="step-content">
-                            <form class="form-horizontal" id="form_resource" role="form">
+                            <form class="form-horizontal" id="form_resourceAddr" role="form">
                                 <div class="form-group">
                                     <label class="control-label col-sm-3">
                                         <span>Name</span>
                                         <span class="required" aria-required="true">*</span>
                                     </label>
                                     <div class="col-sm-7">
-                                        <input type="text" ms-duplex="currentElement.emsName" name="emsName" class="form-control"/>
+                                        <input type="text" ms-duplex="currentElement.name" name="name" class="form-control"/>
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
@@ -82,7 +82,7 @@
                                         <span class="required" aria-required="true">*</span>
                                     </label>
                                     <div class="col-sm-7">
-                                        <select ms-duplex="currentElement.resource.ftptype" name="ftptype" class="form-control">
+                                        <select ms-duplex="currentElement.resourceAddr.ftptype" name="ftptype" class="form-control">
                                             <option value="ftp">ftp</option>
                                             <option value="sftp">sftp</option>
                                         </select>
@@ -95,7 +95,7 @@
                                         <span class="required" aria-required="true">*</span>
                                     </label>
                                     <div class="col-sm-7">
-                                        <input type="text" ms-duplex="currentElement.resource.ip" name="ip" class="form-control"/>
+                                        <input type="text" ms-duplex="currentElement.resourceAddr.ip" name="ip" class="form-control"/>
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
@@ -105,7 +105,7 @@
                                         <span class="required" aria-required="true">*</span>
                                     </label>
                                     <div class="col-sm-7">
-                                        <input type="text" ms-duplex="currentElement.resource.port" name="port" class="form-control"/>
+                                        <input type="text" ms-duplex="currentElement.resourceAddr.port" name="port" class="form-control"/>
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
@@ -115,7 +115,7 @@
                                         <span class="required" aria-required="true">*</span>
                                     </label>
                                     <div class="col-sm-7">
-                                        <input type="text" ms-duplex="currentElement.resource.user" name="user" class="form-control" ms-attr-placeholder="urlTip"/>
+                                        <input type="text" ms-duplex="currentElement.resourceAddr.user" name="user" class="form-control" ms-attr-placeholder="urlTip"/>
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
@@ -124,7 +124,7 @@
                                         <span>Password</span>
                                     </label>
                                     <div class="col-sm-7">
-                                    <input type="password" class="form-control" rows="3" ms-duplex="currentElement.resource.password"  name="password"/>
+                                    <input type="password" class="form-control" rows="3" ms-duplex="currentElement.resourceAddr.password"  name="password"/>
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
@@ -133,7 +133,7 @@
                                         <span>Remotepath</span>
                                     </label>
                                     <div class="col-sm-7">
-                                    <input class="form-control" rows="3" ms-duplex="currentElement.resource.remotepath" name="remotepath"/>
+                                    <input class="form-control" rows="3" ms-duplex="currentElement.resourceAddr.remotepath" name="remotepath"/>
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
@@ -142,7 +142,7 @@
                                         <span>Passive</span>
                                     </label>
                                     <div class="col-sm-7">
-                                    <select class="form-control" rows="3" ms-duplex="currentElement.resource.passive" name="passive">
+                                    <select class="form-control" rows="3" ms-duplex="currentElement.resourceAddr.passive" name="passive">
                                         <option value="true">true</option>
                                         <option value="false">false</option>
                                     </select>
@@ -150,14 +150,14 @@
                                     </div>
                                 </div>
                             </form>
-                            <form class="form-horizontal" id="form_performance" role="form" hidden>
+                            <form class="form-horizontal" id="form_performanceAddr" role="form" hidden>
                                 <div class="form-group">
                                     <label class="control-label col-sm-3">
                                         <span>Ftptype</span>
                                         <span class="required" aria-required="true">*</span>
                                     </label>
                                     <div class="col-sm-7">
-                                        <select ms-duplex="currentElement.performance.ftptype" name="type" class="form-control">
+                                        <select ms-duplex="currentElement.performanceAddr.ftptype" name="type" class="form-control">
                                             <option value="ftp">ftp</option>
                                             <option value="sftp">sftp</option>
                                         </select>
@@ -170,7 +170,7 @@
                                         <span class="required" aria-required="true">*</span>
                                     </label>
                                     <div class="col-sm-7">
-                                        <input type="text" ms-duplex="currentElement.performance.ip" name="ip" class="form-control"/>
+                                        <input type="text" ms-duplex="currentElement.performanceAddr.ip" name="ip" class="form-control"/>
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
@@ -180,7 +180,7 @@
                                         <span class="required" aria-required="true">*</span>
                                     </label>
                                     <div class="col-sm-7">
-                                        <input type="text" ms-duplex="currentElement.performance.port" name="port" class="form-control"/>
+                                        <input type="text" ms-duplex="currentElement.performanceAddr.port" name="port" class="form-control"/>
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
@@ -190,7 +190,7 @@
                                         <span class="required" aria-required="true">*</span>
                                     </label>
                                     <div class="col-sm-7">
-                                        <input type="text" ms-duplex="currentElement.performance.user" name="user" class="form-control" ms-attr-placeholder="urlTip"/>
+                                        <input type="text" ms-duplex="currentElement.performanceAddr.user" name="user" class="form-control" ms-attr-placeholder="urlTip"/>
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
@@ -199,7 +199,7 @@
                                         <span>Password</span>
                                     </label>
                                     <div class="col-sm-7">
-                                    <input type="password" class="form-control" rows="3" ms-duplex="currentElement.performance.password"  name="password"/>
+                                    <input type="password" class="form-control" rows="3" ms-duplex="currentElement.performanceAddr.password"  name="password"/>
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
@@ -208,7 +208,7 @@
                                         <span>Remotepath</span>
                                     </label>
                                     <div class="col-sm-7">
-                                    <input class="form-control" rows="3" ms-duplex="currentElement.performance.remotepath" name="remotepath"/>
+                                    <input class="form-control" rows="3" ms-duplex="currentElement.performanceAddr.remotepath" name="remotepath"/>
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
@@ -217,7 +217,7 @@
                                         <span>Passive</span>
                                     </label>
                                     <div class="col-sm-7">
-                                    <select class="form-control" rows="3" ms-duplex="currentElement.performance.passive" name="passive">
+                                    <select class="form-control" rows="3" ms-duplex="currentElement.performanceAddr.passive" name="passive">
                                         <option value="true">true</option>
                                         <option value="false">false</option>
                                     </select>
@@ -225,14 +225,14 @@
                                     </div>
                                 </div>
                             </form>
-                            <form class="form-horizontal" id="form_alarm" role="form" hidden>
+                            <form class="form-horizontal" id="form_alarmAddr" role="form" hidden>
                                 <div class="form-group">
                                     <label class="control-label col-sm-3">
                                         <span>IP</span>
                                         <span class="required" aria-required="true">*</span>
                                     </label>
                                     <div class="col-sm-7">
-                                        <input type="text" ms-duplex="currentElement.alarm.ip" name="ip" class="form-control"/>
+                                        <input type="text" ms-duplex="currentElement.alarmAddr.ip" name="ip" class="form-control"/>
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
@@ -242,7 +242,7 @@
                                         <span class="required" aria-required="true">*</span>
                                     </label>
                                     <div class="col-sm-7">
-                                        <input type="text" ms-duplex="currentElement.alarm.port" name="port" class="form-control"/>
+                                        <input type="text" ms-duplex="currentElement.alarmAddr.port" name="port" class="form-control"/>
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
@@ -252,7 +252,7 @@
                                         <span class="required" aria-required="true">*</span>
                                     </label>
                                     <div class="col-sm-7">
-                                        <input type="text" ms-duplex="currentElement.alarm.user" name="user" class="form-control" ms-attr-placeholder="urlTip"/>
+                                        <input type="text" ms-duplex="currentElement.alarmAddr.user" name="user" class="form-control" ms-attr-placeholder="urlTip"/>
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
@@ -261,7 +261,7 @@
                                         <span>Password</span>
                                     </label>
                                     <div class="col-sm-7">
-                                    <input type="password" class="form-control" rows="3" ms-duplex="currentElement.alarm.password"  name="password"/>
+                                    <input type="password" class="form-control" rows="3" ms-duplex="currentElement.alarmAddr.password"  name="password"/>
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
@@ -298,8 +298,8 @@
                         <i class="fa fa-server  fa-5x color_cloud"></i>
                     </div>
                     <div class="m-t-xl">
-                        <h3 ms-text="el.emsName"></h3>
-                        <!--<div class="card-name"><span ms-text="el.emsName"></span></div>-->
+                        <h3 class="md-text-overflow" ms-attr-title="'name:' + el.name" ms-text="'name:' + el.name"></h3>
+                        <!--<div class="card-name"><span ms-text="el.name"></span></div>-->
                     </div>
                 </div>
                 <div class="panel-footer">

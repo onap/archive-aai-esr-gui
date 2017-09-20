@@ -38,7 +38,7 @@
     "version": "v1.0",
     "vendor": "ZTE",
     "description": "ems description",
-    "resouce": {
+    "resource": {
       "ftptype": "sftp",
       "ip": "10.44.55.15",
       "port": "2100",

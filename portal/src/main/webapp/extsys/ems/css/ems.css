@@ -458,6 +458,9 @@ h3 {
     margin-top: 10px;
     margin-bottom: 40px;
     font-weight: 200;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .blue-font {
@@ -550,4 +553,9 @@ h3 {
 }
 #btnPreStep, #btnSave{
     display: none;
+}
+.md-text-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
