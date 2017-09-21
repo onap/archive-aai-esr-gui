@@ -15,21 +15,20 @@
  */
 
 var vm = avalon.define({
-        $id: "emsController",
+        $id: "sdncController",
         sdncList: [],
         currentElement: {},
         currentIndex: 0,
         $sdncList: [],
         $newElement: {
-            "sdnControllerId":"a6c42529-cd6",
+            "thirdpartySdncId":"",
             "name":"sdnc1",
-            "status": "active",
             "url":"",
+            "location":"edge",
             "userName":"admin",
-            "password":"admin",
+            "password":"",
             "version":"v1.0",
             "vendor":"ZTE",
-            "description":"",
             "protocol":"netconf",
             "productName":"",
             "type":"WAN"
@@ -56,12 +55,10 @@ var vm = avalon.define({
             "url": /^(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?$/
         },
         $restUrl: {
-            queryEmsInfoUrl: "/esrui/extsys/sdncontroller/mock-data/sdnc.json",//'/onapapi/aai/esr/v1/ems',
-            addVnfmInfoUrl: '/onapapi/aai/esr/v1/ems',
-            updateVnfmInfoUrl: '/onapapi/aai/esr/v1/ems/',
-            delVnfmInfoUrl: '/onapapi/aai/esr/v1/ems/',
-            queryMocUrl: '',
-            queryVimUrl: '/onapapi/aai/esr/v1/vims'
+            queryEmsInfoUrl: "/api/aai-esr-server/v1/sdncontrollers",
+            addVnfmInfoUrl: '/api/aai-esr-server/v1/sdncontrollers',
+            updateVnfmInfoUrl: '/api/aai-esr-server/v1/sdncontrollers/{thirdpartySdncId}',
+            delVnfmInfoUrl: '/api/aai-esr-server/v1/sdncontrollers/{thirdpartySdncId}'
         },
         $htmlText: {
             saveSuccess: $.i18n.prop("nfv-sdnc-iui-message-save-success"),
@@ -145,115 +142,115 @@ var vm = avalon.define({
         delSDNC: function (id, index) {
             bootbox.confirm($.i18n.prop("nfv-sdnc-iui-message-delete-confirm"), function (result) {
                 if (result) {
-                    vm.sdncList.splice(index, 1);
-                    vm.$sdncList.splice(index, 1);
-                    console.log(vm.sdncList[index]);
-                   /* $.ajax({
+                    var sdncId = vm.sdncList[index]["thirdpartySdncId"];
+                    var url = vm.$restUrl.delVnfmInfoUrl.replace("{thirdpartySdncId}", sdncId)
+                    $.ajax({
                         type: "DELETE",
-                        url: vm.$restUrl.delVnfmInfoUrl + id,
+                        url: url,
                         dataType: "json",
                         success: function (data, statusText, jqXHR) {
                             if (jqXHR.status == "204") {
-
+                                vm.sdncList.splice(index, 1);
+                                vm.$sdncList.splice(index, 1);
                                 commonUtil.showMessage($.i18n.prop("nfv-sdnc-iui-message-delete-success"), "success");
                             } else {
                                 commonUtil.showMessage($.i18n.prop("nfv-sdnc-iui-message-delete-fail"), "warning");
                             }
                         },
-                        error: function () {
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
                             commonUtil.showMessage($.i18n.prop("nfv-sdnc-iui-message-delete-fail"), "warning");
                         }
-                    });*/
+                    });
                 }
             });
         },
         postSDNC: function () {
-            var emsSave = vm.getSDNCSave();
-            emsSave.sdnControllerId = Math.floor(Math.random() * 100000) / 100000;
-            vm.sdncList.push(emsSave);
-            vm.$sdncList.push(emsSave);
-            console.log(emsSave);
-            return true;
-            /*$.ajax({
+            var res = false;
+            var sdncSave = vm.getSDNCSave();
+            $.ajax({
                 type: "POST",
                 url: vm.$restUrl.addVnfmInfoUrl,
-                data: JSON.stringify(vm.currentElement),
+                data: JSON.stringify(sdncSave),
                 dataType: "json",
                 contentType: "application/json",
-                success: function (data) {
+                success: function (data, statusText, jqXHR) {
                     vm.server_rtn.info_block = false;
                     vm.server_rtn.warning_block = false;
-                    if (data) {
-                        vm.vnfmInfo = [];
-                        vm.$initTable();
-
+                    if (jqXHR.status == "200") {
+                        res = true;
+                        sdncSave["thirdpartySdncId"] = data.id;
+                        vm.sdncList.push(sdncSave);
+                        vm.$sdncList.push(sdncSave);
                         $('#addEmsDlg').modal('hide');
                         commonUtil.showMessage(vm.$htmlText.saveSuccess, "success");
                     } else {
+                        res = false;
                         vm.server_rtn.warning_block = true;
                         vm.server_rtn.rtn_info = vm.$htmlText.saveFail;
                         commonUtil.showMessage(vm.$htmlText.saveFail, "failed");
                     }
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    res = false;
                     vm.server_rtn.warning_block = true;
                     vm.server_rtn.rtn_info = textStatus + ":" + errorThrown;
                     vm.server_rtn.info_block = false;
                 }
-            });*/
+            });
+            return res;
         },
         putSDNC: function () {
-            console.log(vm.getSDNCSave());
-            vm.fillElement(vm.currentElement, vm.sdncList[vm.currentIndex]);
-            return true;
-           /* $.ajax({
+            var res = false;
+            var currentElement = vm.getSDNCSave();
+            var url = vm.$restUrl.updateVnfmInfoUrl.replace("{thirdpartySdncId}", currentElement["thirdpartySdncId"]);
+            $.ajax({
                 type: "PUT",
-                url: vm.$restUrl.updateVnfmInfoUrl + vm.currentElement.emsId,
-                data: JSON.stringify(vm.currentElement),
+                url: url,
+                data: JSON.stringify(currentElement),
                 dataType: "json",
                 contentType: "application/json",
-                success: function (data) {
+                success: function (data, statusText, jqXHR) {
                     vm.server_rtn.info_block = false;
                     vm.server_rtn.warning_block = false;
-                    if (data) {
-                        for (var i = 0; i < vm.vnfmInfo.length; i++) {
-                            if (vm.vnfmInfo[i].vnfmId == vm.addVnfm.vnfmId) {
-                                vm.vnfmInfo[i].name = vm.addVnfm.name;
-                                vm.vnfmInfo[i].vimId = $("#vimId").val();
-                                vm.vnfmInfo[i].vendor = vm.addVnfm.vendor;
-                                vm.vnfmInfo[i].version = vm.addVnfm.version;
-                                vm.vnfmInfo[i].certificateUrl = vm.addVnfm.certificateUrl;
-                                vm.vnfmInfo[i].description = vm.addVnfm.description;
-                                vm.vnfmInfo[i].url = vm.addVnfm.url;
-                                vm.vnfmInfo[i].userName = vm.addVnfm.userName;
-                                vm.vnfmInfo[i].password = vm.addVnfm.password;
-                            }
-                        }
+                    if (jqXHR.status == "200") {
+                        res = true;
+                        vm.fillElement(vm.currentElement, vm.sdncList[vm.currentIndex]);
                         $('#addEmsDlg').modal('hide');
                         commonUtil.showMessage(vm.$htmlText.updateSuccess, "success");
                     } else {
+                        res = false;
                         vm.server_rtn.warning_block = true;
                         vm.server_rtn.rtn_info = vm.$htmlText.updateFail;
                         commonUtil.showMessage(vm.$htmlText.updateFail, "failed");
                     }
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    res = false;
                     vm.server_rtn.warning_block = true;
                     vm.server_rtn.rtn_info = textStatus + ":" + errorThrown;
                     vm.server_rtn.info_block = false;
                 }
-            });*/
+            });
+            return res;
+        },
+        sdncTypeChange: function (value) {
+            var $sdncLocation = $("#sdncLocation");
+            if("WAN" == value){
+                $sdncLocation.hide();
+                vm.currentElement.location = "";
+            } else {
+                $sdncLocation.show();
+            }
         },
         fillElement: function (sourceElement, targetElement) {
-            targetElement["sdnControllerId"] = sourceElement["sdnControllerId"];
+            targetElement["thirdpartySdncId"] = sourceElement["thirdpartySdncId"];
             targetElement["name"] = sourceElement["name"];
-            targetElement["status"] = sourceElement["status"];
             targetElement["url"] = sourceElement["url"];
+            targetElement["location"] = sourceElement["location"];
             targetElement["userName"] = sourceElement["userName"];
             targetElement["password"] = sourceElement["password"];
             targetElement["version"] = sourceElement["version"];
             targetElement["vendor"] = sourceElement["vendor"];
-            targetElement["description"] = sourceElement["description"];
             targetElement["protocol"] = sourceElement["protocol"];
             targetElement["productName"] = sourceElement["productName"];
             targetElement["type"] = sourceElement["type"];

@@ -29,7 +29,7 @@
     <style> .ms-controller {  visibility: hidden } </style>
 </head>
 <body>
-<div ms-controller="emsController" class="container-fluid ms-controller">
+<div ms-controller="sdncController" class="container-fluid ms-controller">
     <div id="addEmsDlg" class="modal fade" tabindex="-1" role="dialog"
          aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog">
@@ -76,7 +76,7 @@
                                         <span>Password</span>
                                     </label>
                                     <div class="col-sm-7">
-                                    <input type="password" class="form-control" rows="3" ms-duplex="currentElement.password"  name="password"/>
+                                    <input type="password" class="form-control" ms-duplex="currentElement.password"  name="password"/>
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
@@ -85,7 +85,7 @@
                                         <span>Version</span>
                                     </label>
                                     <div class="col-sm-7">
-                                        <input class="form-control" rows="3" ms-duplex="currentElement.version" name="version"/>
+                                        <input class="form-control" ms-duplex="currentElement.version" name="version"/>
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
@@ -94,7 +94,7 @@
                                         <span>Vendor</span>
                                     </label>
                                     <div class="col-sm-7">
-                                         <input class="form-control" rows="3" ms-duplex="currentElement.vendor" name="vendor"/>
+                                         <input class="form-control" ms-duplex="currentElement.vendor" name="vendor"/>
                                          <span class="help-block"></span>
                                     </div>
                                 </div>
@@ -103,7 +103,7 @@
                                         <span>Protocol</span>
                                     </label>
                                     <div class="col-sm-7">
-                                         <input class="form-control" rows="3" ms-duplex="currentElement.protocol" name="protocol"/>
+                                         <input class="form-control" ms-duplex="currentElement.protocol" name="protocol"/>
                                          <span class="help-block"></span>
                                     </div>
                                 </div>
@@ -112,7 +112,7 @@
                                         <span>ProductName</span>
                                     </label>
                                     <div class="col-sm-7">
-                                         <input class="form-control" rows="3" ms-duplex="currentElement.productName" name="productName"/>
+                                         <input class="form-control" ms-duplex="currentElement.productName" name="productName"/>
                                          <span class="help-block"></span>
                                     </div>
                                 </div>
@@ -121,17 +121,18 @@
                                         <span>Type</span>
                                     </label>
                                     <div class="col-sm-7">
-                                         <input class="form-control" rows="3" ms-duplex="currentElement.type" name="type"/>
-                                         <span class="help-block"></span>
+                                        <select class="form-control" ms-duplex="currentElement.type" name="type" ms-change="sdncTypeChange(this.value)">
+                                            <option value="WAN">WAN</option>
+                                            <option value="DC">DC</option>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" ms-if="'DC' == currentElement.type" id="sdncLocation">
                                     <label class="control-label col-sm-3">
-                                        <span>Description</span>
+                                        <span>location</span>
                                     </label>
                                     <div class="col-sm-7">
-                                         <input class="form-control" rows="3" ms-duplex="currentElement.description" name="description"/>
-                                         <span class="help-block"></span>
+                                        <input class="form-control" ms-duplex="currentElement.location" name="location"/>
                                     </div>
                                 </div>
                             </form>

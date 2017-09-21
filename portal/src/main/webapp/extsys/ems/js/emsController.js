@@ -209,7 +209,7 @@ var vm = avalon.define({
                                 commonUtil.showMessage($.i18n.prop("nfv-ems-iui-message-delete-fail"), "warning");
                             }
                         },
-                        error: function () {
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
                             commonUtil.showMessage($.i18n.prop("nfv-ems-iui-message-delete-fail"), "warning");
                         }
                     });
@@ -237,7 +237,6 @@ var vm = avalon.define({
         },
         postEMS: function () {
             var emsSave = vm.getEMSSave();
-            emsSave.emsId = Math.floor(Math.random() * 100000) / 100000;
             var res = false;
             $.ajax({
                 type: "POST",
@@ -249,6 +248,7 @@ var vm = avalon.define({
                     vm.server_rtn.info_block = false;
                     vm.server_rtn.warning_block = false;
                     if (jqXHR.status === 200) {
+                        emsSave.emsId = data.id;
                         vm.emsInfo.push(emsSave);
                         vm.$emsList.push(emsSave);
                         res = true;

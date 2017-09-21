@@ -55,7 +55,7 @@ var vm = avalon
         $queryVimInfoUrl: '/api/aai-esr-server/v1/vims',
         $addVimInfoUrl: '/api/aai-esr-server/v1/vims',
         $updateVimInfoUrl: '/api/aai-esr-server/v1/vims/{cloudOwner}/{cloudRegionId}',
-        $delVimInfoUrl: '/api/aai-esr-server/v1/vims?cloudOwner={cloudOwner}&cloudRegionId={cloudRegionId}',
+        $delVimInfoUrl: '/api/aai-esr-server/v1/vims/{cloudOwner}/{cloudRegionId}',
         $initTable: function () {
             $.ajax({
                 "type": 'get',
@@ -192,19 +192,15 @@ var vm = avalon
         delVim: function (index) {
             bootbox.confirm($.i18n.prop('com_zte_ums_eco_roc_vim_confirm_delete_vim_record'), function (result) {
                 if (result) {
-                    var id = vm.vimInfo[index]["id"];
-                    vm.vimInfo.splice(index, 1);
-                   /* $.ajax({
+                    var cloudOwner = vm.vimInfo[index]["cloudOwner"];
+                    var cloudRegionId = vm.vimInfo[index]["cloudRegionId"];
+                    var url = vm.$delVimInfoUrl.replace('{cloudOwner}', cloudOwner).replace('{cloudRegionId}', cloudRegionId);
+                    $.ajax({
                         type: "DELETE",
-                        url: vm.$delVimInfoUrl.replace('{vim_id}', el.vimId),
+                        url: url,
                         success: function (data, statusText, jqXHR) {
                             if (jqXHR.status == "204") {
-                                for (var i = 0; i < vm.vimInfo.length; i++) {
-                                    if (el.vimId == vm.vimInfo[i].vimId) {
-                                        vm.vimInfo.splice(i, 1);
-                                        break;
-                                    }
-                                }
+                                vm.vimInfo.splice(index, 1);
                                 resUtil.growl($.i18n.prop('com_zte_ums_eco_roc_vim_growl_msg_title') + $.i18n.prop('com_zte_ums_eco_roc_vim_growl_msg_remove_success'), "success");
                             }
                             else {
@@ -214,7 +210,7 @@ var vm = avalon
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                             resUtil.growl($.i18n.prop('com_zte_ums_eco_roc_vim_growl_msg_title') + errorThrown, "danger");
                         }
-                    });*/
+                    });
                 }
             });
         },
