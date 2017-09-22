@@ -282,7 +282,7 @@ var vm = avalon.define({
                 data: JSON.stringify(currentElement),
                 dataType: "json",
                 contentType: "application/json",
-                success: function (data) {
+                success: function (data, statusText, jqXHR) {
                     vm.server_rtn.info_block = false;
                     vm.server_rtn.warning_block = false;
                     if (data) {
@@ -340,7 +340,7 @@ var vm = avalon.define({
             emsSave.performanceAddr = vm.currentElement.performanceAddr.$model;
             return emsSave;
         }
-    });
+});
 vm.currentElement = $.extend(true, {}, vm.$newElement);
 avalon.scan();
 vm.$initTable();

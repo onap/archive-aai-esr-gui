@@ -23,7 +23,7 @@ function loadPropertiesSideMenu(lang, fileNamePrefix, filePath) {
             var i18nItems = $("[name_i18n=com_zte_nfv_nsoc_i18n]");
             for (var i = 0; i < i18nItems.length; i++) {
                 var $item = $(i18nItems.eq(i));
-                var itemId = $item.attr("id");
+                var itemId = $item.attr("id_i18n");
                 var itemTitle = $item.attr("title");
                 if (typeof(itemTitle) != "undefined") {
                     $item.attr("title", $.i18n.prop(itemId));

@@ -124,7 +124,7 @@ var vm = avalon.define({
         updateSDNC: function (index) {
             vm.saveType = "update";
             vm.currentIndex = index;
-            vm.fillElement(vm.sdncList[vm.currentIndex], vm.currentElement)
+            vm.fillElement(vm.sdncList[vm.currentIndex], vm.currentElement);
             vm.$showTable();
         },
         validate: function () {
