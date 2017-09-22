@@ -14,12 +14,27 @@
  * limitations under the License.
  */
 
-var vm = avalon
-    .define({
+var vm = avalon.define({
         $id: "vnfmController",
         vnfmInfo: [],
-        //mocSelectItems : [],
-        vimSelectItems: [],
+        currentElement: {},
+        currentIndex: 0,
+        saveType: "add",
+        $vnfmList: [],
+        $newElement: {
+            "vnfmId": "",
+            "name": "",
+            "type": "Tacker",
+            "vimId": "",
+            "vendor": "ZTE",
+            "version": "v1.0",
+            "certificateUrl": "",
+            "url": "http://",
+            "userName": "",
+            "password": ""
+        },
+        saveType: "add",
+        modalTitle: $.i18n.prop("nfv-ems-iui-text-register"),
         server_rtn: {
             info_block: false,
             warning_block: false,
@@ -32,12 +47,10 @@ var vm = avalon
             failed: "inactive"
         },
         $restUrl: {
-            queryVnfmInfoUrl: '/onapapi/aai/esr/v1/vnfms',
-            addVnfmInfoUrl: '/onapapi/aai/esr/v1/vnfms',
-            updateVnfmInfoUrl: '/onapapi/aai/esr/v1/vnfms/',
-            delVnfmInfoUrl: '/onapapi/aai/esr/v1/vnfms/',
-            queryMocUrl: '',
-            queryVimUrl: '/onapapi/aai/esr/v1/vims'
+            queryVnfmInfoUrl: '/api/aai-esr-server/v1/vnfms',
+            addVnfmInfoUrl: '/api/aai-esr-server/v1/vnfms',
+            updateVnfmInfoUrl: '/api/aai-esr-server/v1/vnfms/{vnfmId}',
+            delVnfmInfoUrl: '/api/aai-esr-server/v1/vnfms/{vnfmId}'
         },
         $htmlText: {
             saveSuccess: $.i18n.prop("nfv-vnfm-iui-message-save-success"),
@@ -50,12 +63,14 @@ var vm = avalon
             $.ajax({
                 "type": 'GET',
                 "url": vm.$restUrl.queryVnfmInfoUrl,
-                //"dataType": "json",
-                "success": function (resp) {
-                    for (var i = 0; i < resp.length; i++) {
-                        resp[i].status = vm.$Status.success;
+                "dataType": "json",
+                "success": function (resp, statusText, jqXHR) {
+                    if(jqXHR.status == 200){
+                        vm.vnfmInfo = resp;
+                        vm.$vnfmList =  $.extend(true, [], resp) ;
+                    } else {
+                        bootbox.alert($.i18n.prop("nfv-vnfm-iui-message-query-fail") + "：" + textStatus + ":" + errorThrown);
                     }
-                    vm.vnfmInfo = resp;
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     bootbox.alert($.i18n.prop("nfv-vnfm-iui-message-query-fail") + "：" + textStatus + ":" + errorThrown);
@@ -66,77 +81,7 @@ var vm = avalon
                 }
             });
         },
-        // $initMoc : function() {
-        // 	/*var url = vm.$restUrl.queryMocUrl;
-        //     commonUtil.get(url, null, function(resp) {
-        //         if (resp) {
-        //             vm.addVnfm.moc = resp.data;
-        //         }
-        //     });*/
-        //     var resp = [
-        //     	{ id : "nfv.vnfm.eco", name : "VNFM(ECO)"},
-        //     	{ id : "nfv.vnfm.tacker", name : "VNFM(Tacker)"},
-        //     	{ id : "nfv.vnfm.cmcc", name : "VNFM(CMCC)"},
-        //     	{ id : "nfv.vnfm.etsi", name : "VNFM(ETSI)"}
-        //     ]
-        //     vm.mocSelectItems = resp;
-        // },
-        $initVim: function () {
-            $.ajax({
-                type: 'get',
-                url: vm.$restUrl.queryVimUrl,
-                dataType: 'json',
-                success: function (resp) {
-                    if (resp) {
-                        vm.vimSelectItems = resp;
-                    }
-                    vm.vimSelectItems.push({"vimId": "", "name": ""});
-                }
-            });
-        },
-        addVnfm: {
-            title: $.i18n.prop("nfv-vnfm-iui-text-register"),
-            vnfmId: "",
-            name: "",
-            type: "",
-            //moc : "",
-            nameReadonly : false,
-            vimId: "",
-            //vimVisiable : false,
-            vendor: "",
-            version: "",
-            description: "",
-            certificateUrl: "",
-            url: "",
-            urlTip: $.i18n.prop("nfv-vnfm-iui-text-url-tip"),
-            userName: "",
-            password: "",
-            saveType: "add",
-            status: ""
-        },
         $showVnfmTable: function () {
-            vm.addVnfm.title = $.i18n.prop("nfv-vnfm-iui-text-register"),
-                vm.addVnfm.vnfmId = "";
-            vm.addVnfm.name = "";
-            vm.addVnfm.type = "";
-            //vm.addVnfm.moc = "";
-            vm.addVnfm.nameReadonly = false;
-            vm.addVnfm.vimId = "";
-            //vm.addVnfm.vimVisiable = false;
-            vm.addVnfm.vendor = "";
-            vm.addVnfm.version = "";
-            vm.addVnfm.description = "";
-            vm.addVnfm.certificateUrl = "";
-            vm.addVnfm.url = "";
-            vm.addVnfm.userName = "";
-            vm.addVnfm.password = "";
-            vm.addVnfm.saveType = "add";
-            vm.server_rtn.warning_block = false;
-            vm.server_rtn.info_block = false;
-            //vm.$initMoc();
-            vm.$initVim();
-            //vm.$mocChange();
-
             $(".form-group").each(function () {
                 $(this).removeClass('has-success');
                 $(this).removeClass('has-error');
@@ -144,159 +89,128 @@ var vm = avalon
             });
             $("#addVnfmDlg").modal("show");
         },
-        // $getMocName : function(mocId) {
-        //       	var items = vm.mocSelectItems;
-        //           for(var i=0;i<items.length;i++) {
-        //    		if(items[i].id == mocId) {
-        //    			return items[i].name;
-        //    		}
-        //    	}
-        //    	return "";
-        // },
         $saveVnfm: function () {
             var form = $('#vnfm_form');
             if (form.valid() == false) {
                 return false;
             }
-            vm.server_rtn.info_block = true;
-            vm.server_rtn.warning_block = false;
-            vm.addVnfm.status = vm.$Status.success;
-
-            var param = {
-                name: vm.addVnfm.name,
-                //status : vm.addVnfm.status,
-                //moc : $("#moc").val(),
-                //vimId : vm.$getVimId($("#moc").val()),
-                vimId: $("#vimId").val(),
-                vendor: vm.addVnfm.vendor,
-                version: vm.addVnfm.version,
-                type: vm.addVnfm.type,
-                description: vm.addVnfm.description,
-                certificateUrl: vm.addVnfm.certificateUrl,
-                url: vm.addVnfm.url,
-                userName: vm.addVnfm.userName,
-                password: vm.addVnfm.password
-            }
             //save VIM info
-            if (vm.addVnfm.saveType == "add") {  
-                //      for( var i = 0; i < vm.vnfmInfo.length; i ++ ){
-                //     if(vm.addVnfm.name == vm.vnfmInfo[i].name){                       
-                //        vm.server_rtn.warning_block = true;
-                //        vm.server_rtn.rtn_info = vm.$htmlText.alreadyExist;
-                //        commonUtil.showMessage(vm.$htmlText.alreadyExist, "failed");
-                //        return;
-                //     }
-                // }     
-                $.ajax({
-                    type: "POST",
-                    url: vm.$restUrl.addVnfmInfoUrl,
-                    data: JSON.stringify(param),
-                    dataType: "json",
-                    contentType: "application/json",
-                    success: function (data) {
-                        vm.server_rtn.info_block = false;
-                        vm.server_rtn.warning_block = false;
-                        if (data) {
-                            vm.vnfmInfo = [];
-                            vm.$initTable();
-
-                            $('#addVnfmDlg').modal('hide');
-                            commonUtil.showMessage(vm.$htmlText.saveSuccess, "success");
-                        } else {
-                            vm.server_rtn.warning_block = true;
-                            vm.server_rtn.rtn_info = vm.$htmlText.saveFail;
-                            commonUtil.showMessage(vm.$htmlText.saveFail, "failed");
-                        }
-                    },
-                    error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        vm.server_rtn.warning_block = true;
-                        vm.server_rtn.rtn_info = textStatus + ":" + errorThrown;
-                        vm.server_rtn.info_block = false;
-                    }
-                });
+            if (vm.saveType == "add") {
+                vm.postVnfm();
             } else {
-                $.ajax({
-                    type: "PUT",
-                    url: vm.$restUrl.updateVnfmInfoUrl + vm.addVnfm.vnfmId,
-                    data: JSON.stringify(param),
-                    dataType: "json",
-                    contentType: "application/json",
-                    success: function (data) {
-                        vm.server_rtn.info_block = false;
-                        vm.server_rtn.warning_block = false;
-                        if (data) {
-                            for (var i = 0; i < vm.vnfmInfo.length; i++) {
-                                if (vm.vnfmInfo[i].vnfmId == vm.addVnfm.vnfmId) {
-                                    vm.vnfmInfo[i].name = vm.addVnfm.name;
-                                    vm.vnfmInfo[i].vimId = $("#vimId").val();
-                                    vm.vnfmInfo[i].vendor = vm.addVnfm.vendor;
-                                    vm.vnfmInfo[i].version = vm.addVnfm.version;
-                                    vm.vnfmInfo[i].certificateUrl = vm.addVnfm.certificateUrl;
-                                    vm.vnfmInfo[i].description = vm.addVnfm.description;
-                                    vm.vnfmInfo[i].url = vm.addVnfm.url;
-                                    vm.vnfmInfo[i].userName = vm.addVnfm.userName;
-                                    vm.vnfmInfo[i].password = vm.addVnfm.password;
-                                }
+                vm.putVnfm();
+            }
+        },
+        registerVnfm: function () {
+            vm.saveType = "add";
+            vm.currentIndex = -1;
+            vm.modalTitle = "Register";
+            vm.currentElement = $.extend(true, {}, vm.$newElement);
+            vm.$showVnfmTable();
+        },
+        delVnfm: function (id, index) {
+            bootbox.confirm($.i18n.prop("nfv-vnfm-iui-message-delete-confirm"), function (result) {
+                if (result) {
+                    var vnfmId = vm.vnfmInfo[index]["vnfmId"];
+                    var url = vm.$restUrl.delVnfmInfoUrl.replace("{vnfmId}", vnfmId)
+                    $.ajax({
+                        type: "DELETE",
+                        url: url,
+                        dataType: "json",
+                        success: function (data, statusText, jqXHR) {
+                            if (jqXHR.status == "204") {
+                                vm.vnfmInfo.splice(index, 1);
+                                vm.$vnfmList.splice(index, 1);
+                                commonUtil.showMessage($.i18n.prop("nfv-vnfm-iui-message-delete-success"), "success");
+                            } else {
+                                commonUtil.showMessage($.i18n.prop("nfv-vnfm-iui-message-delete-fail"), "warning");
                             }
-                            $('#addVnfmDlg').modal('hide');
-                            commonUtil.showMessage(vm.$htmlText.updateSuccess, "success");
-                        } else {
-                            vm.server_rtn.warning_block = true;
-                            vm.server_rtn.rtn_info = vm.$htmlText.updateFail;
-                            commonUtil.showMessage(vm.$htmlText.updateFail, "failed");
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            commonUtil.showMessage($.i18n.prop("nfv-vnfm-iui-message-delete-fail"), "warning");
                         }
-                    },
-                    error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        vm.server_rtn.warning_block = true;
-                        vm.server_rtn.rtn_info = textStatus + ":" + errorThrown;
-                        vm.server_rtn.info_block = false;
-                    }
-                });
-            }
-        },
-        //  		mocRendered : function(action) {
-        // 	if(vm.addVnfm.saveType === "update" && vm.addVnfm.moc) {
-        // 		var items = vm.mocSelectItems;
-        // 		for(var i=0;i<items.length;i++) {
-        //     		if(items[i].id == vm.addVnfm.moc) {
-        //     			$("#moc")[0].selectedIndex = i;
-        //     			vm.$mocChange();
-        //     			break;
-        //     		}
-        //     	}
-        // 	} else {
-        // 		$("#moc")[0].selectedIndex = 0;
-        // 	}
-        // },
-        vimRendered: function (action) {
-            var items = vm.vimSelectItems;
-            if (vm.addVnfm.saveType === "update") {
-                for (var i = 0; i < items.length; i++) {
-                    if (items[i].vimId == vm.addVnfm.vimId) {
-                        $("#vimId")[0].selectedIndex = i;
-                        break;
-                    }
+                    });
                 }
-            } else {
-                $("#vimId")[0].selectedIndex = items.length - 1;
-            }
+            });
         },
-        // $mocChange : function() {
-        // 	var mocId = $('#moc').val();
-        // 	if(mocId == "nfv.vnfm.tacker") {
-        // 		vm.addVnfm.vimVisiable = true;
-        // 	} else {
-        // 		vm.addVnfm.vimVisiable = false;
-        // 	}
-        // },
-        // $getVimId : function(mocId) {
-        // 	if(vm.addVnfm.vimVisiable) {
-        // 		return $("#vimId").val();
-        // 	} else {
-        // 		return "";
-        // 	}
-        // }
-    });
+        updateVnfm: function (index) {
+            vm.saveType = "update";
+            vm.currentIndex = index;
+            vm.modalTitle = "Modify";
+            vm.currentElement = $.extend(true, {}, vm.vnfmInfo[index].$model);
+            vm.$showVnfmTable();
+        },
+        postVnfm: function () {
+            var currentElement = vm.getVnfmSave();
+            $.ajax({
+                type: "POST",
+                url: vm.$restUrl.addVnfmInfoUrl,
+                data: JSON.stringify(currentElement),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (resp, statusText, jqXHR) {
+                    if (jqXHR.status == 200) {
+                        currentElement.vnfmId = resp.id;
+                        vm.vnfmInfo.push(currentElement);
+                        $('#addVnfmDlg').modal('hide');
+                        commonUtil.showMessage(vm.$htmlText.saveSuccess, "success");
+                    } else {
+                        vm.server_rtn.warning_block = true;
+                        vm.server_rtn.rtn_info = vm.$htmlText.saveFail;
+                        commonUtil.showMessage(vm.$htmlText.saveFail, "failed");
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    vm.server_rtn.warning_block = true;
+                    vm.server_rtn.rtn_info = textStatus + ":" + errorThrown;
+                    vm.server_rtn.info_block = false;
+                }
+            });
+        },
+        putVnfm: function () {
+            var currentElement = vm.getVnfmSave();
+            var url = vm.$restUrl.updateVnfmInfoUrl .replace("{vnfmId}", currentElement.vnfmId);
+            $.ajax({
+                type: "PUT",
+                url: url,
+                data: JSON.stringify(currentElement),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (resp, statusText, jqXHR) {
+                    if (jqXHR.status == 200) {
+                        vm.fillElement(currentElement, vm.vnfmInfo[vm.currentIndex]);
+                        $('#addVnfmDlg').modal('hide');
+                        commonUtil.showMessage(vm.$htmlText.updateSuccess, "success");
+                    } else {
+                        vm.server_rtn.warning_block = true;
+                        vm.server_rtn.rtn_info = vm.$htmlText.updateFail;
+                        commonUtil.showMessage(vm.$htmlText.updateFail, "failed");
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    vm.server_rtn.warning_block = true;
+                    vm.server_rtn.rtn_info = textStatus + ":" + errorThrown;
+                    vm.server_rtn.info_block = false;
+                }
+            });
+        },
+        fillElement: function (sourceElement, targetElement) {
+            targetElement["vnfmId"] = sourceElement["vnfmId"];
+            targetElement["name"] = sourceElement["name"];
+            targetElement["type"] = sourceElement["type"];
+            targetElement["vimId"] = sourceElement["vimId"];
+            targetElement["vendor"] = sourceElement["vendor"];
+            targetElement["version"] = sourceElement["version"];
+            targetElement["certificateUrl"] = sourceElement["certificateUrl"];
+            targetElement["url"] = sourceElement["url"];
+            targetElement["userName"] = sourceElement["userName"];
+            targetElement["password"] = sourceElement["password"];
+        },
+        getVnfmSave: function () {
+            var vnfmSave = $.extend(true, {}, vm.currentElement.$model);
+            return vnfmSave;
+        }
+});
+vm.currentElement = $.extend(true, {}, vm.$newElement);
 avalon.scan();
 vm.$initTable();
-//vm.$initMoc();

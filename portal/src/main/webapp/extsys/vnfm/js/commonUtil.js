@@ -53,7 +53,7 @@ commonUtil.parseDate = function (dateObj, format) {
 commonUtil.showMessage = function (message, type) {
     $.growl({
         icon: "fa fa-envelope-o fa-lg",
-        title: "&nbsp;&nbsp;" + $.i18n.prop("nfv-nso-iui-common-tip"),
+        title: "&nbsp;&nbsp;Tips: ",
         message: message
     }, {
         type: type
