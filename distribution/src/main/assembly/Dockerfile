@@ -19,8 +19,8 @@ ENV JRE_HOME ${JAVA_HOME}/jre
 #add esr gui related resources to the docker image
 RUN mkdir /home/esr
 WORKDIR /home/esr
-ADD esr-gui-*-linux64.tar.gz /home/esr-gui/
-RUN chmod 755 /home/esr-gui/**/*.sh
+ADD esr-gui-*-linux64.tar.gz /home/esr/
+RUN chmod 755 /home/esr/*.sh
 
-ENTRYPOINT /home/esr-gui/startup.sh
+ENTRYPOINT /home/esr/startup.sh
 
