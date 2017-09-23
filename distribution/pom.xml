@@ -264,7 +264,7 @@
                         <configuration>
                             <images>
                                 <image>
-                                    <name>onap/sdc/sdc-workflow-designer</name>
+                                    <name>onap/aai/esr-gui</name>
                                     <build>
                                         <cleanup>try</cleanup>
                                         <dockerFileDir>${basedir}/${version.output}</dockerFileDir>
