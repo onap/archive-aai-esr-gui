@@ -31,9 +31,9 @@ public class SystemListener implements ServletContextListener {
     }
 
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        logger.info("open-o portal register task begin.");
+        logger.info("onap esr gui register task begin.");
         String registerFilePath = SystemListener.class.getClassLoader().getResource("").getPath() + "portalConfig" + File.separator + "msb_register.xml";
         RegisterService.registerMsb(registerFilePath);
-        logger.info("open-o portal register task ended.");
+        logger.info("onap esr gui register task ended.");
     }
 }
