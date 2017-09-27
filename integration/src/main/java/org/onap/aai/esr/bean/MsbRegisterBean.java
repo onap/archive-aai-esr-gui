@@ -1,5 +1,5 @@
-/*
- * Copyright 2016-2017, CMCC Technologies Co., Ltd.
+/**
+ * Copyright 2017 ZTE Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,13 @@ import java.util.List;
 public class MsbRegisterBean {
     private String serviceName = "";
 
+    private String version = "";
+
     private String lb_policy = "";
 
     private String url = "";
+
+    private String path = "";
 
     private String protocol = "";
 
@@ -54,6 +58,14 @@ public class MsbRegisterBean {
         this.url = url;
     }
 
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
     public String getProtocol() {
         return protocol;
     }
@@ -76,5 +88,13 @@ public class MsbRegisterBean {
 
     public void setNodes(List<ServiceNodeBean> nodes) {
         this.nodes = nodes;
+    }
+
+    public String getVersion() {
+      return version;
+    }
+
+    public void setVersion(String version) {
+      this.version = version;
     }
 }

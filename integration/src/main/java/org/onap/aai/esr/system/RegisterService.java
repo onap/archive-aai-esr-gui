@@ -1,5 +1,5 @@
-/*
- * Copyright 2016-2017, CMCC Technologies Co., Ltd.
+/**
+ * Copyright 2017 ZTE Corporation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,6 +69,7 @@ public class RegisterService {
                 registerBean.setNodes(nodeList);
                 registerBean.setServiceName(registerInfo.get("serviceName"));
                 registerBean.setUrl(registerInfo.get("url"));
+                registerBean.setPath(registerInfo.get("path"));
                 registerBean.setProtocol(registerInfo.get("protocol"));
                 registerBean.setVisualRange(registerInfo.get("visualRange"));
                 registerBean.setLb_policy(registerInfo.get("lb_policy"));

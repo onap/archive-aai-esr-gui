@@ -16,16 +16,17 @@
 -->
 <msbRegister>
     <msbHost>
-        <hostIp>http://192.168.233.226</hostIp>
+        <hostIp>http://127.0.0.1</hostIp>
         <hostPort>80</hostPort>
-        <msbApiRootDomain>/onapapi/microservices/v1/services</msbApiRootDomain>
+        <msbApiRootDomain>/api/microservices/v1/services</msbApiRootDomain>
     </msbHost>
     <registerList>
         <registerInfo>
             <ip>127.0.0.1</ip>
-            <port>9150</port>
-            <url>/esrui/esr</url>
-            <serviceName>esr</serviceName>
+            <port>9519</port>
+            <url>/esr-gui</url>
+            <path>/iui/aai-esr-gui</path>
+            <serviceName>aai-esr-gui</serviceName>
             <protocol>UI</protocol>
             <visualRange>1</visualRange>
             <lb_policy>hash</lb_policy>
