@@ -106,6 +106,32 @@ var vm = avalon
             if (form.valid() == false) {
                 vm.isSave = false;
                 return false;
+            } else {
+                vm.isSave = true;
+            }
+            var cloudOwner = vm.currentElement["cloudOwner"];
+            var $cloudOwner = $("#vim_form input[name='cloudOwner']");
+            var cloudRegionId  = vm.currentElement["cloudRegionId"];
+            var $cloudRegionId = $("#vim_form input[name='cloudRegionId']");
+            if(cloudOwner.indexOf("_") != -1){
+                $cloudOwner.parent().parent().addClass("has-error");
+                $cloudOwner.next().html("It not allowed '_' contained here").show();
+                vm.isSave = false;
+                return false;
+            } else {
+                vm.isSave = true;
+                $cloudOwner.parent().parent().removeClass("has-error");
+                $cloudOwner.next().hide();
+            }
+            if(cloudRegionId.indexOf("_") != -1){
+                $cloudRegionId.parent().parent().addClass("has-error");
+                $cloudRegionId.next().html("It not allowed '_' contained here").show();
+                vm.isSave = false;
+                return false;
+            } else {
+                vm.isSave = true;
+                $cloudRegionId.parent().parent().removeClass("has-error");
+                $cloudRegionId.next().hide();
             }
             var res = false;
             if (vm.saveType == "add") {
