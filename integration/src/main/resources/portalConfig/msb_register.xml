@@ -23,7 +23,7 @@
     <registerList>
         <registerInfo>
             <ip>127.0.0.1</ip>
-            <port>9519</port>
+            <port>8080</port>
             <url>/esr-gui</url>
             <path>/iui/aai-esr-gui</path>
             <serviceName>aai-esr-gui</serviceName>
