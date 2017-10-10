@@ -25,7 +25,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.onap.aai.esr-gui</groupId>
-    <artifactId>aai-esr-gui-parent</artifactId>
+    <artifactId>aai-esr-gui</artifactId>
     <packaging>pom</packaging>
 	<version>1.0.0-SNAPSHOT</version>
     <name>aai-esr-gui</name>
