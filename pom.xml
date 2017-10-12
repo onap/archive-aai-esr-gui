@@ -33,6 +33,7 @@
     <modules>
         <module>common</module>
 		<module>portal</module>
+		<module>integration</module>	
 		<module>distribution</module>		
     </modules>
 	
