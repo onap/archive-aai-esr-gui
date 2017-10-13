@@ -40,7 +40,8 @@ var vm = avalon
                     "authUrl": "",
                     "sslCacert": "",
                     "sslInsecure": "false",
-                    "cloudDomain": ""
+                    "cloudDomain": "",
+                    "defaultTenant": ""
                 }
             ]
         },
@@ -233,6 +234,7 @@ var vm = avalon
             targetElement["vimAuthInfos"][0]["sslCacert"] = sourceElement["vimAuthInfos"][0]["sslCacert"];
             targetElement["vimAuthInfos"][0]["sslInsecure"] = sourceElement["vimAuthInfos"][0]["sslInsecure"];
             targetElement["vimAuthInfos"][0]["cloudDomain"] = sourceElement["vimAuthInfos"][0]["cloudDomain"];
+            targetElement["vimAuthInfos"][0]["defaultTenant"] = sourceElement["vimAuthInfos"][0]["defaultTenant"];
         },
         getVIMSave: function () {
             var vimSave = $.extend(true, {}, vm.currentElement.$model);
