@@ -19,7 +19,7 @@
      define subcomponents such as "Valves" at this level.
      Documentation at /docs/config/server.html
  -->
-<Server port="10508" shutdown="APDSSHUTDOWN">
+<Server port="8005" shutdown="SHUTDOWN">
   <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
   <!-- Security listener. Documentation at /docs/config/listeners.html
   <Listener className="org.apache.catalina.security.SecurityListener" />
@@ -66,14 +66,9 @@
          APR (HTTP/AJP) Connector: /docs/apr.html
          Define a non-SSL/TLS HTTP/1.1 Connector on port 8080
     -->
-    <Connector port="10500" protocol="HTTP/1.1"
+    <Connector port="9519" protocol="HTTP/1.1"
                connectionTimeout="20000"
-               redirectPort="10509"
-               compression="on"
-               compressionMinSize1="2048"
-               noCompressionUserAgents="gozilla, traviata"
-               compressableMimeType="text/html, text/xml, text/javascript, text/css, text/plain, application/javascript, application/json, image/svg+xml"
-               useSendfile="false"/>
+               redirectPort="8443" />
     <!-- A "Connector" using the shared thread pool-->
     <!--
     <Connector executor="tomcatThreadPool"
@@ -113,7 +108,7 @@
     -->
 
     <!-- Define an AJP 1.3 Connector on port 8009 -->
-    <!--<Connector port="8009" protocol="AJP/1.3" redirectPort="8443" />-->
+    <Connector port="8009" protocol="AJP/1.3" redirectPort="8443" />
 
 
     <!-- An Engine represents the entry point (within Catalina) that processes
@@ -157,9 +152,9 @@
         <!-- Access log processes all example.
              Documentation at: /docs/config/valve.html
              Note: The pattern used is equivalent to using pattern="common" -->
-        <!--Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
                prefix="localhost_access_log" suffix=".txt"
-               pattern="%h %l %u %t &quot;%r&quot; %s %b" /-->
+               pattern="%h %l %u %t &quot;%r&quot; %s %b" />
 
       </Host>
     </Engine>
