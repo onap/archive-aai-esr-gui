@@ -35,6 +35,9 @@
         <linux64outputdir>target/assembly/${linux64id}</linux64outputdir>
         <win64outputdir>target/assembly/${win64id}</win64outputdir>
         <version.output>target/version</version.output>
+		<aai.esr.gui.project.version>${project.version}</aai.esr.gui.project.version>
+		<maven.build.timestamp.format>yyMMdd-HHmmss</maven.build.timestamp.format>
+        <build.number>${maven.build.timestamp}</build.number>
     </properties>
 
     <build>
@@ -248,7 +251,7 @@
                     </execution>
                 </executions>
             </plugin>
-			<!--<plugin>
+			<plugin>
                 <groupId>org.codehaus.groovy.maven</groupId>
                 <artifactId>gmaven-plugin</artifactId>
                 <executions>
@@ -273,7 +276,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>-->
+            </plugin>
         </plugins>
     </build>
 	
