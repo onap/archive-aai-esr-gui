@@ -88,11 +88,19 @@
                                     <span>Cloud Region Version</span>
                                     <span class="required" aria-required="true">*</span>
                                 </label>
-                                <div class="col-sm-7">
-                                    <input type="text" ms-duplex="currentElement['cloudRegionVersion']" name="cloudRegionVersion" class="form-control"/>
+                                <div class="col-sm-7" ms-if="'openstack' == currentElement.cloudType">
+                                    <select ms-duplex="currentElement['cloudRegionVersion']">
+                                        <option value='titanium_cloud'>titanium_cloud</option>
+                                        <option value='ocata'>ocata</option>
+                                    </select>
                                     <span class="help-block"></span>
                                 </div>
-
+                                <div class="col-sm-7" ms-if="'vmware' == currentElement.cloudType">
+                                    <select ms-duplex="currentElement['cloudRegionVersion']">
+                                        <option value='4.0'>4.0</option>
+                                    </select>
+                                    <span class="help-block"></span>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-3">
@@ -221,8 +229,7 @@
     <div class="row-fluid col-sm-12" data-name="cond_zone">
         <div class="col-sm-4">
             <button class="btn white radius_l" id="app-new-btn" ms-click="$showVimTable(-1, 'add')">
-                <i class="ict-new"></i> <span id_i18n="com_zte_ums_eco_roc_vim_register"
-                                              name_i18n="com_zte_conductor_ui_i18n"></span>
+                <i class="ict-new"></i> <span id_i18n="com_zte_ums_eco_roc_vim_register" name_i18n="com_zte_conductor_ui_i18n"></span>
             </button>
         </div>
         <!-- <div class="fa fa-refresh text-muted refresh-status-text"><small><span id_i18n="com_zte_ums_eco_roc_vim_status_update_time" name_i18n="com_zte_conductor_ui_i18n"></span></small><small ms-text="vimStatusTime"></small></div>-->
