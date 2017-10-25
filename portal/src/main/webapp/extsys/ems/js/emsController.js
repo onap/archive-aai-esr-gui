@@ -22,8 +22,8 @@ var vm = avalon.define({
         $newElement: {
             "emsId": "",
             "name": "",
-            "version": "v1.0",
-            "vendor": "ZTE",
+            "version": "",
+            "vendor": "",
             "resourceAddr": {
                 "ftptype": "ftp",
                 "ip": "",
@@ -104,20 +104,10 @@ var vm = avalon.define({
             });
         },
         $nextStep: function () {
-            if(vm.currentStep == 1 && !vm.validate("resourceAddr")){
-                 return false;
-            } else if(vm.currentStep == 2 && !vm.validate("performanceAddr")){
-                return false;
-            }
             vm.currentStep ++;
             vm.showStep();
         },
         $preStep: function () {
-            if(vm.currentStep == 2 && !vm.validate("resourceAddr")){
-                return false;
-            } else if(vm.currentStep == 3 && !vm.validate("alarmAddr")){
-                return false;
-            }
             vm.currentStep --;
             vm.showStep();
         },
@@ -130,16 +120,21 @@ var vm = avalon.define({
             };
             switch (vm.currentStep){
                 case 1:
-                    show("resourceAddr");
+                    show("commonInfo");
                     $("#btnSave, #btnPreStep").hide();
                     $("#btnNextStep").show();
                     break;
                 case 2:
-                    show("performanceAddr");
+                    show("resourceAddr");
                     $("#btnSave").hide();
                     $("#btnNextStep, #btnPreStep").show();
                     break;
                 case 3:
+                    show("performanceAddr");
+                    $("#btnSave").hide();
+                    $("#btnNextStep, #btnPreStep").show();
+                    break;
+                case 4:
                     show("alarmAddr");
                     $("#btnNextStep").hide();
                     $("#btnSave, #btnPreStep").show();
@@ -162,6 +157,8 @@ var vm = avalon.define({
         dismiss: function () {
             if(vm.currentIndex !== -1){
                 vm.currentElement.name = vm.$emsList[vm.currentIndex].name;
+                vm.currentElement.vendor = vm.$emsList[vm.currentIndex].vendor;
+                vm.currentElement.version = vm.$emsList[vm.currentIndex].version;
             }
             $("#addEmsDlg").modal("hide");
         },

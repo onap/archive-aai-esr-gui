@@ -41,23 +41,30 @@
                     <div class="modal-body">
                         <div class="px-ui-steps">
                             <ul class="px-ui-horizon-ul-horizon" role="tablist">
-                                <li class="px-ui-steps-li step-active" id="step-resourceAddr">
+                                <li class="px-ui-steps-li step-active" id="step-commonInfo">
                                     <div  class="px-ui-menuitem-div-passive">
                                         <span class="px-ui-steps-number-passive">1</span>
+                                        <span class="px-ui-steps-title-passive">Common</span>
+                                    </div>
+                                    <div class="px-ui-underline-passive"></div>
+                                </li>
+                                <li class="px-ui-steps-li" id="step-resourceAddr">
+                                    <div  class="px-ui-menuitem-div-passive">
+                                        <span class="px-ui-steps-number-passive">2</span>
                                         <span class="px-ui-steps-title-passive">Resource</span>
                                     </div>
                                     <div class="px-ui-underline-passive"></div>
                                 </li>
                                 <li class="px-ui-steps-li" id="step-performanceAddr">
                                     <div class="px-ui-menuitem-div-passive">
-                                        <span class="px-ui-steps-number-passive">2</span>
+                                        <span class="px-ui-steps-number-passive">3</span>
                                         <span class="px-ui-steps-title-passive">Performance</span>
                                     </div>
                                     <div class="px-ui-underline-passive"></div>
                                 </li>
                                 <li class="px-ui-steps-li" id="step-alarmAddr">
                                     <div class="px-ui-menuitem-div-passive">
-                                        <span class="px-ui-steps-number-passive">3</span>
+                                        <span class="px-ui-steps-number-passive">4</span>
                                         <span class="px-ui-steps-title-passive">Alarm</span>
                                     </div>
                                     <div class="px-ui-underline-passive"></div>
@@ -65,7 +72,7 @@
                             </ul>
                         </div>
                         <div class="step-content">
-                            <form class="form-horizontal" id="form_resourceAddr" role="form">
+                            <form class="form-horizontal" id="form_commonInfo" role="form">
                                 <div class="form-group">
                                     <label class="control-label col-sm-3">
                                         <span>Name</span>
@@ -76,6 +83,26 @@
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">
+                                        <span>Vendor</span>
+                                    </label>
+                                    <div class="col-sm-7">
+                                        <input type="text" ms-duplex="currentElement.vendor" name="vendor" class="form-control"/>
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">
+                                        <span>Version</span>
+                                    </label>
+                                    <div class="col-sm-7">
+                                        <input type="text" ms-duplex="currentElement.version" name="version" class="form-control"/>
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                            </form>
+                            <form class="form-horizontal" id="form_resourceAddr" role="form"> 
                                 <div class="form-group">
                                     <label class="control-label col-sm-3">
                                         <span>Ftp Type</span>
