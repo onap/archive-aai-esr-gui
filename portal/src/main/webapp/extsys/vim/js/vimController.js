@@ -266,9 +266,6 @@ var vm = avalon
             var vimSave = $.extend(true, {}, vm.currentElement.$model);
             vimSave["vimAuthInfos"] = $.extend(true, [], vm.currentElement["vimAuthInfos"].$model);
             return vimSave;
-        },
-        gotoChartPage: function (oid, name, tenant) {
-            window.location.href = "vimChart.html?" + oid + "&" + name + "&" + tenant;
         }
     });
 vm.currentElement = $.extend(true, {}, vm.$blankElement);
