@@ -86,7 +86,7 @@ commonUtil.registerCometdMessage = function (url, channel, callback) {
 }
 
 commonUtil.format = function () {
-    if (arguments.length == 0) {
+    if (arguments.length === 0) {
         return null;
     }
     var str = arguments[0];
