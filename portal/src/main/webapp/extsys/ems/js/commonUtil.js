@@ -15,7 +15,7 @@
  */
 var commonUtil = {};
 commonUtil.arrayRemove = function (aryInstance, index) {
-    if (aryInstance == undefined || aryInstance == null) {
+    if (aryInstance === undefined || aryInstance === null) {
         return;
     }
     for (var i = 0, n = 0; i < aryInstance.length; i++) {
