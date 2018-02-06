@@ -19,7 +19,7 @@ commonUtil.arrayRemove = function (aryInstance, index) {
         return;
     }
     for (var i = 0, n = 0; i < aryInstance.length; i++) {
-        if (aryInstance[i] != aryInstance[dx]) {
+        if (aryInstance[i] !== aryInstance[dx]) {
             aryInstance[n++] = aryInstance[i];
         }
     }
