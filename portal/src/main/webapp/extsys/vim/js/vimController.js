@@ -45,6 +45,9 @@ var vm = avalon
                 }
             ]
         },
+        vimTypeObj: [],
+        vimTypes: [],
+        vimVersions:[],
         $Status: {
             success: "active",
             failed: "inactive",
@@ -57,6 +60,7 @@ var vm = avalon
         $addVimInfoUrl: '/api/aai-esr-server/v1/vims',
         $updateVimInfoUrl: '/api/aai-esr-server/v1/vims/{cloudOwner}/{cloudRegionId}',
         $delVimInfoUrl: '/api/aai-esr-server/v1/vims/{cloudOwner}/{cloudRegionId}',
+        $queryVimTypeUrl: '/multicloud/v0/vim_types',
         $initTable: function () {
             $.ajax({
                 "type": 'get',
@@ -79,7 +83,6 @@ var vm = avalon
                     resUtil.tooltipVimStatus();
                 }
             });
-
         },
         $showVimTable: function (index, action) {
             vm.isSave = false;
@@ -93,6 +96,7 @@ var vm = avalon
                 vm.fillElement(vm.vimInfo[index], vm.currentElement);
             }
             vm.$showModal();
+            vm.getVimTypes();
         },
         $showModal: function () {
             $(".form-group").removeClass('has-success').removeClass('has-error').find(".help-block[id]").remove();
@@ -266,6 +270,48 @@ var vm = avalon
             var vimSave = $.extend(true, {}, vm.currentElement.$model);
             vimSave["vimAuthInfos"] = $.extend(true, [], vm.currentElement["vimAuthInfos"].$model);
             return vimSave;
+        },
+        getVimTypes: function(){
+            // vm.vimTypeObj = [{
+            //     "vim_type": "openstack",
+            //     "versions": ["titanium_cloud","ocata"]
+            // },
+            // {
+            //     "vim_type": "vmware",
+            //     "versions": ["4.0"]
+            // },
+            // {
+            //     "vim_type": "test",
+            //     "versions": ["1.0","2.0"]
+            // }];
+            $.ajax({
+                "type": 'get',
+                "url": vm.$queryVimTypeUrl,
+                "success": function (resp, statusText, jqXHR) {
+                    if (jqXHR.status == "200") {
+                        vm.vimTypeObj = resp;
+                    }
+                    else {
+                        vm.vimTypeObj = [];
+                        bootbox.alert($.i18n.prop("com_zte_ums_eco_roc_vim_growl_msg_query_failed"));
+                        return;
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    bootbox.alert($.i18n.prop("com_zte_ums_eco_roc_vim_growl_msg_query_failed") + textStatus + ":" + errorThrown);
+                    return;
+                },
+                complete: function () {
+                    resUtil.tooltipVimStatus();
+                }
+            });
+        },
+        getVimVerions: function(vim_type){
+            for (var i=0;i<vm.vimTypeObj.length;i++) {
+                if(vim_type == vm.vimTypeObj[i]["vim_type"]) {
+                    vm.vimVersions = vm.vimTypeObj[i]["versions"];
+                }
+            }
         }
     });
 vm.currentElement = $.extend(true, {}, vm.$blankElement);

@@ -76,9 +76,8 @@
                                     <span class="required" aria-required="true">*</span>
                                 </label>
                                 <div class="col-sm-7">
-                                    <select ms-duplex="currentElement['cloudType']">
-                                        <option value='openstack'>openstack</option>
-                                        <option value='vmware'>vmware</option>
+                                    <select ms-duplex="currentElement['cloudType']" ms-change="getVimVerions(this.value)" >
+                                        <option ms-repeat="vimTypeObj" ms-attr-value="el.vim_type">{{el.vim_type}}</option>
                                     </select>
                                     <span class="help-block"></span>
                                 </div>
@@ -88,16 +87,9 @@
                                     <span>Cloud Region Version</span>
                                     <span class="required" aria-required="true">*</span>
                                 </label>
-                                <div class="col-sm-7" ms-if="'openstack' == currentElement.cloudType">
+                                <div class="col-sm-7">
                                     <select ms-duplex="currentElement['cloudRegionVersion']">
-                                        <option value='titanium_cloud'>titanium_cloud</option>
-                                        <option value='ocata'>ocata</option>
-                                    </select>
-                                    <span class="help-block"></span>
-                                </div>
-                                <div class="col-sm-7" ms-if="'vmware' == currentElement.cloudType">
-                                    <select ms-duplex="currentElement['cloudRegionVersion']">
-                                        <option value='4.0'>4.0</option>
+                                        <option ms-repeat="vimVersions">{{el}}</option>
                                     </select>
                                     <span class="help-block"></span>
                                 </div>
