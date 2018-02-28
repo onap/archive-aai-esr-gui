@@ -305,6 +305,7 @@ var vm = avalon
                     resUtil.tooltipVimStatus();
                 }
             });
+            vm.getVimVerions(vm.vimTypeObj[0]["vim_type"]);
         },
         getVimVerions: function(vim_type){
             for (var i=0;i<vm.vimTypeObj.length;i++) {
