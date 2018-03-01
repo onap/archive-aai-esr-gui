@@ -31,7 +31,7 @@ var vm = avalon
             "cloudRegionVersion": "v1.0",
             "ownerDefinedType": "",
             "cloudZone": "",
-            "complexName": "",
+            "physicalLocationId": "",
             "cloudExtraInfo": "",
             "vimAuthInfos": [
                 {
@@ -48,6 +48,7 @@ var vm = avalon
         vimTypeObj: [],
         vimTypes: [],
         vimVersions:[],
+        physicalLocationIds:[],
         $Status: {
             success: "active",
             failed: "inactive",
@@ -60,6 +61,7 @@ var vm = avalon
         $addVimInfoUrl: '/api/aai-esr-server/v1/vims',
         $updateVimInfoUrl: '/api/aai-esr-server/v1/vims/{cloudOwner}/{cloudRegionId}',
         $delVimInfoUrl: '/api/aai-esr-server/v1/vims/{cloudOwner}/{cloudRegionId}',
+        $queryComplexInfoUrl: '/api/aai-esr-server/v1/vims/complexes',
         $queryVimTypeUrl: '/multicloud/v0/vim_types',
         $initTable: function () {
             $.ajax({
@@ -96,6 +98,7 @@ var vm = avalon
                 vm.fillElement(vm.vimInfo[index], vm.currentElement);
             }
             vm.$showModal();
+            vm.getPhysicalLocationIds();
             vm.getVimTypes();
         },
         $showModal: function () {
@@ -253,7 +256,7 @@ var vm = avalon
             targetElement["cloudRegionVersion"] = sourceElement["cloudRegionVersion"];
             targetElement["ownerDefinedType"] = sourceElement["ownerDefinedType"];
             targetElement["cloudZone"] = sourceElement["cloudZone"];
-            targetElement["complexName"] = sourceElement["complexName"];
+            targetElement["physicalLocationId"] = sourceElement["physicalLocationId"];
             targetElement["cloudExtraInfo"] = sourceElement["cloudExtraInfo"];
             if(!targetElement["vimAuthInfos"]){
                 targetElement["vimAuthInfos"] = [{}];
@@ -293,12 +296,12 @@ var vm = avalon
                     }
                     else {
                         vm.vimTypeObj = [];
-                        bootbox.alert($.i18n.prop("com_zte_ums_eco_roc_vim_growl_msg_query_failed"));
+                        bootbox.alert($.i18n.prop("com_zte_ums_eco_roc_vim_growl_msg_query_vim_type_failed"));
                         return;
                     }
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    bootbox.alert($.i18n.prop("com_zte_ums_eco_roc_vim_growl_msg_query_failed") + textStatus + ":" + errorThrown);
+                    bootbox.alert($.i18n.prop("com_zte_ums_eco_roc_vim_growl_msg_query_vim_type_failed") + textStatus + ":" + errorThrown);
                     return;
                 },
                 complete: function () {
@@ -306,6 +309,29 @@ var vm = avalon
                 }
             });
             vm.getVimVerions(vm.vimTypeObj[0]["vim_type"]);
+        },
+        getPhysicalLocationIds: function(){
+            $.ajax({
+                "type": 'get',
+                "url": vm.$queryComplexInfoUrl,
+                "success": function (resp, statusText, jqXHR) {
+                    if (jqXHR.status == "200") {
+                        vm.physicalLocationIds = resp;
+                    }
+                    else {
+                        vm.physicalLocationIds = [];
+                        bootbox.alert($.i18n.prop("com_zte_ums_eco_roc_vim_growl_msg_query_complex_failed"));
+                        return;
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    bootbox.alert($.i18n.prop("com_zte_ums_eco_roc_vim_growl_msg_query_complex_failed") + textStatus + ":" + errorThrown);
+                    return;
+                },
+                complete: function () {
+                    resUtil.tooltipVimStatus();
+                }
+            });
         },
         getVimVerions: function(vim_type){
             for (var i=0;i<vm.vimTypeObj.length;i++) {
