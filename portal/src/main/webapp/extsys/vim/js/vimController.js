@@ -62,7 +62,7 @@ var vm = avalon
         $updateVimInfoUrl: '/api/aai-esr-server/v1/vims/{cloudOwner}/{cloudRegionId}',
         $delVimInfoUrl: '/api/aai-esr-server/v1/vims/{cloudOwner}/{cloudRegionId}',
         $queryComplexInfoUrl: '/api/aai-esr-server/v1/vims/complexes',
-        $queryVimTypeUrl: '/multicloud/v0/vim_types',
+        $queryVimTypeUrl: '/api/multicloud/v0/vim_types',
         $initTable: function () {
             $.ajax({
                 "type": 'get',
