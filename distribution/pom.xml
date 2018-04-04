@@ -36,7 +36,7 @@
         <win64outputdir>target/assembly/${win64id}</win64outputdir>
         <version.output>target/version</version.output>
 		<aai.esr.gui.project.version>${project.version}</aai.esr.gui.project.version>
-		<maven.build.timestamp.format>yyMMdd-HHmmss</maven.build.timestamp.format>
+		<maven.build.timestamp.format>yyyyMMdd'T'HHmmss'Z'</maven.build.timestamp.format>
         <build.number>${maven.build.timestamp}</build.number>
     </properties>
 
