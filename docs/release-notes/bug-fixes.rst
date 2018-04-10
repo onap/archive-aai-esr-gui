@@ -17,7 +17,7 @@ Bug
 * [AAI-225] - aai/esr-server daily build failed
 * [AAI-278] - AAI throws exception about mismatch keys adding esr-system-info to cloud-region
 * [AAI-377] - esr-gui docker build failed
-* [AAI-393] - The jjb defiend in a error way that cause CSIT build failed.
+* [AAI-393] - The jjb defined in a error way that cause CSIT build failed.
 * [AAI-398] - If a cloud-region didn't contain a external system info, there will be an null pointer error
 * [AAI-400] - Register ServiceTest to microservice
 * [AAI-407] - There is an error to startup esr-gui docker

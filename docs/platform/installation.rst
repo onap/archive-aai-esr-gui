@@ -34,7 +34,7 @@ sudo docker run -p  9519:8080 -d --net=host --name esr-gui nexus3.onap.org:10001
 Check status of ESR
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Test whether esr-server is runing:
+Test whether esr-server is running:
 
 GET  http://ESR_SERVICE_IP:9518/api/aai-esr-server/v1/test 
 

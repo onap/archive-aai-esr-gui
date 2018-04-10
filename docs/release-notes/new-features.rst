@@ -33,7 +33,7 @@ Story
 Task
 ^^^^
 
-* [AAI-67] - Upload the server-end seed code to ONAP repostory
+* [AAI-67] - Upload the server-end seed code to ONAP repository
 * [AAI-68] - Upload the ESR gui seed code to ONAP repository
 * [AAI-69] - Remove the original SDNC related function from Amsterdan release.
 * [AAI-70] - Collect the schema of ESR for ONAP in Amsterdam release
@@ -109,7 +109,7 @@ Task
 * [AAI-358] - Change util method from static to unstatic
 * [AAI-359] - Fix the return data of del and query list API
 * [AAI-360] - Realize delete vim API
-* [AAI-361] - Update VIM after register finishied.
+* [AAI-361] - Update VIM after register finished.
 * [AAI-362] - Clean the Config files
 * [AAI-363] - Add unit test for app configuration
 * [AAI-365] - change the objectToString method to un-static
