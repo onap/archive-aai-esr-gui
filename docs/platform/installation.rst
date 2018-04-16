@@ -24,19 +24,23 @@ Run esr-server docker
 
 Login the ONAP docker registry first: sudo docker login -u docker -p docker nexus3.onap.org:10001
 
-sudo docker run -p  9518:9518 -d --net=host --name esr-server -e MSB_ADDR=${MSB_SERVER_IP}:80 nexus3.onap.org:10001/onap/aai/esr-server
+sudo docker pull nexus3.onap.org:10001/onap/aai/esr-server:latest
+
+sudo docker run -i -t -d -p 9518:9518 -e MSB_ADDR=${MSB_SERVER_IP}:80 --name esr_server nexus3.onap.org:10001/onap/aai/esr-server:latest
 
 Run esr-gui docker
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-sudo docker run -p  9519:8080 -d --net=host --name esr-gui nexus3.onap.org:10001/onap/aai/esr-gui
+sudo docker pull nexus3.onap.org:10001/onap/aai/esr-gui:latest
+
+docker run -i -t -d -p 9519:8080 -e MSB_ADDR=${MSB_SERVER_IP}:80 --name esr_gui nexus3.onap.org:10001/onap/aai/esr-gui:latest
 
 Check status of ESR
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 Test whether esr-server is running:
 
-GET  http://ESR_SERVICE_IP:9518/api/aai-esr-server/v1/test 
+GET  https://ESR_SERVICE_IP:9518/api/aai-esr-server/v1/test 
 
 The returned status should be 200.
 
@@ -73,9 +77,9 @@ curl -X POST -H "Content-Type: application/json" -d '{"serviceName": "multicloud
 ESR register to MSB
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-curl -X POST -H "Content-Type: application/json" -d '{"serviceName": "aai-esr-server", "version": "v1", "url": "/api/aai-esr-server/v1","protocol": "REST", "visualRange":"1", "nodes": [ {"ip": "ESR_SERVER_IP","port": "9518"}]}' "http://MSB_SERVER_IP:10081/api/microservices/v1/services"
+curl -X POST -H "Content-Type: application/json" -d '{"serviceName": "aai-esr-server", "version": "v1", "url": "/api/aai-esr-server/v1","protocol": "REST", "enable_ssl":"true", "visualRange":"1", "nodes": [ {"ip": "ESR_SERVER_IP","port": "9518"}]}' "http://MSB_SERVER_IP:10081/api/microservices/v1/services"
 
-curl -X POST -H "Content-Type: application/json" -d '{"serviceName": "aai-esr-gui", "url": "/esr-gui","protocol": "UI", "visualRange":"1", "path":"/iui/aai-esr-gui", "nodes": [ {"ip": "ESR_SERVER_IP","port": "9519"}]}' "http://MSB_SERVER_IP:10081/api/microservices/v1/services"
+curl -X POST -H "Content-Type: application/json" -d '{"serviceName": "aai-esr-gui", "version": "v1", "url": "/esr-gui","path": "/iui/aai-esr-gui","protocol": "UI",  "nodes": [ {"ip": "ESR_SERVER_IP","port": "9519"}]}' "http://MSB_SERVER_IP:10081/api/microservices/v1/services"
 
 ESR usage
 ^^^^^^^^^^^^^^^^^^^^^^^
