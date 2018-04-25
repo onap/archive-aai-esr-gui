@@ -49,7 +49,7 @@ form.validate({
         },
         password: {
             required: true,
-            maxlength: 20
+            maxlength: 50
         },
         tenant: {
             required: true,
