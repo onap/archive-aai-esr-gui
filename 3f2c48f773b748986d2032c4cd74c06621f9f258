@@ -1,0 +1,8 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: Jessica Wagantall <jwagantall@linuxfoundation.org>
+Code-Review+2: sun qi <sun.qi310@zte.com.cn>
+Submitted-by: sun qi <sun.qi310@zte.com.cn>
+Submitted-at: Wed, 25 Apr 2018 03:00:02 +0000
+Reviewed-on: https://gerrit.onap.org/r/44553
+Project: aai/esr-gui
+Branch: refs/heads/master
