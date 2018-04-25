@@ -300,7 +300,7 @@
                                         <dockerFile>${basedir}/target/version/Dockerfile</dockerFile>
                                         <tags>
                                             <tag>${project.version}</tag>
-                                            <tag>${project.version}-STAGING-${maven.build.timestamp}</tag>
+                                            <tag>${project.version}-${maven.build.timestamp}</tag>
                                             <tag>${project.docker.latesttag.version}</tag>
                                         </tags>
                                     </build>
