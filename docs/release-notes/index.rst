@@ -3,7 +3,7 @@
 Release-notes
 -------------
 
-ESR provide a way to register external system which not included in ONAP system, mainly inclouded VIM/VNFM/EMS/thirdparty SDNC. 
+ESR provide a way to register external system that are not included in the ONAP system, mainly included VIM/VNFM/EMS/third party SDNC.
 
 .. toctree::
    :maxdepth: 1
