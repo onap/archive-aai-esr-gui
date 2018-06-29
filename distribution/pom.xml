@@ -289,6 +289,13 @@
                         <groupId>io.fabric8</groupId>
                         <artifactId>docker-maven-plugin</artifactId>
                         <version>0.16.5</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>com.github.jnr</groupId>
+                                <artifactId>jnr-unixsocket</artifactId>
+                                <version>0.13</version>
+                            </dependency>
+                        </dependencies>
                         <inherited>false</inherited>
                         <configuration>
                             <images>
