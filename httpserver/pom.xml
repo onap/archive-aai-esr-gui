@@ -141,7 +141,7 @@
                                 <delete file="target/assembly/tomcat/conf/web.xml"/>
 								<delete file="target/assembly/tomcat/bin/catalina.bat"/>
                                 <delete file="target/assembly/tomcat/bin/catalina.sh"/>
-                                <copydir src="src/main/assembly/" dest="target/assembly" />
+                                <copydir src="src/main/assembly/" dest="target/assembly"/>
 								<!--<copydir src="dist/" dest="target/assembly/tomcat/webapps/ROOT/esr-gui"></copydir>
                                 <copy todir="target/assembly/tomcat/webapps/ROOT/esr-gui">
                                     <fileset dir="blueprint/">
