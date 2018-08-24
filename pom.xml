@@ -20,7 +20,7 @@
     <parent>
       <groupId>org.onap.oparent</groupId>
       <artifactId>oparent</artifactId>
-      <version>1.1.0</version>
+      <version>1.2.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -36,11 +36,11 @@
 		<module>integration</module>	
 		<module>distribution</module>		
     </modules>
-	
+
 	<properties>
         <tomcat.version>8.5.23</tomcat.version>
     </properties>
-	
+
 	<dependencyManagement>
         <dependencies>
             <dependency>
@@ -51,7 +51,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-	
+
 	<build>
 		<pluginManagement>
 			<plugins>
