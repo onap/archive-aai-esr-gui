@@ -1,0 +1,25 @@
+---
+project: 'aai-esr-gui'
+project_creation_date: '2017-05-03'
+lifecycle_state: 'Incubation'
+project_lead: &onap_releng_ptl
+    name: 'James Forsyth'
+    email: 'jf2512@att.com'
+    id: 'jimmydot'
+    company: 'ATT'
+    timezone: 'America/Detroit'
+primary_contact: *onap_releng_ptl
+issue_tracking:
+    type: 'jira'
+    url: 'https://jira.onap.org/projects/AAI'
+    key: 'AAI'
+meetings:
+    - type: 'zoom'
+      agenda: 'https://wiki.onap.org/display/DW/AAI+Meeting+Notes'
+      url: 'https://wiki.onap.org/pages/viewpage.action?pageId=8227676'
+      server: 'n/a'
+      channel: 'n/a'
+      repeats: 'weekly'
+      time: '14:00 UTC'
+committers:
+    - <<: *onap_releng_ptl
