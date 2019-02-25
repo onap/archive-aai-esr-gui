@@ -293,6 +293,7 @@ var vm = avalon
                 "success": function (resp, statusText, jqXHR) {
                     if (jqXHR.status == "200") {
                         vm.vimTypeObj = resp;
+                        vm.getVimVerions(vm.vimTypeObj[0]["vim_type"]);
                     }
                     else {
                         vm.vimTypeObj = [];
@@ -308,7 +309,6 @@ var vm = avalon
                     resUtil.tooltipVimStatus();
                 }
             });
-            vm.getVimVerions(vm.vimTypeObj[0]["vim_type"]);
         },
         getPhysicalLocationIds: function(){
             $.ajax({
