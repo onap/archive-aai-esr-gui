@@ -1,0 +1,189 @@
+<!--
+
+    Copyright (C) 2019 Verizon. All Rights Reserved
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="../../thirdparty/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="../../thirdparty/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../thirdparty/uniform/css/uniform.default.min.css" rel="stylesheet"/>
+    <link href="../../thirdparty/css/ngict-component.css" rel="stylesheet"/>
+    <link href="css/animate.min.css" rel="stylesheet"/>
+    <link href="css/nfvo.css" rel="stylesheet"/>
+    <style> .ms-controller {  visibility: hidden } </style>
+</head>
+<body>
+<div ms-controller="nfvoController" class="container-fluid ms-controller">
+    <div id="addNfvoDlg" class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content Changepasswd">
+                <div class="content">
+                    <div class="modal-header">
+                        <h4 id="myModalLabel">{{modalTitle}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="step-content">
+                            <form class="form-horizontal" role="form" id="form_nfvo">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">
+                                        <span>Name</span>
+                                        <span class="required" aria-required="true">*</span>
+                                    </label>
+                                    <div class="col-sm-7">
+                                        <input type="text" ms-duplex="currentElement.name" name="name" class="form-control"/>
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">
+                                        <span>Url</span>
+                                        <span class="required" aria-required="true">*</span>
+                                    </label>
+                                    <div class="col-sm-7">
+                                        <input type="text" ms-duplex="currentElement.url" name="url" class="form-control"/>
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">
+                                        <span>Username</span>
+                                        <span class="required" aria-required="true">*</span>
+                                    </label>
+                                    <div class="col-sm-7">
+                                        <input type="text" ms-duplex="currentElement.userName" name="userName" class="form-control"/>
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">
+                                        <span>Password</span>
+                                    </label>
+                                    <div class="col-sm-7">
+                                    <input type="password" class="form-control" ms-duplex="currentElement.password"  name="password"/>
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">
+                                        <span>Version</span>
+                                    </label>
+                                    <div class="col-sm-7">
+                                        <input class="form-control" ms-duplex="currentElement.version" name="version"/>
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">
+                                        <span>Vendor</span>
+                                    </label>
+                                    <div class="col-sm-7">
+                                         <input class="form-control" ms-duplex="currentElement.vendor" name="vendor"/>
+                                         <span class="help-block"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3">
+                                        <span>API Root</span>
+                                    </label>
+                                    <div class="col-sm-7">
+                                         <input class="form-control" ms-duplex="currentElement.apiroot" name="apiroot"/>
+                                         <span class="help-block"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group" ms-if="'DC' == currentElement.type" id="nfvoLocation">
+                                    <label class="control-label col-sm-3">
+                                        <span>Location</span>
+                                    </label>
+                                    <div class="col-sm-7">
+                                        <input class="form-control" ms-duplex="currentElement.location" name="location"/>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" id="btnSave" ms-click="$saveNFVO" id_i18n="nfv-nfvo-iui-text-saveBtn" name_i18n="com_vz_nfv_nsoc_i18n"></button>
+                        <button class="btn" id="btnCancel" ms-click="dismiss" aria-hidden="true" id_i18n="nfv-nfvo-iui-text-cancelBtn" name_i18n="com_vz_nfv_nsoc_i18n"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid" data-name="cond_zone">
+        <div class="col-md-12">
+            <button class="btn white radius_l" id="app-new-btn" ms-click="$registerNFVO">
+                <i class="ict-new"></i> <span id_i18n="nfv-nfvo-iui-text-registerBtn"  name_i18n="com_vz_nfv_nsoc_i18n"></span>
+            </button>
+        </div>
+    </div>
+
+    <div class="col-sm-12 vnfm-padding" ms-each-el="nfvoList">
+        <div class="col-sm-3 animated-panel zoomIn">
+            <div class="hpanel stats">
+                <div class="panel-body h-200" ms-hover="hpanel_show">
+                    <div class="pull-left">
+                        <span class="label label-success" ms-if="el.status == status.success" id_i18n="nfv-nfvo-iui-text-status-normal" name_i18n="com_vz_nfv_nsoc_i18n"></span>
+                        <span class="label label-danger" ms-if="el.status == status.failed" ms-attr-title="el.errorInfo" data-toggle="tooltip" id_i18n="nfv-nfvo-iui-text-status-fail" name_i18n="com_vz_nfv_nsoc_i18n"></span>
+                    </div>
+                    <div class="stats-icon pull-right">
+                        <i class="fa fa-server  fa-5x color_cloud"></i>
+                    </div>
+                    <div class="m-t-xl">
+                        <h3 ms-text="el.name"></h3>
+                        <!--<div class="card-name"><span ms-text="el.emsName"></span></div>-->
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="pull-right">
+                        <a class="btn btn-default btn-sm" ms-click="updateNFVO($index)"><i class="fa fa-pencil-square-o fa-lg"></i></a>
+                        <a class="btn btn-default btn-sm" ms-click="delNFVO(el.emsId, $index)"><i class="fa fa-trash-o fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="pull-left text-muted">
+            <small><span id_i18n="nfv-nfvo-iui-text-total" name_i18n="com_vz_nfv_nsoc_i18n"></span> <span class="blue-font" ms-text="nfvoList.size()"></span>
+                <span id_i18n="nfv-nfvo-iui-text-total-nfvo" name_i18n="com_vz_nfv_nsoc_i18n"></span></small>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../../thirdparty/jquery/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="../../thirdparty/jquery.i18n/jquery.i18n.properties-1.0.9.js"></script>
+<script type="text/javascript" src="../../thirdparty/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../thirdparty/bootbox/bootbox.min.js"></script>
+<script type="text/javascript" src="../../thirdparty/jquery-validation/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="../../thirdparty/jquery-validation/js/additional-methods.min.js"></script>
+
+<script type="text/javascript" src="../../thirdparty/bootstrap-growl/bootstrap-growl.min.js"></script>
+<!--<script type="text/javascript" src="../../thirdparty/cometd/cometd.js"></script>-->
+<!--<script type="text/javascript" src="../../thirdparty/cometd/jquery.cometd.js"></script>-->
+<script type="text/javascript" src="../../thirdparty/avalon/avalon.js"></script>
+
+<script type="text/javascript" src="../../thirdparty/js/tools.js"></script>
+
+<script type="text/javascript" src="js/commonUtil.js"></script>
+<script type="text/javascript" src="js/loadi18n_nsoc.js"></script>
+
+<script type="text/javascript" src="js/nfvo-validate.js"></script>
+<script type="text/javascript" src="js/nfvoController.js"></script>
+</body>
+</html>
