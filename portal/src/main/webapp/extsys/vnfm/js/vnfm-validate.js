@@ -39,10 +39,6 @@ $(function () {
             vendor: {
                 required: true,
                 maxlength: 20
-            },
-            url: {
-                required: true,
-                url: true
             }
         },
         messages: {
@@ -57,10 +53,6 @@ $(function () {
             },
             vendor: {
                 required: $.i18n.prop("nfv-vnfm-iui-validate-vendor")
-            },
-            url: {
-                required: $.i18n.prop("nfv-vnfm-iui-validate-url-required"),
-                url: $.i18n.prop("nfv-vnfm-iui-validate-url")
             }
         },
         errorPlacement: function (error, element) { // render error placement for each input type
