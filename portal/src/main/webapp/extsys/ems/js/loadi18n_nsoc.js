@@ -34,5 +34,5 @@ function loadPropertiesSideMenu(lang, fileNamePrefix, filePath) {
         }
     });
 }
-var lang = getLanguage();
-loadPropertiesSideMenu(lang, 'nfv-nso-iui-i18n', 'i18n/');
+
+loadPropertiesSideMenu('en-US','nfv-nso-iui-i18n', 'i18n/');
