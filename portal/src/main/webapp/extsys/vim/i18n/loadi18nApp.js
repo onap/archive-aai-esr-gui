@@ -37,6 +37,5 @@ function loadPropertiesSideMenu(lang, propertiesFileNamePrefix, propertiesFilePa
         }
     });
 }
-var lang = getLanguage();
-loadPropertiesSideMenu(lang, 'roc-vim-iui-i18n', 'i18n/');
+loadPropertiesSideMenu('en-US', 'roc-vim-iui-i18n', 'i18n/');
 
