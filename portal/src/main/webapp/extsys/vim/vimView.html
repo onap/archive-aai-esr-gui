@@ -21,7 +21,7 @@
     <meta charset="UTF-8">
     <title></title>
     <link href="../../thirdparty/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
-    <link href="../../thirdparty/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../thirdparty/bootstrap4.3.1/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../../thirdparty/uniform/css/uniform.default.css" rel="stylesheet"/>
     <link href="../../thirdparty/css/ngict-component.css" rel="stylesheet" type="text/css">
     <link href="css/vim.css" rel="stylesheet" type="text/css"/>
@@ -38,19 +38,20 @@
 
     <div id="addVimDlg" class="modal  fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true" data-backdrop="static">
-        <div class="modal-dialog">
+         <div class="modal-dialog">
             <div class="modal-content Changepasswd">
                 <div class="content">
                     <div class="modal-header">
                         <h4 id="myModalLabel">{{ modalTitle }}</h4>
                     </div>
                     <!-- modal body begin-->
-                    <div class="modal-body">
+                    <div class="modal-body"  style="height:600px; overflow:auto;">
                         <!--<div class="alert alert-info" ms-visible="executeWait.visible">{{executeWait.text}}</div>
                         <div class="alert alert-danger " ms-visible="executeError.visible">{{executeError.text}}</div>-->
 
                         <form class="form-horizontal" id="vim_form" role="form">
                             <div class="form-group">
+                                <div class="row">
                                 <label class="control-label col-sm-3">
                                     <span>Cloud Owner</span>
                                     <span class="required" aria-required="true">*</span>
@@ -59,8 +60,10 @@
                                     <input type="text" ms-duplex="currentElement['cloudOwner']" name="Cloud Owner" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
+                                </div>
                             </div>
                             <div class="form-group">
+                                <div class="row">
                                 <label class="control-label col-sm-3">
                                     <span>Cloud Region Id</span>
                                     <span class="required" aria-required="true">*</span>
@@ -69,8 +72,10 @@
                                     <input type="text" ms-duplex="currentElement['cloudRegionId']" name="cloudRegionId" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
+                                </div>
                             </div>
                             <div class="form-group">
+                                <div class="row">
                                 <label class="control-label col-sm-3">
                                     <span>Cloud Type</span>
                                     <span class="required" aria-required="true">*</span>
@@ -81,8 +86,10 @@
                                     </select>
                                     <span class="help-block"></span>
                                 </div>
+                                </div>
                             </div>
                             <div class="form-group">
+                                <div class="row">
                                 <label class="control-label col-sm-3">
                                     <span>Cloud Region Version</span>
                                     <span class="required" aria-required="true">*</span>
@@ -93,8 +100,10 @@
                                     </select>
                                     <span class="help-block"></span>
                                 </div>
+                                </div>
                             </div>
                             <div class="form-group">
+                                <div class="row">
                                 <label class="control-label col-sm-3">
                                     <span>Owner Defined Type</span>
                                     <span class="required" aria-required="true">*</span>
@@ -103,8 +112,10 @@
                                     <input type="text" ms-duplex="currentElement['ownerDefinedType']" name="ownerDefinedType" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
+                                </div>
                             </div>
                             <div class="form-group">
+                                <div class="row">
                                 <label class="control-label col-sm-3">
                                     <span>Cloud Zone</span>
                                     <span class="required" aria-required="true">*</span>
@@ -113,8 +124,10 @@
                                     <input type="text" ms-duplex="currentElement['cloudZone']" name="cloudZone" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
+                                </div>
                             </div>
                             <div class="form-group">
+                                <div class="row">
                                 <label class="control-label col-sm-3">
                                     <span>Physical Location Id</span>
                                     <span class="required" aria-required="true">*</span>
@@ -126,9 +139,11 @@
                                     </select>
                                     <span class="help-block"></span>
                                 </div>
+                                </div>
                             </div>
                             
                             <div class="form-group">
+                                <div class="row">
                                 <label class="control-label col-sm-3">
                                     <span>username</span>
                                     <span class="required" aria-required="true">*</span>
@@ -137,8 +152,10 @@
                                     <input type="text" ms-duplex="currentElement['vimAuthInfos'][0].userName" name="username" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
+                                </div>
                             </div>
                             <div class="form-group">
+                                <div class="row">
                                 <label class="control-label col-sm-3">
                                     <span>password</span>
                                 </label>
@@ -146,8 +163,10 @@
                                     <input type="password" ms-duplex="currentElement['vimAuthInfos'][0].password" name="password" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
+                                </div>
                             </div>                           
                             <div class="form-group">
+                                <div class="row">
                                 <label class="control-label col-sm-3">
                                     <span>Auth Url</span>
                                 </label>
@@ -155,8 +174,10 @@
                                     <input type="text" ms-duplex="currentElement['vimAuthInfos'][0]['authUrl']" name="authUrl" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
+                                </div>
                             </div>
                             <div class="form-group">
+                                <div class="row">
                                 <label class="control-label col-sm-3">
                                     <span>ssl Cacert</span>
                                 </label>
@@ -164,8 +185,10 @@
                                     <input type="text" ms-duplex="currentElement['vimAuthInfos'][0]['sslCacert']" name="sslCacert" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
+                                </div>
                             </div>
                             <div class="form-group">
+                                <div class="row">
                                 <label class="control-label col-sm-3">
                                     <span>ssl Insecure</span>
                                 </label>
@@ -175,8 +198,10 @@
                                         <option value="true">true</option>
                                     </select>
                                 </div>
+                                </div>
                             </div>
                             <div class="form-group">
+                                <div class="row">
                                 <label class="control-label col-sm-3">
                                     <span>Cloud Domain</span>
                                 </label>
@@ -184,8 +209,10 @@
                                     <input type="text" ms-duplex="currentElement['vimAuthInfos'][0]['cloudDomain']" name="cloudDomain" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
+                                </div>
                             </div>
                             <div class="form-group">
+                                <div class="row">
                                 <label class="control-label col-sm-3">
                                     <span>Default Tenant</span>
                                 </label>
@@ -193,8 +220,10 @@
                                     <input type="text" ms-duplex="currentElement['vimAuthInfos'][0]['defaultTenant']" name="defaultTenant" class="form-control"/>
                                     <span class="help-block"></span>
                                 </div>
+                                </div>
                             </div>
                             <div class="form-group">
+                                <div class="row">
                                 <label class="control-label col-sm-3">
                                     <span>Cloud Extra Info</span>
                                 </label>
@@ -202,6 +231,7 @@
                                     <textarea class="form-control" rows="3" ms-duplex="currentElement['cloudExtraInfo']"
                                               name="cloudExtraInfo"></textarea>
                                     <span class="help-block"></span>
+                                </div>
                                 </div>
                             </div>
                         </form>
@@ -218,7 +248,7 @@
                 </div>
 
             </div>
-        </div>
+        </div>        
     </div>
 
     <div class="row-fluid col-sm-12" data-name="cond_zone">
@@ -280,7 +310,7 @@
 <script type="text/javascript" src="../../thirdparty/jquery/jquery-3.4.1.min.js"></script>
 <!-- <script type="text/javascript" src="../../thirdparty/js/tools.js"></script> -->
 <script type="text/javascript" src="../../thirdparty/jquery.i18n/jquery.i18n.properties-1.0.9.js"></script>
-<script type="text/javascript" src="../../thirdparty/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../thirdparty/bootstrap4.3.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../thirdparty/jquery-validation/js/jquery.validate.js"></script>
 <script type="text/javascript" src="../../thirdparty/jquery-validation/js/additional-methods.min.js"></script>
 <script type="text/javascript" src="../../thirdparty/bootbox/bootbox.min.js"></script>

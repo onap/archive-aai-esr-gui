@@ -21,7 +21,7 @@
     <meta charset="UTF-8">
     <title></title>
     <link href="../../thirdparty/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
-    <link href="../../thirdparty/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../thirdparty/bootstrap4.3.1/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../../thirdparty/uniform/css/uniform.default.min.css" rel="stylesheet"/>
     <link href="../../thirdparty/css/ngict-component.css" rel="stylesheet"/>
     <link href="css/animate.min.css" rel="stylesheet"/>
@@ -32,7 +32,7 @@
 <div ms-controller="emsController" class="container-fluid ms-controller">
     <div id="addEmsDlg" class="modal fade" tabindex="-1" role="dialog"
          aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
-        <div class="modal-dialog">
+         <div class="modal-dialog">
             <div class="modal-content Changepasswd">
                 <div class="content">
                     <div class="modal-header">
@@ -74,6 +74,7 @@
                         <div class="step-content">
                             <form class="form-horizontal" id="form_commonInfo" role="form">
                                 <div class="form-group">
+                                    <div class="row">
                                     <label class="control-label col-sm-3">
                                         <span>Name</span>
                                         <span class="required" aria-required="true">*</span>
@@ -82,8 +83,10 @@
                                         <input type="text" ms-duplex="currentElement.name" name="name" class="form-control"/>
                                         <span class="help-block"></span>
                                     </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
+                                    <div class="row">
                                     <label class="control-label col-sm-3">
                                         <span>Vendor</span>
                                     </label>
@@ -91,8 +94,10 @@
                                         <input type="text" ms-duplex="currentElement.vendor" name="vendor" class="form-control"/>
                                         <span class="help-block"></span>
                                     </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
+                                    <div class="row">
                                     <label class="control-label col-sm-3">
                                         <span>Version</span>
                                     </label>
@@ -100,10 +105,12 @@
                                         <input type="text" ms-duplex="currentElement.version" name="version" class="form-control"/>
                                         <span class="help-block"></span>
                                     </div>
+                                    </div>
                                 </div>
                             </form>
-                            <form class="form-horizontal" id="form_resourceAddr" role="form"> 
+                            <form class="form-horizontal" id="form_resourceAddr" role="form">
                                 <div class="form-group">
+                                    <div class="row">
                                     <label class="control-label col-sm-3">
                                         <span>Ftp Type</span>
                                         <span class="required" aria-required="true">*</span>
@@ -115,8 +122,10 @@
                                         </select>
                                         <span class="help-block"></span>
                                     </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
+                                    <div class="row">
                                     <label class="control-label col-sm-3">
                                         <span>IP</span>
                                         <span class="required" aria-required="true">*</span>
@@ -125,8 +134,10 @@
                                         <input type="text" ms-duplex="currentElement.resourceAddr.ip" name="ip" class="form-control"/>
                                         <span class="help-block"></span>
                                     </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
+                                    <div class="row">
                                     <label class="control-label col-sm-3">
                                         <span>Port</span>
                                         <span class="required" aria-required="true">*</span>
@@ -135,8 +146,10 @@
                                         <input type="text" ms-duplex="currentElement.resourceAddr.port" name="port" class="form-control"/>
                                         <span class="help-block"></span>
                                     </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
+                                    <div class="row">
                                     <label class="control-label col-sm-3">
                                         <span>User</span>
                                         <span class="required" aria-required="true">*</span>
@@ -145,40 +158,48 @@
                                         <input type="text" ms-duplex="currentElement.resourceAddr.user" name="user" class="form-control" ms-attr-placeholder="urlTip"/>
                                         <span class="help-block"></span>
                                     </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
+                                    <div class="row">
                                     <label class="control-label col-sm-3">
                                         <span>Password</span>
                                     </label>
                                     <div class="col-sm-7">
-                                    <input type="password" class="form-control" rows="3" ms-duplex="currentElement.resourceAddr.password"  name="password"/>
+                                        <input type="password" class="form-control" rows="3" ms-duplex="currentElement.resourceAddr.password"  name="password"/>
                                         <span class="help-block"></span>
+                                    </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <div class="row">
                                     <label class="control-label col-sm-3">
                                         <span>Remote Path</span>
                                     </label>
                                     <div class="col-sm-7">
-                                    <input class="form-control" rows="3" ms-duplex="currentElement.resourceAddr.remotepath" name="remotepath"/>
+                                        <input class="form-control" rows="3" ms-duplex="currentElement.resourceAddr.remotepath" name="remotepath"/>
                                         <span class="help-block"></span>
+                                    </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <div class="row">
                                     <label class="control-label col-sm-3">
                                         <span>Passive</span>
                                     </label>
                                     <div class="col-sm-7">
-                                    <select class="form-control" rows="3" ms-duplex="currentElement.resourceAddr.passive" name="passive">
-                                        <option value="true">true</option>
-                                        <option value="false">false</option>
-                                    </select>
-                                     <span class="help-block"></span>
+                                        <select class="form-control" rows="3" ms-duplex="currentElement.resourceAddr.passive" name="passive">
+                                            <option value="true">true</option>
+                                            <option value="false">false</option>
+                                        </select>
+                                        <span class="help-block"></span>
+                                    </div>
                                     </div>
                                 </div>
                             </form>
-                            <form class="form-horizontal" id="form_performanceAddr" role="form" hidden>
+                            <form class="form-horizontal" id="form_performanceAddr" role="form" >
                                 <div class="form-group">
+                                    <div class="row">
                                     <label class="control-label col-sm-3">
                                         <span>Ftp Type</span>
                                         <span class="required" aria-required="true">*</span>
@@ -190,8 +211,10 @@
                                         </select>
                                         <span class="help-block"></span>
                                     </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
+                                    <div class="row">
                                     <label class="control-label col-sm-3">
                                         <span>IP</span>
                                         <span class="required" aria-required="true">*</span>
@@ -200,8 +223,10 @@
                                         <input type="text" ms-duplex="currentElement.performanceAddr.ip" name="ip" class="form-control"/>
                                         <span class="help-block"></span>
                                     </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
+                                    <div class="row">
                                     <label class="control-label col-sm-3">
                                         <span>Port</span>
                                         <span class="required" aria-required="true">*</span>
@@ -210,8 +235,10 @@
                                         <input type="text" ms-duplex="currentElement.performanceAddr.port" name="port" class="form-control"/>
                                         <span class="help-block"></span>
                                     </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
+                                    <div class="row">
                                     <label class="control-label col-sm-3">
                                         <span>User</span>
                                         <span class="required" aria-required="true">*</span>
@@ -220,40 +247,48 @@
                                         <input type="text" ms-duplex="currentElement.performanceAddr.user" name="user" class="form-control" ms-attr-placeholder="urlTip"/>
                                         <span class="help-block"></span>
                                     </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
+                                    <div class="row">
                                     <label class="control-label col-sm-3">
                                         <span>Password</span>
                                     </label>
                                     <div class="col-sm-7">
-                                    <input type="password" class="form-control" rows="3" ms-duplex="currentElement.performanceAddr.password"  name="password"/>
+                                        <input type="password" class="form-control" rows="3" ms-duplex="currentElement.performanceAddr.password"  name="password"/>
                                         <span class="help-block"></span>
+                                    </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <div class="row">
                                     <label class="control-label col-sm-3">
                                         <span>Remote Path</span>
                                     </label>
                                     <div class="col-sm-7">
-                                    <input class="form-control" rows="3" ms-duplex="currentElement.performanceAddr.remotepath" name="remotepath"/>
+                                        <input class="form-control" rows="3" ms-duplex="currentElement.performanceAddr.remotepath" name="remotepath"/>
                                         <span class="help-block"></span>
+                                    </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <div class="row">
                                     <label class="control-label col-sm-3">
                                         <span>Passive</span>
                                     </label>
                                     <div class="col-sm-7">
-                                    <select class="form-control" rows="3" ms-duplex="currentElement.performanceAddr.passive" name="passive">
-                                        <option value="true">true</option>
-                                        <option value="false">false</option>
-                                    </select>
-                                     <span class="help-block"></span>
+                                        <select class="form-control" rows="3" ms-duplex="currentElement.performanceAddr.passive" name="passive">
+                                            <option value="true">true</option>
+                                            <option value="false">false</option>
+                                        </select>
+                                        <span class="help-block"></span>
+                                    </div>
                                     </div>
                                 </div>
                             </form>
-                            <form class="form-horizontal" id="form_alarmAddr" role="form" hidden>
+                            <form class="form-horizontal" id="form_alarmAddr" role="form" >
                                 <div class="form-group">
+                                    <div class="row">
                                     <label class="control-label col-sm-3">
                                         <span>IP</span>
                                         <span class="required" aria-required="true">*</span>
@@ -262,8 +297,10 @@
                                         <input type="text" ms-duplex="currentElement.alarmAddr.ip" name="ip" class="form-control"/>
                                         <span class="help-block"></span>
                                     </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
+                                    <div class="row">
                                     <label class="control-label col-sm-3">
                                         <span>Port</span>
                                         <span class="required" aria-required="true">*</span>
@@ -272,8 +309,10 @@
                                         <input type="text" ms-duplex="currentElement.alarmAddr.port" name="port" class="form-control"/>
                                         <span class="help-block"></span>
                                     </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
+                                    <div class="row">
                                     <label class="control-label col-sm-3">
                                         <span>User</span>
                                         <span class="required" aria-required="true">*</span>
@@ -282,14 +321,17 @@
                                         <input type="text" ms-duplex="currentElement.alarmAddr.user" name="user" class="form-control" ms-attr-placeholder="urlTip"/>
                                         <span class="help-block"></span>
                                     </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
+                                    <div class="row">
                                     <label class="control-label col-sm-3">
                                         <span>Password</span>
                                     </label>
                                     <div class="col-sm-7">
-                                    <input type="password" class="form-control" rows="3" ms-duplex="currentElement.alarmAddr.password"  name="password"/>
+                                        <input type="password" class="form-control" rows="3" ms-duplex="currentElement.alarmAddr.password"  name="password"/>
                                         <span class="help-block"></span>
+                                    </div>
                                     </div>
                                 </div>
                             </form>
@@ -303,7 +345,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>        
     </div>
     <div class="row-fluid" data-name="cond_zone">
         <div class="col-md-12">
@@ -348,7 +390,7 @@
 </div>
 <script type="text/javascript" src="../../thirdparty/jquery/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="../../thirdparty/jquery.i18n/jquery.i18n.properties-1.0.9.js"></script>
-<script type="text/javascript" src="../../thirdparty/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../thirdparty/bootstrap4.3.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../thirdparty/bootbox/bootbox.min.js"></script>
 <script type="text/javascript" src="../../thirdparty/jquery-validation/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="../../thirdparty/jquery-validation/js/additional-methods.min.js"></script>
