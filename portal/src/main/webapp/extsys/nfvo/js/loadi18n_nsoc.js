@@ -19,6 +19,7 @@ function loadPropertiesSideMenu(lang, fileNamePrefix, filePath) {
         name: fileNamePrefix,
         path: filePath,
         mode: 'map',
+	encoding: 'UTF-8',
         callback: function () {
             var i18nItems = $("[name_i18n=com_vz_nfv_nsoc_i18n]");
             for (var i = 0; i < i18nItems.length; i++) {
