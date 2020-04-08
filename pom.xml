@@ -38,7 +38,7 @@
     </modules>
 
 	<properties>
-        <tomcat.version>9.0.31</tomcat.version>
+        <tomcat.version>9.0.33</tomcat.version>
     </properties>
 
 	<dependencyManagement>
