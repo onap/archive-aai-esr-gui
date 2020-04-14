@@ -27,7 +27,7 @@
     <groupId>org.onap.aai.esr-gui</groupId>
     <artifactId>aai-esr-gui</artifactId>
     <packaging>pom</packaging>
-	<version>1.5.0-SNAPSHOT</version>
+	<version>1.7.0-SNAPSHOT</version>
     <name>aai-esr-gui</name>
 
     <modules>
