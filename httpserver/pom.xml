@@ -30,7 +30,7 @@
 
     <properties>
         <packagename>httpserver</packagename>
-        <tomcat.version>9.0.18</tomcat.version>        
+        <tomcat.version>9.0.33</tomcat.version>        
     </properties>
 
     <profiles>
