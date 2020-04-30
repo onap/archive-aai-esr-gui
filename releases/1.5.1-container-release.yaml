@@ -1,0 +1,7 @@
+distribution_type: container
+container_release_tag: 1.5.1
+project: esr-gui
+ref: ad6a3eabe8e301e0c0523ad4040fc1f7d103befe
+containers:
+    - name: aai-esr-gui
+      version: 1.5.1-20200430T182757Z
