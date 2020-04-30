@@ -22,6 +22,7 @@ RUN addgroup -S esr && adduser -S -G esr esr
 WORKDIR /home/esr
 ADD esr-gui-*-linux64.tar.gz /home/esr/
 RUN chmod 755 /home/esr/*.sh
+RUN chown -R esr:esr /home/esr
 
 USER esr
 ENTRYPOINT /home/esr/startup.sh
