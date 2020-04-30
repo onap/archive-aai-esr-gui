@@ -27,7 +27,7 @@
     <groupId>org.onap.aai.esr-gui</groupId>
     <artifactId>aai-esr-gui</artifactId>
     <packaging>pom</packaging>
-	<version>1.5.0-SNAPSHOT</version>
+	<version>1.5.1-SNAPSHOT</version>
     <name>aai-esr-gui</name>
 
     <modules>
@@ -38,7 +38,7 @@
     </modules>
 
 	<properties>
-        <tomcat.version>8.5.35</tomcat.version>
+        <tomcat.version>9.0.18</tomcat.version>
     </properties>
 
 	<dependencyManagement>
