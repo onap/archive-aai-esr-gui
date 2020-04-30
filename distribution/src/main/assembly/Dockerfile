@@ -18,10 +18,11 @@ ENV JRE_HOME ${JAVA_HOME}/jre
 
 #add esr gui related resources to the docker image
 RUN mkdir /home/esr
-RUN addgroup -S esr && adduser -S -G esr esr
+RUN groupadd -r esr && useradd -r -g esr esr
 WORKDIR /home/esr
 ADD esr-gui-*-linux64.tar.gz /home/esr/
 RUN chmod 755 /home/esr/*.sh
+RUN chown -R esr:esr /home/esr
 
 USER esr
 ENTRYPOINT /home/esr/startup.sh
