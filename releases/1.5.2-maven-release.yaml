@@ -1,0 +1,4 @@
+distribution_type: maven
+log_dir: aai-esr-gui-maven-stage-frankfurt/36/
+project: esr-gui
+version: 1.5.2
