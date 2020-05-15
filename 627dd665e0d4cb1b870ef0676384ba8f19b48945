@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "35eb6eb9_12acaf5f",
+        "filename": "httpserver/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 33
+      },
+      "writtenOn": "2020-05-15T13:14:35Z",
+      "side": 1,
+      "message": "This is confusing - it seems like you want to release a new version of the maven artifacts and update tomcat in the same commit?  Will 1.5.2 be used?  If we update the pom then we\u0027d need a 1.5.3 version",
+      "revId": "627dd665e0d4cb1b870ef0676384ba8f19b48945",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
